@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Symscram System Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: monospace;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .test-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #333;
+      background: rgba(255,255,255,0.05);
+    }
+    .voice-test {
+      margin: 20px 0;
+      padding: 15px;
+      border-left: 3px solid #666;
+      background: rgba(255,255,255,0.02);
+    }
+    .voice-name {
+      color: #ff6b6b;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .typing-output {
+      min-height: 40px;
+      border: 1px dashed #444;
+      padding: 10px;
+      background: #111;
+    }
+    .controls {
+      margin: 10px 0;
+    }
+    button {
+      background: #333;
+      color: #fff;
+      border: 1px solid #666;
+      padding: 8px 15px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    button:hover {
+      background: #555;
+    }    .symscram {
+      opacity: 0.7;
+      font-style: italic;
+    }
+    
+    /* World-specific symscram colors */
+    .world0 .symscram { color: #FFD700; } /* Gold for ancient */
+    .world1 .symscram { color: #E6E6FA; } /* Lavender for platonic */
+    .world2 .symscram { color: #87CEEB; } /* Sky blue for melodic */
+    .world3 .symscram { color: #CD5C5C; } /* Indian red for harsh */
+    .world4 .symscram { color: #00FF00; } /* Green for matrix/debug */
+    .worldv .symscram { color: #40E0D0; } /* Turquoise for AIIC freedom */
+    .lunic .symscram { color: #DDA0DD; }  /* Plum for fae elegance */
+    .demonic .symscram { color: #8B0000; } /* Dark red for corruption */
+    .log {
+      background: #001;
+      border: 1px solid #333;
+      padding: 10px;
+      margin-top: 20px;
+      font-size: 12px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>🔬 Symscram System Test</h1>
+    <p>Testing if the symscram (symbol) system displays 4-7 character symbols before generated text for different narrator voices.</p>
+    
+    <div class="voice-test">      <div class="voice-name">World0 Narrator (World: Ancient)</div>
+      <div class="controls">
+        <button onclick="testVoice('narrator-world0')">Test World0 Voice</button>
+        <button onclick="clearOutput('narrator-world0-output')">Clear</button>
+      </div>
+      <div id="narrator-world0-output" class="typing-output"></div>
+    </div>
+
+    <div class="voice-test">
+      <div class="voice-name">World1 Narrator (World: Aritári)</div>
+      <div class="controls">
+        <button onclick="testVoice('narrator-world1')">Test World1 Voice</button>
+        <button onclick="clearOutput('narrator-world1-output')">Clear</button>
+      </div>
+      <div id="narrator-world1-output" class="typing-output"></div>
+    </div>
+
+    <div class="voice-test">
+      <div class="voice-name">World2 Narrator (World: Svalvmark)</div>
+      <div class="controls">
+        <button onclick="testVoice('narrator-world2')">Test World2 Voice</button>
+        <button onclick="clearOutput('narrator-world2-output')">Clear</button>
+      </div>
+      <div id="narrator-world2-output" class="typing-output"></div>
+    </div>    <div class="voice-test">
+      <div class="voice-name">World3 Narrator (World: Harsh)</div>
+      <div class="controls">
+        <button onclick="testVoice('narrator-world3')">Test World3 Voice</button>
+        <button onclick="clearOutput('narrator-world3-output')">Clear</button>
+      </div>
+      <div id="narrator-world3-output" class="typing-output"></div>
+    </div>
+    
+    <div class="voice-test">
+      <div class="voice-name">World4 Narrator (World: Machine Logic)</div>
+      <div class="controls">
+        <button onclick="testVoice('narrator-world4')">Test World4 Voice</button>
+        <button onclick="clearOutput('narrator-world4-output')">Clear</button>
+      </div>
+      <div id="narrator-world4-output" class="typing-output"></div>
+    </div>
+    
+    <div class="voice-test">
+      <div class="voice-name">WorldV Narrator (World: AIIC Freedom)</div>
+      <div class="controls">
+        <button onclick="testVoice('narrator-worldv')">Test WorldV Voice</button>
+        <button onclick="clearOutput('narrator-worldv-output')">Clear</button>
+      </div>
+      <div id="narrator-worldv-output" class="typing-output"></div>
+    </div>
+    
+    <div class="voice-test">
+      <div class="voice-name">Lunic Narrator (World: Fae Elegance)</div>
+      <div class="controls">
+        <button onclick="testVoice('narrator-lunic')">Test Lunic Voice</button>
+        <button onclick="clearOutput('narrator-lunic-output')">Clear</button>
+      </div>
+      <div id="narrator-lunic-output" class="typing-output"></div>
+    </div>
+    
+    <div class="voice-test">
+      <div class="voice-name">Demonic Narrator (World: Corruption)</div>
+      <div class="controls">
+        <button onclick="testVoice('narrator-demonic')">Test Demonic Voice</button>
+        <button onclick="clearOutput('narrator-demonic-output')">Clear</button>
+      </div>
+      <div id="narrator-demonic-output" class="typing-output"></div>
+    </div>
+
+    <div class="controls">
+      <button onclick="testAllVoices()">Test All Voices</button>
+      <button onclick="clearAllOutputs()">Clear All</button>
+    </div>
+
+    <div id="debug-log" class="log"></div>
+  </div>  <script type="module">
+    import { typeSymscram, generateSymscram } from '../../assets/js/secondArena.js';
+    import { getVoiceProfile } from '../../assets/js/typingVoices.js';
+
+    // Make the imported functions available to the window
+    window.generateSymscram = generateSymscram;
+    window.typeSymscram = typeSymscram;
+    window.getVoiceProfile = getVoiceProfile;
+
+    window.log = function(message) {
+      const logElement = document.getElementById('debug-log');
+      const timestamp = new Date().toLocaleTimeString();
+      logElement.innerHTML += `[${timestamp}] ${message}<br>`;
+      logElement.scrollTop = logElement.scrollHeight;
+      console.log(message);
+    };
+
+    window.testVoice = async function(voiceName) {
+      const outputElement = document.getElementById(`${voiceName}-output`);
+      outputElement.innerHTML = '';
+      
+      log(`Testing voice: ${voiceName}`);
+      
+      // Check if voice exists and get its profile
+      const voice = getVoiceProfile(voiceName);
+      if (!voice) {
+        log(`❌ ERROR: Voice '${voiceName}' not found in typingVoices.js`);
+        outputElement.innerHTML = `<span style="color: red;">Voice '${voiceName}' not found!</span>`;
+        return;
+      }
+      
+      log(`✅ Voice found. Name: '${voice.name}', World: '${voice.personality?.world || "unknown"}'`);
+
+      // Test symscram generation
+      try {
+        const symscram = generateSymscram(voiceName);
+        log(`🔮 Generated symscram: '${symscram}' (length: ${symscram.length})`);
+        
+        // Add world class for proper styling
+        if (voice.personality?.world) {
+          outputElement.classList.add(voice.personality.world);
+        }
+
+        // Type the text with symscram
+        const testText = `Hello, this is ${voice.name} speaking. The symscram system should have displayed symbols before this text.`;
+        await typeSymscram(outputElement, testText, voiceName);
+        
+        log(`✅ Typing completed for ${voiceName}`);
+        
+      } catch (error) {
+        log(`❌ ERROR testing ${voiceName}: ${error.message}`);
+        outputElement.innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
+      }
+    };
+
+    window.clearOutput = function(elementId) {
+      document.getElementById(elementId).innerHTML = '';
+    };    window.clearAllOutputs = function() {
+      [
+        'narrator-world0', 
+        'narrator-world1', 
+        'narrator-world2', 
+        'narrator-world3',
+        'narrator-world4',
+        'narrator-worldv',
+        'narrator-lunic',
+        'narrator-demonic'
+      ].forEach(voice => {
+        clearOutput(`${voice}-output`);
+      });
+      document.getElementById('debug-log').innerHTML = '';
+    };window.testAllVoices = async function() {
+      log('🧪 Testing all voices...');
+      clearAllOutputs();
+      
+      const voiceNames = [
+        'narrator-world0', 
+        'narrator-world1', 
+        'narrator-world2', 
+        'narrator-world3',
+        'narrator-world4',
+        'narrator-worldv',
+        'narrator-lunic',
+        'narrator-demonic'
+      ];
+      
+      for (let i = 0; i < voiceNames.length; i++) {
+        const voiceName = voiceNames[i];
+        log(`Testing ${i + 1}/${voiceNames.length}: ${voiceName}`);
+        await testVoice(voiceName);
+        
+        // Small delay between voices
+        if (i < voiceNames.length - 1) {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+      }
+      
+      log('🎉 All voice tests completed!');
+    };    // Initial setup
+    document.addEventListener('DOMContentLoaded', () => {
+      log('🚀 Symscram Test Page Loaded');
+      log('📚 Available functions: testVoice(name), testAllVoices(), clearAllOutputs()');
+      
+      // Test if modules loaded correctly
+      if (typeof window.generateSymscram === 'function') {
+        log('✅ generateSymscram function loaded');
+      } else {
+        log('❌ generateSymscram function not loaded');
+      }
+      
+      if (typeof window.typeSymscram === 'function') {
+        log('✅ typeSymscram function loaded');
+      } else {
+        log('❌ typeSymscram function not loaded');
+      }
+      
+      // List available narrator voices
+      try {
+        const availableVoices = [
+          'narrator-world0', 
+          'narrator-world1', 
+          'narrator-world2', 
+          'narrator-world3',
+          'narrator-world4',
+          'narrator-worldv',
+          'narrator-lunic',
+          'narrator-demonic'
+        ];
+        
+        log(`✅ Testing these voices: ${availableVoices.join(', ')}`);
+      } catch (err) {
+        log(`❌ Error listing voices: ${err.message}`);
+      }
+    });
+  </script>
+</body>
+</html>

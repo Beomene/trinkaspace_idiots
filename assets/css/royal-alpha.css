@@ -1,0 +1,140 @@
+/* Royal Alpha Coordinate System CSS */
+
+/* General container */
+#trinkaspace-container {
+  position: relative;
+  margin: 0 auto;
+}
+
+/* A1 Arena (Diorama) */
+.diorama-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--a1-width, 400px); /* Default to Alpha width */
+  aspect-ratio: 1/1; /* Perfect square as per Royal Decree */
+  box-sizing: border-box;
+  transition: opacity 0.3s ease;
+}
+
+/* A2 Arena (Textbox) extends beyond A1 */
+.textbox-container, .textbox {
+  position: absolute;
+  width: calc(var(--a1-width, 400px) * 1.2); /* 20% wider than A1 */
+  max-width: calc(var(--a1-width, 400px) * 1.5); /* Maximum width */
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  transition: opacity 0.3s ease;
+}
+
+/* Royal Alpha scaling for textboxes */
+.royal-alpha-scaled-text {
+  font-size: calc(16px * var(--cuc, 1));
+  line-height: calc(1.5em * var(--cuc, 1));
+}
+
+/* Scale padding based on CUC */
+.royal-alpha-scaled-text p,
+.royal-alpha-scaled-text div {
+  padding: calc(0.5em * var(--cuc, 1)) calc(1em * var(--cuc, 1));
+  margin: calc(0.5em * var(--cuc, 1)) 0;
+}
+
+/* HUD Layout styles */
+body.hud-layout-wide .arena3-element {
+  max-width: 30%;
+  opacity: 0.85;
+  --hud-padding: 20px;
+  --hud-margin: 15px;
+  --hud-font-size: 16px;
+}
+
+body.hud-layout-narrow .arena3-element {
+  max-width: 20%;
+  opacity: 0.9;
+  --hud-padding: 12px;
+  --hud-margin: 8px;
+  --hud-font-size: 14px;
+}
+
+/* Arena Three Menu Styles */
+body.hud-layout-wide #arena3-menu {
+  width: 25vw;
+  font-size: 16px;
+}
+
+body.hud-layout-narrow #arena3-menu {
+  width: 35vw;
+  font-size: 14px;
+}
+
+/* Arena 3B HUD Elements - Royal Alpha scaled */
+.royal-alpha-hud {
+  padding: var(--hud-padding);
+  margin: var(--hud-margin);
+  font-size: calc(var(--hud-font-size) * var(--hud-cuc, 1));
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* CUC utility classes */
+.royal-alpha-scaled {
+  transform: scale(var(--cuc, 1));
+  transform-origin: center top;
+}
+
+.royal-alpha-centered {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Debug overlay (visible only with ?debug=royal in URL) */
+.royal-alpha-debug {
+  display: none;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  font-family: monospace;
+  z-index: 9999;
+  max-width: 300px;
+}
+
+.royal-alpha-debug.visible {
+  display: block;
+}
+
+.royal-alpha-debug table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.royal-alpha-debug td {
+  padding: 2px 5px;
+  border-bottom: 1px solid #333;
+}
+
+.royal-alpha-debug td:first-child {
+  font-weight: bold;
+  color: #8af;
+}
+
+/* Visual indicator for page origo (debug only) */
+.page-origo-marker {
+  display: none;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  z-index: 9999;
+}
+
+.debug-mode .page-origo-marker {
+  display: block;
+}

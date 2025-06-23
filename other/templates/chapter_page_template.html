@@ -1,0 +1,101 @@
+<!-- Chapter Page Template with Trinkatitle Integration -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{pageTitle}} - Trinkaloop Saga</title>
+  <link rel="stylesheet" href="/assets/css/core.css">
+  <link rel="stylesheet" href="/assets/css/user-interface.css">
+  <link rel="stylesheet" href="/assets/css/trinkatitles.css">
+  <link rel="stylesheet" href="/assets/css/keyboard-navigation.css">
+  <link rel="stylesheet" href="/assets/css/beat-system.css">
+  <link rel="stylesheet" href="/assets/css/hud.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+  <script src="/assets/js/trinkaspaceEngine.js" defer></script>
+  <script type="module" src="/assets/js/userIntegration.js"></script>
+  <script>
+    // Load and set the page Trinkatitle based on page ID
+    document.addEventListener('DOMContentLoaded', () => {
+      const pageId = '{{pageId}}'; // E.g., "001_001"
+      if (pageId) {
+        const trinkatitleContainer = document.querySelector('.trinkatitle-container');
+        const trinkatitleImg = document.querySelector('.trinkatitle');
+        
+        if (trinkatitleImg) {
+          trinkatitleImg.onerror = function() {
+            // Hide the container if image can't be found
+            trinkatitleContainer.style.display = 'none';
+          };
+        }
+      }
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div id="trinkaspace-user-display" class="trinkaspace-user-area">
+      <!-- User interface will be injected here by userIntegration.js -->
+    </div>
+  </header>
+  
+  <div class="chapter-page">
+    <!-- Trinkatitle container - will show custom page title if image exists -->
+    <div class="trinkatitle-container">
+      <img src="/assets/images/trinkatitles/{{pageId}}-title.png" 
+           alt="{{pageTitle}}" 
+           class="trinkatitle"
+           onerror="this.style.display='none'">
+    </div>
+    
+    <!-- Main content container -->
+    <div id="trinkaspace-container" tabindex="-1"></div>
+    
+    <!-- Navigation controls -->
+    <div class="page-navigation" role="navigation" aria-label="Chapter Navigation">
+      <a href="{{prevPageUrl}}" class="nav-button prev-button" aria-label="Previous Page">Previous</a>
+      <a href="/portal.html" class="nav-button home-button" aria-label="Return to Portal">Home</a>
+      <a href="{{nextPageUrl}}" class="nav-button next-button" aria-label="Next Page">Next</a>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 Trinkaloop Saga. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/pages/general/legal/privacy-policy.html" class="footer-link">Privacy Policy</a>
+        <a href="/pages/general/support/index.html" class="footer-link">Support</a>
+        <button id="keyboard-help-button" class="footer-button">Keyboard Shortcuts</button>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import TrinkaspaceEngine from '/assets/js/trinkaspaceEngine.js';
+    import userManager from '/assets/js/userManager.js';
+    import keyboardNavigation from '/assets/js/keyboardNavigation.js';
+
+    // Initialize the engine when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize user management system
+      userManager.init();
+      
+      console.log('🚀 Initializing Trinkaspace Engine...');
+      window.trinkaspaceEngine = new TrinkaspaceEngine({ pageId: '{{pageId}}' });
+      
+      // Setup keyboard help button
+      const helpButton = document.getElementById('keyboard-help-button');
+      if (helpButton) {
+        helpButton.addEventListener('click', () => {
+          keyboardNavigation.showHelp();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

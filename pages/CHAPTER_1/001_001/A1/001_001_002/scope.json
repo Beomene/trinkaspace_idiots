@@ -1,0 +1,22 @@
+{
+  "width": "60vw",
+  "heightMode": "width-ratio",
+  "heightValue": 0.75,
+  "safetyZone": 300,
+  "bleed": false,
+  "left": "20vw",
+  "zIndex": 10,
+  "scopeVerticalOffset": 500,
+  "fitToScope": false,
+  "frames": {
+    "upper": "frame_upper_1_202029.png",
+    "lower": "frame_lower_1_202029.png",
+    "left": "frame_left_1_202029.png",
+    "right": "frame_right_1_202029.png"
+  },
+  "filter": {
+    "path": "subtle_grain.png",
+    "opacity": 0.15,
+    "blendMode": "overlay"
+  }
+}

@@ -1,0 +1,11 @@
+This is a placeholder for the frame_lower_1_202029.png file.
+
+Create a PNG image with:
+- Width matching your entire diorama width (60vw)
+- Height sufficient for your frame design (100-300px suggested)
+- MUST INCLUDE BOTH CORNERS - this covers the lower left corner, bottom edge, and lower right corner
+- Transparent areas where you want the diorama to be visible
+- Opaque areas (in #202029 color) for the frame effect
+
+Think of it like placing a twig/branch across the bottom of your painting that extends to both corners.
+Follow CREATING_SCOPE_FRAME_ASSETS.md for detailed instructions.

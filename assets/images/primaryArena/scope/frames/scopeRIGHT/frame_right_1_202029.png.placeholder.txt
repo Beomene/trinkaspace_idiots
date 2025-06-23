@@ -1,0 +1,11 @@
+This is a placeholder for the frame_right_1_202029.png file.
+
+Create a PNG image with:
+- Height matching your entire diorama height
+- Width sufficient for your frame design (50-200px suggested)
+- MUST INCLUDE BOTH CORNERS - this covers the upper right corner, right edge, and lower right corner
+- Transparent areas where you want the diorama to be visible
+- Opaque areas (in #202029 color) for the frame effect
+
+Think of it like placing a twig/branch along the right side of your painting that extends to both corners.
+Follow CREATING_SCOPE_FRAME_ASSETS.md for detailed instructions.

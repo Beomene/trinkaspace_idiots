@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Typing Voices Demo - Trinkaloop Saga</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../../assets/css/core.css">
+</head>
+<body style="background: #242424; padding: 2em; color: #ACABBB;">
+  <div id="trinkaspace-container"></div>
+  
+  <div style="position: fixed; top: 1em; left: 1em; z-index: 2000; background: rgba(0,0,0,0.8); padding: 1em; border-radius: 10px;">
+    <h3 style="margin: 0 0 0.5em 0; color: #2AFFF7;">🎭 Voice Demo</h3>
+    <button onclick="location.href='../../portal.html'" style="padding: 0.5em 1em; background: #161670; color: #ACABBB; border: none; border-radius: 5px; cursor: pointer;">← Back to Portal</button>
+  </div>
+
+  <div style="text-align: center; margin: 2em 0;">
+    <h1 style="color: #2AFFF7;">Typing Voices Demonstration</h1>
+    <p>Watch how each character has their own unique typing personality!</p>
+  </div>
+
+  <!-- Create simple dioramas for anchoring -->
+  <div id="diorama-demo1" style="height: 200px; background: linear-gradient(45deg, #161721, #181621); margin: 2em 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #ACABBB;">
+    <h2>🚀 Eene's Fast Typing Zone</h2>
+  </div>
+
+  <div id="diorama-demo2" style="height: 200px; background: linear-gradient(45deg, #161A1D, #161621); margin: 2em 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #ACABBB;">
+    <h2>🎯 Emraa's Methodical Zone</h2>
+  </div>
+
+  <div id="diorama-demo3" style="height: 200px; background: linear-gradient(45deg, #161670, #6A00FF); margin: 2em 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #ACABBB;">
+    <h2>🌸 Lyl's Dreamy Zone</h2>
+  </div>
+
+  <div id="diorama-demo4" style="height: 200px; background: linear-gradient(45deg, #050011, #242424); margin: 2em 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #ACABBB;">
+    <h2>📖 Narrator's Story Zone</h2>
+  </div>
+
+  <script type="module">
+    import { addTextBox } from '../../assets/js/secondaryArena.js';
+
+    // Eene - Fast and energetic
+    addTextBox({
+      id: "eene-demo",
+      text: "Hey everyone! This is really exciting! I type super fast and sometimes make mistakes but I fix them right away because I can't wait to share everything with you!",
+      speaker: "Eene",
+      voice: "eene",
+      anchorTo: "demo1",
+      offsetY: "10px",
+      align: "left"
+    });
+
+    // Emraa - Methodical and careful
+    addTextBox({
+      id: "emraa-demo", 
+      text: "Greetings. I am demonstrating a more methodical typing approach. I maintain consistent speed and precision, occasionally making errors which I correct systematically at completion.",
+      speaker: "Emraa",
+      voice: "emraa",
+      anchorTo: "demo2", 
+      offsetY: "10px",
+      align: "left"
+    });
+
+    // Lyl - Slow and dreamy with permanent typos
+    addTextBox({
+      id: "lyl-demo",
+      text: "oh hello lovely freinds... i am typing very slowly becuase i keep getting distracted by all the beautiflu things around me... the sunshine is so peacful today...",
+      speaker: "Lyl",
+      voice: "lyl",
+      anchorTo: "demo3",
+      offsetY: "10px", 
+      align: "left"
+    });
+
+    // Narrator - Balanced storytelling
+    addTextBox({
+      id: "narrator-demo",
+      text: "And so we witness the unique typing personalities of each character... Each voice tells a story not just through words, but through the rhythm and quirks of how those words appear.",
+      speaker: "Narrator", 
+      voice: "narrator",
+      anchorTo: "demo4",
+      offsetY: "10px",
+      align: "left"
+    });
+
+    // Final comparison
+    setTimeout(() => {
+      addTextBox({
+        id: "comparison-intro",
+        text: "🎭 Notice the differences in typing speed, typo frequency, and correction behavior! Each character's personality shines through their typing fingerprint.",
+        speaker: "System",
+        voice: "narrator",
+        anchorTo: "demo4",
+        offsetY: "150px",
+        align: "center"
+      });
+    }, 2000);
+  </script>
+</body>
+</html>

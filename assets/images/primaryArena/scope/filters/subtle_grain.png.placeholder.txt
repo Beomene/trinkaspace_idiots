@@ -1,0 +1,8 @@
+This is a placeholder for the subtle_grain.png filter file.
+
+Create a PNG image with:
+- Subtle noise/grain texture
+- Size matching or exceeding your diorama size
+- Semi-transparent design
+
+This filter will be applied over the entire diorama with opacity 0.15 and blend mode "overlay".

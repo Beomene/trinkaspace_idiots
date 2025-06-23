@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trinkaspace Beat System Demonstration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/css/core.css">
+  <link rel="stylesheet" href="/assets/css/beat-system.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+  <style>
+    body {
+      background-color: var(--bg-color);
+      color: var(--trinka-text);
+      padding: 2rem;
+      font-family: 'Noto Sans', sans-serif;
+    }
+    
+    .test-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background-color: rgba(0,0,0,0.3);
+      border-radius: 15px;
+    }
+    
+    h1, h2, h3 {
+      color: white;
+    }
+    
+    .beat-button {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    .beat-button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .beat-hard {
+      border-left: 4px solid #ff5b5b;
+    }
+    
+    .beat-normal {
+      border-left: 4px solid #5bafff;
+    }
+    
+    .beat-soft {
+      border-left: 4px solid #5bff8f;
+    }
+    
+    #utt-container {
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      font-style: italic;
+      color: #64c9f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>Trinkaspace Beat System</h1>
+    
+    <p>This page demonstrates the Beat System - a specialized type of narrative pause in Trinkaspace that enhances storytelling through different types of intentional pauses.</p>
+    
+    <div id="utt-container">
+      <div id="utt-message">I wonder what these beat things do...</div>
+    </div>
+    
+    <h2>Beat Types</h2>
+    
+    <h3>Hard Beat</h3>
+    <p>Creates tension, focus, and heightened emotional impact. Temporarily disables scrolling.</p>
+    <button class="beat-button beat-hard" onclick="demonstrateBeat('hard', 4000)">Experience Hard Beat (4s)</button>
+    
+    <h3>Normal Beat</h3>
+    <p>Natural rhythm in conversation, thoughtful pauses.</p>
+    <button class="beat-button beat-normal" onclick="demonstrateBeat('normal', 3000)">Experience Normal Beat (3s)</button>
+    
+    <h3>Soft Beat</h3>
+    <p>Extended contemplation, appreciation of beauty, rest.</p>
+    <button class="beat-button beat-soft" onclick="demonstrateBeat('soft', 5000, true)">Experience Soft Beat (5s)</button>
+    
+    <h2>Settings</h2>
+    <p>In a real story, the reader can adjust beat durations to match their reading pace.</p>
+    <button class="beat-button" id="settings-button">Open Beat Settings</button>
+    
+    <div class="beat-settings-panel" id="beat-settings-panel">
+      <h4>Reader Pace Settings</h4>
+      
+      <label for="hard-beat-toggle">
+        Enable Hard Beats
+        <input type="checkbox" id="hard-beat-toggle" checked>
+      </label>
+      
+      <label for="hard-beat-scale">
+        Hard Beat Duration
+        <input type="range" id="hard-beat-scale" min="0.5" max="2" step="0.1" value="1.0">
+      </label>
+      
+      <label for="normal-beat-scale">
+        Normal Beat Duration
+        <input type="range" id="normal-beat-scale" min="0.5" max="2" step="0.1" value="1.0">
+      </label>
+      
+      <label for="soft-beat-scale">
+        Soft Beat Duration
+        <input type="range" id="soft-beat-scale" min="0.5" max="2" step="0.1" value="1.0">
+      </label>
+      
+      <button class="beat-settings-save" onclick="document.getElementById('beat-settings-panel').classList.remove('visible')">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Simulates the beat system
+    function demonstrateBeat(beatType, duration, useEternity = false) {
+      // Update UTT based on beat type
+      const uttMessage = document.getElementById('utt-message');
+      switch(beatType) {
+        case 'hard':
+          uttMessage.textContent = "This is intense!";
+          uttMessage.style.color = '#f98064';
+          break;
+        case 'normal':
+          uttMessage.textContent = "Hmm, a moment to think...";
+          uttMessage.style.color = '#9f64f9';
+          break;
+        case 'soft':
+          uttMessage.textContent = "How beautiful...";
+          uttMessage.style.color = '#b8e986';
+          break;
+      }
+      
+      // Create or get beat overlay
+      let beatOverlay = document.getElementById('beat-overlay');
+      if (!beatOverlay) {
+        beatOverlay = document.createElement('div');
+        beatOverlay.id = 'beat-overlay';
+        beatOverlay.className = 'beat-overlay';
+        document.body.appendChild(beatOverlay);
+      }
+      
+      // Apply appropriate classes
+      beatOverlay.classList.remove('hard-beat', 'normal-beat', 'soft-beat');
+      beatOverlay.classList.add(`${beatType}-beat`);
+      
+      // If hard beat, disable scrolling
+      if (beatType === 'hard') {
+        document.body.style.overflow = 'hidden';
+      }
+      
+      // If soft beat with eternity mode
+      if (beatType === 'soft' && useEternity) {
+        // Add eternity mode button if it doesn't exist
+        if (!document.getElementById('eternity-mode-button')) {
+          const button = document.createElement('button');
+          button.id = 'eternity-mode-button';
+          button.className = 'eternity-mode-button';
+          button.textContent = 'Stay in this moment';
+          document.body.appendChild(button);
+          
+          button.addEventListener('click', function() {
+            if (this.classList.contains('active')) {
+              // End eternity mode
+              this.classList.remove('active');
+              this.textContent = 'Stay in this moment';
+              document.body.classList.remove('viewport-breathing');
+              
+              // Remove the beat after a short delay
+              setTimeout(() => {
+                beatOverlay.classList.remove(`${beatType}-beat`);
+                this.remove();
+              }, 1000);
+            } else {
+              // Enter eternity mode
+              this.classList.add('active');
+              this.textContent = 'Continue journey';
+              document.body.classList.add('viewport-breathing');
+            }
+          });
+        }
+      }
+      
+      // Set a timer to remove the beat after duration
+      if (!(beatType === 'soft' && useEternity && document.getElementById('eternity-mode-button')?.classList.contains('active'))) {
+        setTimeout(() => {
+          beatOverlay.classList.remove(`${beatType}-beat`);
+          
+          // Re-enable scrolling if it was a hard beat
+          if (beatType === 'hard') {
+            document.body.style.overflow = '';
+          }
+          
+          // Remove eternity button if not active
+          const eternityButton = document.getElementById('eternity-mode-button');
+          if (eternityButton && !eternityButton.classList.contains('active')) {
+            eternityButton.remove();
+          }
+        }, duration);
+      }
+    }
+    
+    // Initialize the settings button
+    document.getElementById('settings-button').addEventListener('click', function() {
+      document.getElementById('beat-settings-panel').classList.toggle('visible');
+    });
+  </script>
+</body>
+</html>

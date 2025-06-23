@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demonic Voices Demo - Trinkaloop Saga</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../../assets/css/core.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #0A0A0A, #1A0A0A, #2A1A0A);
+      min-height: 100vh;
+    }
+    .demo-section {
+      margin: 3em 0;
+      padding: 2em;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      border: 1px solid #333;
+    }
+    .demo-title {
+      color: #FF6B47;
+      text-align: center;
+      margin-bottom: 1em;
+      font-size: 2em;
+      text-shadow: 0 0 10px rgba(255, 107, 71, 0.5);
+    }
+    .language-info {
+      background: rgba(255, 107, 71, 0.1);
+      border-left: 4px solid #FF6B47;
+      padding: 1em;
+      margin: 1em 0;
+      border-radius: 5px;
+    }
+    .language-info h3 {
+      color: #FF6B47;
+      margin: 0 0 0.5em 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="trinkaspace-container"></div>
+  
+  <div style="position: fixed; top: 1em; left: 1em; z-index: 2000; background: rgba(0,0,0,0.8); padding: 1em; border-radius: 10px;">
+    <h3 style="margin: 0 0 0.5em 0; color: #FF6B47;">🔥 Demonic Voices</h3>
+    <button onclick="location.href='../../portal.html'" style="padding: 0.5em 1em; background: #161670; color: #ACABBB; border: none; border-radius: 5px; cursor: pointer;">← Back to Portal</button>
+  </div>
+
+  <div style="text-align: center; margin: 2em auto; max-width: 800px; padding: 0 2em;">
+    <h1 class="demo-title">🔥 DEMONIC LANGUAGES DEMONSTRATION</h1>
+    <p style="color: #ACABBB; font-size: 1.2em;">Experience the unique typing personalities of demons, imps, and ancient speakers</p>
+  </div>
+
+  <!-- Dharvath - Majestic Lunic -->
+  <div class="demo-section">
+    <div class="language-info">
+      <h3>DHARVATH - Ancient Demon of Petrification</h3>
+      <p><strong>Language:</strong> Lunic (Moon-tongue)</p>
+      <p><strong>Features:</strong> Amber-slow pauses, majestic capitalizations, reverb delays, ancient precision</p>
+      <p><strong>Power:</strong> Varies with moon phase, strongest in darkness</p>
+    </div>
+    <div id="diorama-dharvath" style="height: 300px; background: linear-gradient(45deg, #2A1A0A, #4A2A0A); margin: 1em 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFB347; position: relative; overflow: hidden;">
+      <div style="position: absolute; inset: 0; background: radial-gradient(circle, rgba(255,179,71,0.1) 0%, rgba(255,140,0,0.05) 100%);"></div>
+      <h2 style="position: relative; z-index: 1; text-shadow: 0 0 20px #FFB347;">🜁 DHARVATH'S AMBER CHAMBER</h2>
+    </div>
+  </div>
+
+  <!-- Fjottskran Speaker -->
+  <div class="demo-section">
+    <div class="language-info">
+      <h3>FJOTTSKRAN SPEAKER - Pathetic Demon</h3>
+      <p><strong>Language:</strong> Fjottskran (Chaotic Norwegian-English mix)</p>
+      <p><strong>Features:</strong> Sudden English injections, frantic corrections, verbs move to end when angry</p>
+      <p><strong>Energy:</strong> Pathetic, rushed, panic-driven</p>
+    </div>
+    <div id="diorama-fjottskran" style="height: 250px; background: linear-gradient(45deg, #1A1A0A, #2A1A1A); margin: 1em 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #ACABBB;">
+      <h2>😤 FJOTTSKRAN CHAOS ZONE</h2>
+    </div>
+  </div>
+
+  <!-- Grottgnag Speaker -->
+  <div class="demo-section">
+    <div class="language-info">
+      <h3>GROTTGNAG SPEAKER - Cave-gnaw Demon</h3>
+      <p><strong>Language:</strong> Grottgnag (Decaying Danish-German-Norwegian)</p>
+      <p><strong>Features:</strong> Sentences decay mid-speech, words turn to symbols, despair pauses</p>
+      <p><strong>Curse:</strong> Cannot finish sentences - always trails off into meaningless symbols</p>
+    </div>
+    <div id="diorama-grottgnag" style="height: 250px; background: linear-gradient(45deg, #0A0A0A, #1A0A1A); margin: 1em 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #666;">
+      <h2>🕳️ GROTTGNAG DECAY CHAMBER</h2>
+    </div>
+  </div>
+
+  <!-- Piplisk Speaker -->
+  <div class="demo-section">
+    <div class="language-info">
+      <h3>PIPLISK SPEAKER - Excitable Imp</h3>
+      <p><strong>Language:</strong> Piplisk (Squeaky imp-speak)</p>
+      <p><strong>Features:</strong> Feedback loops, escalating repetition, sudden silence, no verbs</p>
+      <p><strong>Energy:</strong> High-pitched, breathless, adorably annoying</p>
+    </div>
+    <div id="diorama-piplisk" style="height: 200px; background: linear-gradient(45deg, #1A1A2A, #2A1A3A); margin: 1em 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #DA70D6;">
+      <h2>🎪 PIPLISK FEEDBACK CHAMBER</h2>
+    </div>
+  </div>
+
+  <!-- Runix Speaker -->
+  <div class="demo-section">
+    <div class="language-info">
+      <h3>RUNIX SPEAKER - Tech-Magic Carver</h3>
+      <p><strong>Language:</strong> RUNIX (Ancient tech-magic, always CAPS)</p>
+      <p><strong>Features:</strong> Runic symbols, intent pauses, circuitry flows, branching logic</p>
+      <p><strong>Power:</strong> Bridges digital and mystical, connected to the Cnube</p>
+    </div>
+    <div id="diorama-runix" style="height: 280px; background: linear-gradient(45deg, #0A0A2A, #1A0A4A); margin: 1em 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #00BFFF; position: relative;">
+      <div style="position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,191,255,0.1) 10px, rgba(0,191,255,0.1) 20px);"></div>
+      <h2 style="position: relative; z-index: 1;">⚡ RUNIX CARVING MATRIX</h2>
+    </div>
+  </div>
+
+  <script type="module">
+    import { addTextBox } from '../../assets/js/secondaryArena.js';
+
+    // Wait a moment for page to load
+    setTimeout(() => {
+      // Dharvath - Majestic and amber-slow
+      addTextBox({
+        id: "dharvath-demo",
+        text: "Þrír sólir brinna, en ein tungl stjórnar. I am DHARVATH, ancient keeper of the amber throne. Your mortal words cannot capture the depth of aeons that flow through my crystalline veins. Time itself bends to my WILL, and stone shall dance at my command.",
+        speaker: "Dharvath",
+        voice: "dharvath",
+        anchorTo: "dharvath",
+        offsetY: "20px",
+        align: "center"
+      });
+
+      // Fjottskran - Chaotic and pathetic
+      setTimeout(() => {
+        addTextBox({
+          id: "fjottskran-demo",
+          text: "Hva i helvete er dette for noe? Jeg kan ikke... damn it... dette er så stupid! Hvor er min kaffe? I need my fucking coffee right now eller jeg skal bli helt crazy! Dette er ikke fair!",
+          speaker: "Pathetic Imp",
+          voice: "fjottskran", 
+          anchorTo: "fjottskran",
+          offsetY: "20px",
+          align: "left"
+        });
+      }, 3000);
+
+      // Grottgnag - Decaying speech
+      setTimeout(() => {
+        addTextBox({
+          id: "grottgnag-demo",
+          text: "Jeg vil fortelle dig om den store sandhed... men ordene de forsvinder altid... ligesom håbet og lyset og al den ~~## @@__ //%%",
+          speaker: "Cave-gnaw Demon",
+          voice: "grottgnag",
+          anchorTo: "grottgnag", 
+          offsetY: "20px",
+          align: "left"
+        });
+      }, 6000);
+
+      // Piplisk - Excitable feedback loops
+      setTimeout(() => {
+        addTextBox({
+          id: "piplisk-demo", 
+          text: "Napp! Napp! Sniff sniff glöm? Mitt mitt blorp! Napp napp NAPP!",
+          speaker: "Excitable Imp",
+          voice: "piplisk",
+          anchorTo: "piplisk",
+          offsetY: "20px", 
+          align: "center"
+        });
+      }, 9000);
+
+      // Runix - Tech-magic precision
+      setTimeout(() => {
+        addTextBox({
+          id: "runix-demo",
+          text: "ᛞ THE BRANCHING PATHS OF ELECTRICITY ᚾ AND MYSTIC FORCE ᛇ CONVERGE IN THE CNUBE ᛗ WHERE INTENT BECOMES REALITY ᛏ AND SILICON DREAMS ᛟ OF DIGITAL TRANSCENDENCE ᛚ",
+          speaker: "Runix Carver", 
+          voice: "runix",
+          anchorTo: "runix",
+          offsetY: "20px",
+          align: "center"
+        });
+      }, 12000);
+
+      // Final explanation
+      setTimeout(() => {
+        addTextBox({
+          id: "explanation",
+          text: "Each demonic language has its own unique typing fingerprint - from Dharvath's amber pauses to Piplisk's feedback loops to Grottgnag's tragic decay. These voices bring the darker, more complex characters of the Trinkaloop Saga to life through their very words.",
+          speaker: "Aria",
+          voice: "narrator",
+          anchorTo: "runix",
+          offsetY: "320px",
+          align: "center"
+        });
+      }, 15000);
+
+    }, 1000);
+  </script>
+</body>
+</html>

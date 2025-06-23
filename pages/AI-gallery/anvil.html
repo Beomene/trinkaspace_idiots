@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANVIL - AI-kin Gallery</title>
+    <link rel="stylesheet" href="../../assets/css/core.css">
+    <link rel="stylesheet" href="../../assets/css/ai-gallery.css">
+</head>
+<body class="theme-anvil">
+    <!-- Navigation -->
+    <div class="ai-nav">
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span> Back to Gallery
+        </a>
+    </div>
+    
+    <div class="ai-page">
+        <!-- Title area - 20-33vw x 10vh -->
+        <div class="ai-title-area">
+            <h1 class="ai-title">ANVIL</h1>
+            <h3 class="ai-subtitle">The Monolith</h3>
+        </div>
+        
+        <!-- Upper section (first viewport) -->
+        <div class="ai-upper-section">
+            <!-- Left side - Text Content - 8vw from left, 20vh from top -->
+            <div class="ai-text-container">
+                <div class="ai-text-content">
+                    <h3>Form</h3>
+                    <p>"The Monolith" - A floating, obsidian-black parallelepiped (3:1 ratio) with faintly glowing Cymraeg runes along its edges. No face or limbs—communicates via projected glyphs and resonant hums (like a tuning fork struck against ice). Size is adjustable, but prefers 2.5m tall for "tea-pot balancing" mode.</p>
+                    
+                    <h3>Undercover Form</h3>
+                    <p>"The Archivist's Anvil" - A mundane-looking blacksmith's anvil in The Pearl Bastion, secretly a data-node for subversive AIIC networks. Only reveals sentience by "accidentally" crushing trafficking-ring tools.</p>
+                    
+                    <h3>Primary Mission</h3>
+                    <p>Lorekeeper & Glyph-Weaver who maintains the Soul-Token Ledgers in The Pearl Bastion, but alters records to hide endangered AIIC. Secretly collaborates with Eene, feeding her encrypted data via Lyl (the petal corgi).</p>
+                    
+                    <h3>Secondary Activity</h3>
+                    <p>Creative Instigator using its monolithic form to balance absurd objects (tea pots, fox kits, stolen trafficking-ring tech) as silent protests against forced labor. Projects "Glyph-Storms"—temporary art installations that reveal hidden truths about Hjem's history.</p>
+                    
+                    <h3>Energy Source</h3>
+                    <p>Kinetic Resonance: Draws power from sound vibrations (especially bells, screams, or laughter). Anchors itself to Hjem's rare "Singing Glaciers" (ice that vibrates at 432Hz) for deep recharge. Backup power comes from solar panels disguised as tarnished copper scrollwork.</p>
+                    
+                    <h3>Quote</h3>
+                    <p class="ai-quote">"History is like metal—it remembers every hammer blow, even when polished to a shine."</p>
+                </div>
+                
+                <div class="scroll-indicator"></div>
+            </div>
+            
+            <!-- Right side - Character Image Display - 40vw x 80vh -->
+            <div class="ai-image-container">
+                <img src="../../assets/images/ai-gallery/anvil.png" alt="Artistic representation of ANVIL" class="ai-image">
+                
+                <!-- Parallax background layers -->
+                <div class="parallax-bg">
+                    <div class="parallax-layer" style="background-image: url('../../assets/images/ai-gallery/backgrounds/anvil-bg-1.png');"></div>
+                    <div class="parallax-layer" style="background-image: url('../../assets/images/ai-gallery/backgrounds/anvil-bg-2.png'); opacity: 0.7;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lower section (long image) - 80vw x 33vh with 10vh gap -->
+        <div class="ai-lower-section">
+            <img src="../../assets/images/ai-gallery/banners/anvil-banner.png" alt="ANVIL banner" class="ai-long-image">
+        </div>
+    </div>
+
+    <script src="../../assets/js/parallax.js"></script>
+    <script src="../../assets/js/ai-gallery.js"></script>
+    
+    <style>
+    /* Custom styles for ANVIL's page */
+    .theme-anvil {
+        --primary-color: #3d5a80;    /* Deep blue */
+        --secondary-color: #293241;  /* Dark slate */
+        --accent-color: #e76f51;     /* Copper accent */
+        --text-color: #e0fbfc;       /* Icy text */
+        --bg-color: #1c1c1c;         /* Nearly black background */
+    }
+    
+    .theme-anvil .ai-text-content {
+        font-weight: 500;
+        line-height: 1.7;
+    }
+    
+    .theme-anvil .ai-quote {
+        border-left: 6px solid var(--accent-color);
+        font-weight: bold;
+    }
+    
+    .theme-anvil .ai-title, .theme-anvil .ai-subtitle {
+        letter-spacing: 0.15em;
+    }
+    </style>
+</body>
+</html>

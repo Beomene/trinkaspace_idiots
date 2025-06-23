@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageScript Test</title>
+    <link rel="stylesheet" href="../../assets/css/core.css">
+    <link rel="stylesheet" href="../../assets/css/secondaryArena.css">
+    <style>
+        body {
+            background-color: #202029;
+            color: #ACABBB;
+            font-family: 'Noto Sans', sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .test-container {
+            width: 100%;
+            position: relative;
+            height: 10000px;
+        }
+        
+        .marker {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(200, 200, 200, 0.3);
+        }
+        
+        .marker::after {
+            content: attr(data-y);
+            position: absolute;
+            right: 20px;
+            top: -10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .marker.highlighted {
+            background-color: rgba(42, 255, 247, 0.6);
+            height: 3px;
+        }
+        
+        .marker.highlighted::after {
+            background: rgba(0, 0, 0, 0.8);
+            color: rgba(42, 255, 247, 0.9);
+        }
+        
+        .content-box {
+            background: rgba(20, 20, 30, 0.5);
+            border: 1px solid rgba(180, 180, 190, 0.3);
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        h1 {
+            color: rgba(42, 255, 247, 0.8);
+        }
+        
+        pre {
+            background: rgba(10, 10, 15, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid rgba(42, 255, 247, 0.2);
+        }
+        
+        /* Controls */
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(20, 20, 30, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(42, 255, 247, 0.3);
+            z-index: 1000;
+        }
+        
+        button {
+            background: rgba(42, 255, 247, 0.2);
+            color: #ACABBB;
+            border: 1px solid rgba(42, 255, 247, 0.4);
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: rgba(42, 255, 247, 0.3);
+        }
+        
+        .controls-title {
+            color: rgba(42, 255, 247, 0.8);
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .scroll-info {
+            color: rgba(42, 255, 247, 0.7);
+            font-size: 12px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        /* HUD Elements */
+        .trinkatext-hud {
+            position: fixed;
+            bottom: 100px;
+            left: 28vw;
+            width: 44vw;
+            background: rgba(20, 20, 30, 0.75);
+            border-top: 1px solid rgba(42, 255, 247, 0.4);
+            padding: 10px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .trinkatext-typing {
+            min-height: 1.5em;
+            color: rgba(42, 255, 247, 0.9);
+        }
+        
+        .trinkatext-history {
+            margin-top: 15px; /* Space after the cyan line */
+            color: rgba(170, 170, 190, 0.8);
+            font-style: italic;
+        }
+        
+        .demo-textbox {
+            position: fixed;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 600px;
+            z-index: 1000;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+</head>
+<body>
+    <div class="content-box" style="margin-top: 50px;">
+        <h1>PageScript System Test</h1>
+        <p>
+            This page demonstrates the PageScript system, which extends TextScript to support scroll-driven narrative experiences.
+            The page contains scroll position markers that correspond to section triggers in the script.
+        </p>
+        <p>
+            Scroll down to see how different sections of the script activate at specific scroll positions.
+            The "dense" and "sprinkle" styles for TextBox and TrinkaText content are also demonstrated.
+        </p>
+    </div>
+
+    <div id="trinkaspace-container" class="test-container">
+        <!-- Scroll position markers -->
+        <div class="marker" style="top: 0px;" data-y="0">y=0</div>
+        <div class="marker highlighted" style="top: 1800px;" data-y="1800">y=1800</div>
+        <div class="marker highlighted" style="top: 2222px;" data-y="2222">y=2222</div>
+        <div class="marker highlighted" style="top: 3500px;" data-y="3500">y=3500</div>
+        <div class="marker highlighted" style="top: 4444px;" data-y="4444">y=4444</div>
+        <div class="marker highlighted" style="top: 6000px;" data-y="6000">y=6000</div>
+        <div class="marker highlighted" style="top: 6666px;" data-y="6666">y=6666</div>
+        <div class="marker highlighted" style="top: 8000px;" data-y="8000">y=8000</div>
+    </div>
+
+    <!-- Demo TextBox -->
+    <div id="demo-textbox" class="textbox demo-textbox">
+        <span class="speaker">Narrator</span>
+        <span class="trinka-text-content"></span>
+    </div>
+
+    <!-- TrinkaText HUD -->
+    <div class="trinkatext-hud">
+        <div class="trinkatext-typing" id="trinkatext-typing"></div>
+        <div class="trinkatext-history" id="trinkatext-history"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <div class="controls-title">PageScript Demo Controls</div>
+        <button id="reset-btn">Reset Demo</button>
+        <button id="jump-next-btn">Jump to Next Marker</button>
+        <div class="scroll-info">
+            Current Y: <span id="scroll-y">0</span>px
+        </div>
+    </div>
+
+    <script type="module">
+        import { PageScript } from '../../assets/js/pageScript.js';
+        
+        // Create a mock TrinkaspaceEngine for testing
+        const mockEngine = {
+            updateTextBoxContent(content, style = 'normal') {
+                console.log(`[Mock] TextBox (${style}): ${content}`);
+                const textbox = document.getElementById('demo-textbox');
+                const textSpan = textbox.querySelector('.trinka-text-content');
+                
+                // Apply style classes
+                if (style === 'dense') {
+                    textbox.classList.add('dense');
+                    textbox.classList.remove('sprinkle');
+                } else if (style === 'sprinkle') {
+                    textbox.classList.add('sprinkle');
+                    textbox.classList.remove('dense');
+                } else {
+                    textbox.classList.remove('dense', 'sprinkle');
+                }
+                
+                // Add typewriter effect
+                textSpan.textContent = '';
+                typeText(textSpan, content);
+            },
+            
+            setTrinkatextMessage(message, style = 'normal') {
+                console.log(`[Mock] TrinkaText (${style}): ${message}`);
+                const typing = document.getElementById('trinkatext-typing');
+                const history = document.getElementById('trinkatext-history');
+                
+                // Add message to typing area
+                typing.textContent = '';
+                typeText(typing, message, () => {
+                    // Move to history after typing
+                    setTimeout(() => {
+                        // Create new history item
+                        const historyItem = document.createElement('div');
+                        historyItem.textContent = message;
+                        
+                        // Apply styles
+                        if (style === 'dense') {
+                            historyItem.style.fontWeight = '500';
+                            historyItem.style.opacity = '0.95';
+                        } else if (style === 'sprinkle') {
+                            historyItem.style.fontStyle = 'italic';
+                            historyItem.style.opacity = '0.7';
+                        }
+                        
+                        // Add to history
+                        history.prepend(historyItem);
+                        
+                        // Limit history items
+                        const historyItems = history.children;
+                        if (historyItems.length > 5) {
+                            history.removeChild(historyItems[historyItems.length - 1]);
+                        }
+                        
+                        // Clear typing area
+                        typing.textContent = '';
+                    }, 1000);
+                });
+            },
+            
+            playSound(target, sound) {
+                console.log(`[Mock] Playing sound: ${sound} in ${target}`);
+                // Add visual feedback for sound
+                const notification = document.createElement('div');
+                notification.textContent = `🔊 ${sound}`;
+                notification.style.position = 'fixed';
+                notification.style.top = '20px';
+                notification.style.right = '20px';
+                notification.style.background = 'rgba(42, 255, 247, 0.2)';
+                notification.style.border = '1px solid rgba(42, 255, 247, 0.5)';
+                notification.style.padding = '10px';
+                notification.style.borderRadius = '5px';
+                notification.style.zIndex = '2000';
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => document.body.removeChild(notification), 500);
+                }, 2000);
+            }
+        };
+        
+        // Simple typewriter effect
+        function typeText(element, text, callback) {
+            let i = 0;
+            const speed = 30;
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            
+            type();
+        }
+        
+        // Initialize PageScript
+        const pageScript = new PageScript(mockEngine);
+        
+        // Load the example script
+        fetch('../../other/examples/example-page-script.md')
+            .then(response => response.text())
+            .then(scriptContent => {
+                pageScript.parseScript(scriptContent);
+                console.log('Script loaded with sections:', pageScript.scrollTriggers);
+                
+                // Initial check for triggers
+                pageScript.checkScrollTriggers();
+            })
+            .catch(error => {
+                console.error('Error loading script:', error);
+                alert('Failed to load the example script. Check the console for details.');
+            });
+        
+        // Update scroll position display
+        function updateScrollDisplay() {
+            document.getElementById('scroll-y').textContent = window.scrollY;
+        }
+        
+        window.addEventListener('scroll', updateScrollDisplay);
+        updateScrollDisplay();
+        
+        // Reset button
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            // Reset history
+            document.getElementById('trinkatext-history').innerHTML = '';
+            document.getElementById('trinkatext-typing').textContent = '';
+            
+            // Reset TextBox
+            const textbox = document.getElementById('demo-textbox');
+            textbox.classList.remove('dense', 'sprinkle');
+            textbox.querySelector('.trinka-text-content').textContent = '';
+            
+            // Reset script
+            pageScript.reset();
+            pageScript.parseScript(window.scriptContent);
+            
+            console.log('Demo reset');
+        });
+        
+        // Jump to next marker
+        document.getElementById('jump-next-btn').addEventListener('click', () => {
+            const currentY = window.scrollY;
+            const markers = Array.from(document.querySelectorAll('.marker'));
+            
+            // Find the next marker
+            const nextMarker = markers.find(marker => {
+                const y = parseInt(marker.dataset.y, 10);
+                return y > currentY;
+            });
+            
+            if (nextMarker) {
+                const y = parseInt(nextMarker.dataset.y, 10);
+                window.scrollTo({
+                    top: y,
+                    behavior: 'smooth'
+                });
+                console.log(`Jumping to y=${y}`);
+            } else {
+                console.log('No more markers');
+            }
+        });
+    </script>
+</body>
+</html>

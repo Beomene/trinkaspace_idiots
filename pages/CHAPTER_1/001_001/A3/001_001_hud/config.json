@@ -1,0 +1,52 @@
+{
+  "id": "001_001_hud",
+  "type": "hud",
+  "layout": "WIDE",
+  "elements": [
+    {
+      "id": "chapter-title",
+      "type": "text",
+      "content": "Chapter 1: The Soda Cat Awakens",
+      "position": "top-center",
+      "showBackground": true,
+      "showBorder": true,
+      "width": "auto",
+      "height": "auto",
+      "padding": "10px 20px"
+    },
+    {
+      "id": "navigation-controls",
+      "type": "controls",
+      "position": "bottom-right",
+      "showBackground": true,
+      "showBorder": true,
+      "width": "auto",
+      "height": "auto",
+      "padding": "10px",
+      "buttons": [
+        {
+          "id": "menu-toggle",
+          "icon": "menu",
+          "action": "toggleMenu",
+          "tooltip": "Open Menu"
+        },
+        {
+          "id": "sound-toggle",
+          "icon": "sound-on",
+          "action": "toggleSound",
+          "tooltip": "Toggle Sound"
+        }
+      ]
+    },
+    {
+      "id": "progress-indicator",
+      "type": "progress",
+      "position": "bottom-center",
+      "showBackground": true,
+      "showBorder": true,
+      "width": "200px",
+      "height": "40px",
+      "padding": "10px"
+    }
+  ]
+}

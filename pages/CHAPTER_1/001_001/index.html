@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trinkaloop Saga - Chapter 1, Page 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">  <link rel="stylesheet" href="/assets/css/core.css">
+  <link rel="stylesheet" href="/assets/css/beat-system.css">
+  <link rel="stylesheet" href="/assets/css/hud.css">
+  <link rel="stylesheet" href="/assets/css/keyboard-navigation.css">
+  <link rel="stylesheet" href="/assets/css/story-user-display.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+</head>
+<body class="story-page">
+  <div id="trinkaspace-user-display"></div>
+  <div id="trinkaspace-container" tabindex="-1"></div>
+  
+  <!-- Navigation controls -->
+  <div class="page-navigation" role="navigation" aria-label="Chapter Navigation">
+    <a href="/portal.html" class="nav-button prev-button" aria-label="Return to Portal">Home</a>
+    <a href="../001_002/index.html" class="nav-button next-button" aria-label="Next Page">Next</a>
+  </div>
+  
+  <!-- Footer with keyboard help -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 Trinkaloop Saga. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/pages/general/legal/privacy-policy.html" class="footer-link">Privacy Policy</a>
+        <button id="keyboard-help-button" class="footer-button">Keyboard Shortcuts</button>
+      </div>
+    </div>
+  </footer>
+  
+  <script type="module">
+    import TrinkaspaceEngine from '/assets/js/trinkaspaceEngine.js';
+    import { placeTextBoxFromScope, addTextBox } from '/assets/js/secondaryArena.js';
+    import userManager from '/assets/js/userManager.js';
+    import keyboardNavigation from '/assets/js/keyboardNavigation.js';
+
+    // Initialize the engine when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize user management system
+      userManager.init();
+      
+      console.log('🚀 Initializing Trinkaspace Engine...');
+      window.trinkaspaceEngine = new TrinkaspaceEngine({ pageId: '001_001' });
+      
+      // Setup keyboard help button
+      const helpButton = document.getElementById('keyboard-help-button');
+      if (helpButton) {
+        helpButton.addEventListener('click', () => {
+          keyboardNavigation.showHelp();
+        });
+      }
+      
+      // Setup SCOPEGUARD for development
+      window.SCOPEGUARD_ENABLED = true;
+      window._scopeguardWarned = {};
+    });
+    
+    // Text-boxes will be loaded from folders (001_001_003, etc.)
+    // The textboxes will now be loaded directly by the TrinkaspaceEngine
+    // from the page.json elements section
+
+    // ORIGINAL DIORAMA-DEPENDENT CODE (commented out for debugging)
+    /*
+    // Add text boxes after a delay to ensure dioramas are loaded
+    setTimeout(() => {
+      console.log('📝 Adding text boxes...');
+      
+      // Method 1: Using scope-based positioning (loads from 001_001_003 folder)
+      placeTextBoxFromScope('001_001_003');
+    }, 1000);
+
+    // Add character text boxes after engine is fully loaded
+    setTimeout(() => {
+      console.log('🎭 Adding character voices...');
+      
+      // Eene: Fast typer with frequent quick corrections
+    addTextBox({
+      id: "eene-intro",
+      text: "Hey everyone! I'm Eene and I type really fast but sometimes I make mistakes that I fix right away. The adventure is about to begin and I think we should definitely explore the trinkaloop together!",
+      speaker: "Eene",
+      voice: "eene",
+      anchorTo: "001_001_004",
+      offsetY: "12vh",
+      align: "left"
+    });
+
+    // Emraa: Careful, methodical typer who fixes mistakes in batches
+    addTextBox({
+      id: "emraa-analysis",
+      text: "Greetings. I am Emraa, and I believe this trinkaloop requires careful analysis. We must proceed with deliberate precision to achieve our objectives and understand the underlying mechanisms.",
+      speaker: "Emraa",
+      voice: "emraa",
+      anchorTo: "001_001_006",
+      offsetY: "10vh",
+      align: "left"
+    });
+
+    // Lyl: Slow, dreamy corgi who never corrects mistakes
+    addTextBox({
+      id: "lyl-dreams",
+      text: "oh hello freinds... i am lyl the corgi made of beautiflu white flower petlas... the sunshine feels so nice and peaceful today... maybe we can find some lovely flowers in the gardn later...",
+      speaker: "Lyl",
+      voice: "lyl",
+      anchorTo: "001_001_008",
+      offsetY: "8vh",
+      align: "left"
+    });
+
+    // Narrator: Balanced storytelling voice
+    addTextBox({
+      id: "narrator-conclusion",
+      text: "And so our three heroes prepare for the journey ahead... Each with their own voice, their own way of seeing the world. What mysteries will they uncover in the depths of the trinkaloop?",
+      speaker: "Narrator",
+      voice: "narrator",
+      anchorTo: "001_001_010",
+      offsetY: "5vh",
+      align: "left"
+    });
+    }, 1500);
+    */
+  </script>
+  
+  <script>
+    // Make sure marked and DOMPurify are available globally for textbox rendering
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof marked === 'undefined') {
+        console.error('⚠️ marked.js not loaded!');
+      }
+      if (typeof DOMPurify === 'undefined') {
+        console.error('⚠️ DOMPurify not loaded!');
+      }
+      
+      // Add global sanitization helper
+      window.sanitizeHTML = function(html) {
+        return DOMPurify.sanitize(marked.parse(html));
+      };
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idle Chatter Test</title>
+  <link rel="stylesheet" href="../assets/css/core.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #333;
+      color: #ACABBB;
+      font-family: 'Arial', sans-serif;
+      height: 3000px; /* Long scrollable area for testing */
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #222;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    h1, h2 {
+      color: #7e9bf0;
+      text-align: center;
+    }
+    
+    .text-box {
+      border: 1px solid #444;
+      background: #2a2a2a;
+      border-radius: 4px;
+      padding: 10px;
+      margin: 10px 0;
+      min-height: 60px;
+    }
+    
+    .character-name {
+      font-weight: bold;
+      color: #7e9bf0;
+      margin-bottom: 5px;
+    }
+    
+    .textbox-container {
+      position: fixed;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+    
+    .textbox {
+      width: 80%;
+      max-width: 600px;
+      background: rgba(20, 20, 30, 0.9);
+      border: 2px solid #444;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    
+    .debug-panel {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.7);
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 0.8em;
+      max-width: 300px;
+      z-index: 1000;
+    }
+    
+    .soft-beat-marker {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      z-index: 10;
+    }
+    
+    .soft-beat-start {
+      background: rgba(0, 255, 0, 0.3);
+    }
+    
+    .soft-beat-end {
+      background: rgba(255, 0, 0, 0.3);
+    }
+    
+    .section {
+      height: 500px;
+      margin: 50px 0;
+      padding: 20px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="debug-panel">
+    <div>Scroll Position: <span id="scroll-pos">0</span></div>
+    <div>Soft Beat Area: <span id="soft-beat-area">None</span></div>
+    <div>Idle Time: <span id="idle-time">0</span>s</div>
+  </div>
+  
+  <div class="container">
+    <h1>Idle Chatter System Test</h1>
+    <p>This page demonstrates the idle chatter system. Scroll to different sections and stay idle to see character reactions.</p>
+    <p>The system will display messages in the textbox below after a period of inactivity in designated "soft beat areas".</p>
+  </div>
+  
+  <!-- Soft beat area 1 -->
+  <div class="soft-beat-marker soft-beat-start" style="top: 500px;"></div>
+  <div class="section" style="background: #1a2a40;">
+    <h2>Forest Area</h2>
+    <p>This is a peaceful forest scene. Eene is contemplating the surroundings.</p>
+    <p>Stay idle here to see Eene's thoughts. The system will trigger different messages based on how long you remain inactive.</p>
+  </div>
+  <div class="soft-beat-marker soft-beat-end" style="top: 1050px;"></div>
+  
+  <!-- Soft beat area 2 -->
+  <div class="soft-beat-marker soft-beat-start" style="top: 1200px;"></div>
+  <div class="section" style="background: #2a1a30;">
+    <h2>Cave Entrance</h2>
+    <p>Emraa is standing at the entrance of a mysterious cave.</p>
+    <p>Stay idle here to see Emraa's thoughts about the cave. Mascots might also appear if you're idle for longer periods.</p>
+  </div>
+  <div class="soft-beat-marker soft-beat-end" style="top: 1750px;"></div>
+  
+  <!-- Non-soft beat area -->
+  <div class="section" style="background: #2a2a2a;">
+    <h2>Regular Area</h2>
+    <p>This is not a soft beat area. No idle chatter should appear here.</p>
+    <p>Try staying idle here to confirm that the system doesn't trigger any messages in non-designated areas.</p>
+  </div>
+  
+  <!-- Textbox for displaying idle chatter -->
+  <div class="textbox-container">
+    <div class="textbox">
+      <div class="character-name" id="character-name">System</div>
+      <div class="text-content" id="text-content">Idle Chatter system loaded. Scroll to a soft beat area and wait to see messages appear.</div>
+    </div>
+  </div>
+  
+  <!-- Script data -->
+  <script id="script-data" type="text/plain">
+y=500, **soft_beat forest_idle**
+y=1050, **end_soft_beat**
+y=1200, **soft_beat cave_entrance**
+y=1750, **end_soft_beat**
+  </script>
+
+  <!-- Mock TrinkaspaceEngine for testing -->
+  <script>
+    // Mock TrinkaspaceEngine for testing
+    class MockTrinkaspaceEngine {
+      constructor() {
+        this.scrollTrigger = null;
+      }
+      
+      scaleCoordinate(y) {
+        // Simple pass-through for testing
+        return y;
+      }
+      
+      setTrinkatextMessage(message) {
+        console.log('[MockEngine] TrinkaText message:', message);
+      }
+    }
+    
+    // Mock textbox update function
+    function updateTextbox(textboxId, text, character) {
+      document.getElementById('character-name').textContent = character;
+      document.getElementById('text-content').textContent = text;
+      
+      console.log(`[Textbox] ${character}: ${text}`);
+    }
+    
+    // Mock mascot function
+    function showMascot(mascot, text) {
+      document.getElementById('character-name').textContent = `Mascot: ${mascot}`;
+      document.getElementById('text-content').textContent = text;
+      
+      console.log(`[Mascot] ${mascot}: ${text}`);
+    }
+  </script>
+  
+  <!-- Load the required scripts -->
+  <script src="../assets/js/scrollTrigger.js" type="module"></script>
+  <script src="../assets/js/idleChatter.js"></script>
+  
+  <!-- Initialization script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Create mock engine
+      window.engine = new MockTrinkaspaceEngine();
+      
+      // Import and initialize ScrollTrigger
+      import('../assets/js/scrollTrigger.js').then(module => {
+        const ScrollTrigger = module.ScrollTrigger;
+        window.engine.scrollTrigger = new ScrollTrigger(window.engine);
+        
+        // Parse script data
+        const scriptData = document.getElementById('script-data').textContent;
+        const softBeatTriggers = window.engine.scrollTrigger.parseSoftBeatMarkers(scriptData);
+        
+        // Add soft beat triggers
+        window.engine.scrollTrigger.addSoftBeatTriggers(softBeatTriggers);
+        
+        console.log('ScrollTrigger initialized with soft beat areas');
+      });
+      
+      // Update debug panel
+      function updateDebugPanel() {
+        const scrollY = window.scrollY;
+        document.getElementById('scroll-pos').textContent = scrollY;
+        
+        // Get current soft beat area
+        const softBeatArea = window.engine.scrollTrigger?.currentSoftBeatArea || 'None';
+        document.getElementById('soft-beat-area').textContent = softBeatArea;
+        
+        // Calculate idle time
+        const idleTime = window.idleChatterManager ? 
+          Math.round((Date.now() - window.idleChatterManager.lastActivity) / 1000) : 0;
+        document.getElementById('idle-time').textContent = idleTime;
+      }
+      
+      // Update debug panel every 500ms
+      setInterval(updateDebugPanel, 500);
+      
+      console.log('Idle Chatter test page initialized');
+    });
+  </script>
+</body>
+</html>

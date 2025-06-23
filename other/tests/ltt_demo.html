@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LTT Demo - Loop Tracking Terminal</title>
+  <link rel="stylesheet" href="../../assets/css/core.css">
+  <link rel="stylesheet" href="../../assets/css/ltt-terminal.css">
+  <style>
+    body {
+      background-color: #050011;
+      color: #ACABBB;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: #2AFFF7;
+      margin-bottom: 30px;
+    }
+    
+    .demo-container {
+      width: 100%;
+      max-width: 1200px;
+      min-height: 600px;
+      position: relative;
+      margin: 0 auto;
+      border: 1px solid #333;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .controls {
+      background-color: #111;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+    
+    .control-group {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #2AFFF7;
+    }
+    
+    input, textarea, select, button {
+      background-color: #222;
+      border: 1px solid #444;
+      color: #ACABBB;
+      padding: 8px;
+      border-radius: 4px;
+      width: 100%;
+    }
+    
+    button {
+      background-color: #1a7f7b;
+      color: white;
+      cursor: pointer;
+      margin-top: 10px;
+      padding: 10px;
+    }
+    
+    button:hover {
+      background-color: #2AFFF7;
+      color: #050011;
+    }
+    
+    .stress-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .stress-btn {
+      flex: 1;
+      padding: 5px;
+    }
+    
+    .position-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .position-btn {
+      padding: 8px 0;
+      text-align: center;
+    }
+    
+    .position-btn:nth-child(2) {
+      grid-column: 2;
+    }
+    
+    .position-btn:nth-child(4) {
+      grid-column: 1;
+    }
+    
+    .position-btn:nth-child(6) {
+      grid-column: 3;
+    }
+    
+    .position-btn:nth-child(7) {
+      grid-column: 2;
+    }
+    
+    /* Fixed position for demo LTT */
+    #ltt-container {
+      position: absolute;
+      top: 50px;
+      left: 400px;
+    }
+  </style>
+</head>
+<body>
+  <h1>LTT Demo - Loop Tracking Terminal</h1>
+  
+  <div class="demo-container" id="demo-viewport">
+    <!-- LTT will be inserted here by JS -->
+  </div>
+  
+  <div class="controls">
+    <div class="control-group">
+      <label for="text-input">Enter text to display:</label>
+      <textarea id="text-input" rows="3" placeholder="Enter text to display in the LTT..."></textarea>
+    </div>
+    
+    <div class="control-group">
+      <label>Set stress level:</label>
+      <div class="stress-buttons">
+        <button class="stress-btn" data-level="0">None</button>
+        <button class="stress-btn" data-level="1">Low</button>
+        <button class="stress-btn" data-level="2">Medium</button>
+        <button class="stress-btn" data-level="3">High</button>
+        <button class="stress-btn" data-level="4">Maximum</button>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <label>Position LTT:</label>
+      <div class="position-buttons">
+        <button class="position-btn" data-pos="topleft">Top Left</button>
+        <button class="position-btn" data-pos="top: 20px; left: 50%; transform: translateX(-50%);">Top Center</button>
+        <button class="position-btn" data-pos="topright">Top Right</button>
+        <button class="position-btn" data-pos="top: 50%; left: 20px; transform: translateY(-50%);">Middle Left</button>
+        <button class="position-btn" data-pos="top: 50%; left: 50%; transform: translate(-50%, -50%);">Center</button>
+        <button class="position-btn" data-pos="top: 50%; right: 20px; transform: translateY(-50%);">Middle Right</button>
+        <button class="position-btn" data-pos="bottomleft">Bottom Left</button>
+        <button class="position-btn" data-pos="bottom: 20px; left: 50%; transform: translateX(-50%);">Bottom Center</button>
+        <button class="position-btn" data-pos="bottomright">Bottom Right</button>
+      </div>
+    </div>
+    
+    <button id="display-btn">Display Text</button>
+    <button id="clear-btn">Clear Terminal</button>
+  </div>
+
+  <script type="module">
+    import lttTerminal from '../../assets/js/lttTerminal.js';
+    
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle text display button
+      document.getElementById('display-btn').addEventListener('click', function() {
+        const text = document.getElementById('text-input').value;
+        if (text.trim()) {
+          lttTerminal.addText(text);
+        }
+      });
+      
+      // Handle clear button
+      document.getElementById('clear-btn').addEventListener('click', function() {
+        lttTerminal.clearText();
+      });
+      
+      // Handle stress level buttons
+      document.querySelectorAll('.stress-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const level = parseInt(this.getAttribute('data-level'));
+          lttTerminal.setStressLevel(level);
+        });
+      });
+      
+      // Handle position buttons
+      document.querySelectorAll('.position-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const pos = this.getAttribute('data-pos');
+          lttTerminal.setPosition(pos);
+        });
+      });
+      
+      // Show some demo text after a delay
+      setTimeout(() => {
+        lttTerminal.addText('Loop Tracking Terminal initialized.');
+        setTimeout(() => {
+          lttTerminal.setStressLevel(1);
+          lttTerminal.addText('Monitoring Entity Flow...', 1);
+        }, 2000);
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

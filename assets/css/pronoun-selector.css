@@ -1,0 +1,67 @@
+/* Pronoun selector styles */
+.pronouns-selector {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.pronouns-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pronoun-option {
+  display: flex;
+  align-items: center;
+  background-color: rgba(42, 255, 247, 0.05);
+  border: 1px solid rgba(42, 255, 247, 0.2);
+  border-radius: 16px;
+  padding: 4px 12px;
+  transition: all 0.2s ease;
+}
+
+.pronoun-option:hover {
+  background-color: rgba(42, 255, 247, 0.1);
+}
+
+.pronoun-option input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  accent-color: var(--neoncyan, #2AFFF7);
+}
+
+.pronoun-option label {
+  font-size: 0.9em;
+  color: #ccc;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pronoun-option input[type="checkbox"]:checked + label {
+  color: var(--neoncyan, #2AFFF7);
+  font-weight: 500;
+}
+
+.pronouns-selector small {
+  display: block;
+  color: #999;
+  font-size: 0.8em;
+  margin-top: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .pronouns-options {
+    gap: 6px;
+  }
+  
+  .pronoun-option {
+    padding: 3px 8px;
+  }
+  
+  .pronoun-option label {
+    font-size: 0.85em;
+  }
+}

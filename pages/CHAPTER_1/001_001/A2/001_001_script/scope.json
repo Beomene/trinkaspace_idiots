@@ -1,0 +1,46 @@
+{
+  "elements": [
+    {
+      "id": "text-demo-root",
+      "defaultX": 10,
+      "defaultY": 10,
+      "defaultWidth": 80,
+      "defaultHeight": 80,
+      "styles": {
+        "position": "relative"
+      }
+    },
+    {
+      "id": "text-demo-tb1",
+      "parent": "text-demo-root",
+      "offsetX": 5,
+      "offsetY": 500,
+      "defaultWidth": 40,
+      "defaultHeight": 20
+    },
+    {
+      "id": "text-demo-tb2",
+      "parent": "text-demo-root",
+      "offsetX": 5,
+      "offsetY": 1000,
+      "defaultWidth": 40,
+      "defaultHeight": 20
+    },
+    {
+      "id": "text-demo-tb3",
+      "parent": "text-demo-root",
+      "offsetX": 5,
+      "offsetY": 1500,
+      "defaultWidth": 40,
+      "defaultHeight": 20
+    },
+    {
+      "id": "text-demo-tb4",
+      "parent": "text-demo-root",
+      "offsetX": 5,
+      "offsetY": 2000,
+      "defaultWidth": 40,
+      "defaultHeight": 20
+    }
+  ]
+}

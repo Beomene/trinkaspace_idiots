@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "description": "Script configuration for 001_001",
+    "version": "1.0"
+  },
+  "moments": [
+    {
+      "moment": 1,
+      "atY": 100,
+      "delay": 0,
+      "once": false,
+      "description": "Eene introduces herself"
+    },
+    {
+      "moment": 4,
+      "atY": 500,
+      "delay": 2000,
+      "once": true,
+      "description": "Emraa appears and speaks"
+    },
+    {
+      "moment": 6,
+      "atY": 1000,
+      "delay": 0,
+      "once": true,
+      "description": "Eene has a subconscious reaction"
+    },
+    {
+      "moment": 10,
+      "atY": 1500,
+      "delay": 1000,
+      "once": true,
+      "description": "Eene has a conscious thought"
+    },
+    {
+      "moment": 20,
+      "atY": 2222,
+      "delay": 500,
+      "once": true,
+      "description": "First diorama reaction"
+    },
+    {
+      "moment": 30,
+      "atY": 4444,
+      "delay": 500,
+      "once": true,
+      "description": "Second diorama reaction"
+    },
+    {
+      "moment": 40,
+      "atY": 6666,
+      "delay": 500,
+      "once": true,
+      "description": "Third diorama reaction"
+    },
+    {
+      "moment": 50,
+      "atY": 8000,
+      "delay": 0,
+      "once": true,
+      "description": "Story conclusion"
+    }
+  ],
+  "idleActions": [
+    {
+      "idleTime": 60,
+      "action": {
+        "type": "rtt",
+        "content": "Took a nap, did we?",
+        "style": "sprinkle"
+      }
+    },
+    {
+      "idleTime": 180,
+      "action": {
+        "type": "rtt",
+        "content": "Still there? The story awaits...",
+        "style": "normal"
+      }
+    },
+    {
+      "idleTime": 300,
+      "action": {
+        "type": "utt",
+        "content": "Maybe we should continue?",
+        "emotion": "curious",
+        "opacity": 0.8
+      }
+    }
+  ],
+  "characterConfigs": {
+    "eene": {
+      "lttStyle": {
+        "fontFamily": "Noto Sans, sans-serif", 
+        "fontSize": "1rem",
+        "color": "#d5e8f7",
+        "textShadow": "0 0 3px #4a90e2"
+      },
+      "uttStyle": {
+        "fontFamily": "Noto Sans, sans-serif",
+        "fontSize": "0.9rem",
+        "defaultOpacity": 0.85,
+        "defaultEmotion": "neutral"
+      },
+      "emotionColors": {
+        "neutral": "#d5e8f7",
+        "happy": "#b8e986",
+        "excited": "#f9e264",
+        "curious": "#64c9f9",
+        "nervous": "#f9c064",
+        "embarrassed": "#f98064",
+        "surprised": "#d264f9",
+        "sad": "#6495f9",
+        "thoughtful": "#9f64f9",
+        "confused": "#f964e2"
+      }
+    },
+    "emraa": {
+      "rttStyle": {
+        "fontFamily": "Noto Sans, sans-serif",
+        "fontSize": "1rem",
+        "color": "#d5f7e8",
+        "textShadow": "0 0 3px #4ae29a"
+      }
+    },
+    "narrator": {
+      "rttStyle": {
+        "fontFamily": "Noto Serif, serif",
+        "fontSize": "1rem",
+        "color": "#f7f7f7",
+        "textShadow": "0 0 3px #aaaaaa"
+      }
+    }
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "yStart": 0,
+      "yEnd": 1000,
+      "sequences": [
+        {
+          "id": "intro-sequence",
+          "events": [
+            {
+              "type": "ltt",
+              "content": "Welcome to Trinkaspace. I am Eene, and this is my internal monologue.",
+              "style": "normal",
+              "delay": 0
+            },
+            {
+              "type": "utt",
+              "content": "I wonder what we'll find here...",
+              "emotion": "curious",
+              "opacity": 0.9,
+              "delay": 2000
+            },
+            {
+              "type": "tb",
+              "content": "A new journey begins in the Trinkaloop universe.",
+              "position": "center",
+              "delay": 3000
+            },
+            {
+              "type": "rtt",
+              "content": "Hello there! I'll be your guide through this adventure.",
+              "speaker": "narrator",
+              "delay": 5000
+            }
+          ],
+          "conditions": {
+            "scrollY": 100,
+            "triggers": ["intro"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "first-diorama",
+      "yStart": 1800,
+      "yEnd": 3500,
+      "sequences": [
+        {
+          "id": "emraa-introduction",
+          "events": [
+            {
+              "type": "ltt",
+              "content": "Oh! Who's that elegant figure approaching?",
+              "style": "normal",
+              "delay": 0
+            },
+            {
+              "type": "utt",
+              "content": "HOLY SMOKES SHE'S GORGEOUS",
+              "emotion": "embarrassed",
+              "opacity": 0.5,
+              "foggy": true,
+              "delay": 1000
+            },
+            {
+              "type": "rtt",
+              "content": "Greetings. I am Emraa, analytical genius and master of precision.",
+              "speaker": "emraa",
+              "delay": 3000
+            },
+            {
+              "type": "ltt",
+              "content": "Um... h-hi there! I'm Eene!",
+              "style": "normal",
+              "delay": 4500
+            },
+            {
+              "type": "utt",
+              "content": "Keep it together, Eene...",
+              "emotion": "nervous",
+              "opacity": 0.7,
+              "delay": 5500
+            }
+          ],
+          "conditions": {
+            "scrollY": 2222,
+            "triggers": ["diorama-1-view"],
+            "timeOnScreen": 2
+          }
+        }
+      ]
+    }
+  ],
+  "globalTimers": [
+    {
+      "id": "reminder-1",
+      "time": 60,
+      "recurring": false,
+      "action": {
+        "type": "utt",
+        "content": "Let's explore more of this world",
+        "emotion": "curious",
+        "opacity": 0.9
+      }
+    }
+  ]
+}

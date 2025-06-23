@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Title Parallax Test</title>
+  <style>
+    body {
+      background-color: #050011;
+      color: #ACABBB;
+      font-family: 'Noto Sans', sans-serif;
+      padding: 20px;
+      margin: 0;
+    }
+    
+    h1, h2 {
+      color: #2AFFF7;
+    }
+    
+    .test-section {
+      margin-bottom: 40px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 20px;
+    }
+    
+    .layer-container {
+      position: relative;
+      width: 575px;
+      height: 400px;
+      margin: 20px auto;
+      border: 1px dashed #444;
+    }
+    
+    .layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .layer-outline {
+      border: 1px solid;
+    }
+    
+    .title-layer-1 {
+      border-color: #ff0000;
+      color: #ff0000;
+    }
+    
+    .title-layer-2 {
+      border-color: #00ff00;
+      color: #00ff00;
+    }
+    
+    .title-layer-3 {
+      border-color: #0000ff;
+      color: #0000ff;
+    }
+    
+    .combined-view .layer {
+      opacity: 0.8;
+    }
+    
+    .instructions {
+      background: rgba(42, 255, 247, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border: 1px solid #2AFFF7;
+    }
+    
+    .btn {
+      background: #1a7f7b;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    
+    .btn:hover {
+      background: #2AFFF7;
+      color: #050011;
+    }
+    
+    pre {
+      background: #111;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    
+    .movement-demo {
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+    }
+    
+    .movement-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Portal Title Parallax Test</h1>
+  
+  <div class="instructions">
+    <h2>Image Preparation Instructions</h2>
+    <p>The portal title image (575x400px) needs to be split into 3 separate layers for parallax effect:</p>
+    <ol>
+      <li><strong>portal-title-1.png</strong> - Foreground elements (will move down when scrolling)</li>
+      <li><strong>portal-title-2.png</strong> - Background elements (will move right when scrolling)</li>
+      <li><strong>portal-title-3.png</strong> - Middle elements (will move slightly up when scrolling)</li>
+    </ol>
+    <p>Each layer should have the same dimensions (575x400px) with transparent areas.</p>
+  </div>
+  
+  <div class="test-section">
+    <h2>Individual Layers</h2>
+    <p>Verify that each layer contains the appropriate elements:</p>
+    
+    <h3>Layer 1 (Foreground - will sink when scrolling)</h3>
+    <div class="layer-container">
+      <img id="layer1" class="layer" src="../assets/images/trinkatitles/portal-title-1.png" onerror="this.style.display='none'; document.getElementById('layer1-missing').style.display='block';">
+      <div id="layer1-missing" class="layer layer-outline title-layer-1" style="display: none;">
+        <div style="padding: 20px;">
+          Missing image: portal-title-1.png<br>
+          This layer should contain the main foreground elements.
+        </div>
+      </div>
+    </div>
+    
+    <h3>Layer 2 (Background - will move right when scrolling)</h3>
+    <div class="layer-container">
+      <img id="layer2" class="layer" src="../assets/images/trinkatitles/portal-title-2.png" onerror="this.style.display='none'; document.getElementById('layer2-missing').style.display='block';">
+      <div id="layer2-missing" class="layer layer-outline title-layer-2" style="display: none;">
+        <div style="padding: 20px;">
+          Missing image: portal-title-2.png<br>
+          This layer should contain background elements.
+        </div>
+      </div>
+    </div>
+    
+    <h3>Layer 3 (Middle - will move up when scrolling)</h3>
+    <div class="layer-container">
+      <img id="layer3" class="layer" src="../assets/images/trinkatitles/portal-title-3.png" onerror="this.style.display='none'; document.getElementById('layer3-missing').style.display='block';">
+      <div id="layer3-missing" class="layer layer-outline title-layer-3" style="display: none;">
+        <div style="padding: 20px;">
+          Missing image: portal-title-3.png<br>
+          This layer should contain middle-ground elements.
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Combined View (Layers Stacked)</h2>
+    <p>This shows how the layers will look when stacked together:</p>
+    
+    <div class="layer-container combined-view">
+      <img class="layer" src="../assets/images/trinkatitles/portal-title-3.png" onerror="this.style.display='none';">
+      <img class="layer" src="../assets/images/trinkatitles/portal-title-2.png" onerror="this.style.display='none';">
+      <img class="layer" src="../assets/images/trinkatitles/portal-title-1.png" onerror="this.style.display='none';">
+    </div>
+    
+    <p>Compare with original:</p>
+    <div class="layer-container">
+      <img class="layer" src="../assets/images/trinkatitles/portal-title.png" onerror="this.src='';">
+    </div>
+  </div>
+  
+  <div class="movement-demo">
+    <h2>Movement Simulation</h2>
+    <p>Use these controls to simulate the parallax movement:</p>
+    
+    <div class="movement-controls">
+      <button class="btn" onclick="simulateScroll('down')">Simulate Scroll Down</button>
+      <button class="btn" onclick="simulateScroll('up')">Simulate Scroll Up</button>
+      <button class="btn" onclick="resetPosition()">Reset Position</button>
+    </div>
+    
+    <div class="layer-container" id="movement-demo-container">
+      <img id="demo-layer3" class="layer" src="../assets/images/trinkatitles/portal-title-3.png" style="transform: translate3d(0, 0, 0);" onerror="this.style.display='none';">
+      <img id="demo-layer2" class="layer" src="../assets/images/trinkatitles/portal-title-2.png" style="transform: translate3d(0, 0, 0);" onerror="this.style.display='none';">
+      <img id="demo-layer1" class="layer" src="../assets/images/trinkatitles/portal-title-1.png" style="transform: translate3d(0, 0, 0);" onerror="this.style.display='none';">
+    </div>
+  </div>
+
+  <script>
+    // Demo movement factors
+    const movementFactors = {
+      layer1: { y: 0.15, x: 0 },    // Layer 1 sinks slightly
+      layer2: { y: 0, x: -0.2 },    // Layer 2 moves right
+      layer3: { y: -0.1, x: 0 }     // Layer 3 moves up slightly
+    };
+    
+    let demoScrollY = 0;
+    const scrollStep = 100;
+    const maxScroll = 500;
+    
+    function simulateScroll(direction) {
+      if (direction === 'down') {
+        demoScrollY = Math.min(demoScrollY + scrollStep, maxScroll);
+      } else {
+        demoScrollY = Math.max(demoScrollY - scrollStep, 0);
+      }
+      
+      updateLayerPositions();
+    }
+    
+    function resetPosition() {
+      demoScrollY = 0;
+      updateLayerPositions();
+    }
+    
+    function updateLayerPositions() {
+      for (let i = 1; i <= 3; i++) {
+        const layer = document.getElementById(`demo-layer${i}`);
+        if (layer) {
+          const factor = movementFactors[`layer${i}`];
+          const yOffset = demoScrollY * factor.y;
+          const xOffset = demoScrollY * factor.x;
+          
+          layer.style.transform = `translate3d(${xOffset}px, ${yOffset}px, 0)`;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

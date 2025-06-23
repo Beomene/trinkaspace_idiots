@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextScript Test</title>
+    <link rel="stylesheet" href="../../assets/css/core.css">
+    <style>
+        body {
+            background-color: #202029;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .test-textbox {
+            position: relative;
+            width: 60vw;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: rgba(30, 30, 45, 0.8);
+            border: 1px solid rgba(42, 255, 247, 0.4);
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .textbox-content {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            min-height: 100px;
+        }
+        
+        .narrator-voice {
+            color: #f0f0f0;
+            font-style: italic;
+        }
+        
+        .eene-voice {
+            color: #42a5f5;
+        }
+        
+        .trinkatext-container {
+            position: fixed;
+            bottom: 5vh;
+            left: 8vw;
+            width: 33vw;
+            min-height: 13vh;
+            padding: 1rem;
+            background-color: rgba(20, 20, 30, 0.75);
+            border: 1px solid rgba(42, 255, 247, 0.4);
+            border-radius: 4px;
+            z-index: 1000;
+        }
+        
+        .trinkatext-message {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .trinkatext-line {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, rgba(42, 255, 247, 0), rgba(42, 255, 247, 0.8), rgba(42, 255, 247, 0));
+            margin-top: 8px;
+        }
+        
+        .controls {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .btn {
+            background-color: rgba(42, 255, 247, 0.2);
+            color: #fff;
+            border: 1px solid rgba(42, 255, 247, 0.4);
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: rgba(42, 255, 247, 0.4);
+        }
+        
+        .script-display {
+            margin-top: 3rem;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid rgba(42, 255, 247, 0.4);
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .script-display code {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .current-line-indicator {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        .effect-typing {
+            overflow: hidden;
+            border-right: 2px solid rgba(42, 255, 247, 0.7);
+            animation: blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(42, 255, 247, 0.7) }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TextScript Test</h1>
+        <p>This demo demonstrates how the TextScript system coordinates TextBox and TrinkaText content with timing controls.</p>
+        
+        <div class="test-textbox">
+            <h3>TextBox</h3>
+            <div class="textbox-content narrator-voice"></div>
+        </div>
+        
+        <div class="trinkatext-container">
+            <div class="trinkatext-message"></div>
+            <div class="trinkatext-line"></div>
+        </div>
+        
+        <div class="controls">
+            <button id="play-btn" class="btn">Play</button>
+            <button id="pause-btn" class="btn">Pause</button>
+            <button id="reset-btn" class="btn">Reset</button>
+        </div>
+        
+        <div class="current-line-indicator">Line: 0 / 0</div>
+        
+        <div class="script-display">
+            <code id="script-code"></code>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { TextScript } from '../../assets/js/textScript.js';
+        
+        // Sample script content based on your 001_001_003.md
+        const scriptContent = `TB: "Have you ever felt a pull that is just… erratic?" (pause 3 seconds)
+second
+second
+second
+TT: Ugh. Anxiety. Why is it starting up now...
+second
+TB: "Not the steady tug of knowing *what* to do, knowing *for sure* what's *needed*" (pause 3 seconds)
+second
+second
+second
+TT: ...
+TT: Why am I thinking of the woods.
+second
+TB: "-something *quieter*. A *whisper* in the *ribs*. The kind of pull that *lingers*."
+second
+TT: It's cold outside. Gonna be dark soon.
+...
+TB: "If you felt that *pull*, from the world outside... Would you go?"
+second
+TT: Like I'm letting someone down, just because I wasn't planning on taking my walk tonight...
+second
+TB: "Some stay."
+second
+TB: "Most stay."
+second
+TT: Not gonna be able to sleep now, unless I take that walk...
+second
+TB: "A hollowness has visited. A sense that the walls are *holding their breath* and the teacups all around the apartment are judging your stillness."
+second
+second
+TT: Where's my scarf...
+second
+TB: "Boots laced crooked. Scarf loose enough to let the night slip its fingers against her throat."
+second
+second
+TT: Did Gwenrr take my mittens?
+second
+TB: "It's best not to look back. The amber lights lie. You would *not* be happier there."
+(SOUND-BOX, A2, the sound of a door opening and closing)
+(SOUND-BOX, A2, the sound of walking on snow)
+TT: Oh god, should've worn thicker socks.
+TB: "It says *safe* when it means _stuck_. It says *enough* when it means *never_.
+
+TB: "The world moves in strange ways around those who moves with it... Somewhere, you'll be someone else. More truly yourself. _Somewhere_, your breath will hang in the air and make all the difference."
+
+TB: Would you bother?
+second
+second
+TB: This one does.
+second
+TB: Old bones settling. Bones of the _witch_. Veil-Lights shiver low... just out of sync with the world...
+second
+second
+second
+
+TB: "Some walks begin with a destination."
+second
+second
+TB: "This one begins... with a fox."
+second
+TT: what the F**K IS THAT?! No, no way, I can't be that fu-king lucky!!
+second
+second
+TB: Luck seldom involves *demons*, so _think again_.`;
+        
+        // Initialize a mock TrinkaspaceEngine
+        const mockEngine = {
+            setTrinkatextMessage(message) {
+                const trinkatext = document.querySelector('.trinkatext-message');
+                trinkatext.innerHTML = '';
+                
+                // Simple typewriter effect for demonstration
+                typeText(trinkatext, message);
+            },
+            
+            updateTextBoxContent(content) {
+                const textbox = document.querySelector('.textbox-content');
+                textbox.innerHTML = '';
+                
+                // Simple typewriter effect for demonstration
+                typeText(textbox, processMarkdown(content));
+            },
+            
+            playSound(target, soundDescription) {
+                console.log(`Playing sound: ${soundDescription} in ${target}`);
+                
+                // Show a notification about the sound
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 20px;
+                    background-color: rgba(0, 0, 0, 0.7);
+                    color: #fff;
+                    padding: 10px 20px;
+                    border-radius: 4px;
+                    z-index: 2000;
+                `;
+                notification.textContent = `🔊 ${soundDescription}`;
+                document.body.appendChild(notification);
+                
+                // Remove after 2 seconds
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transition = 'opacity 0.5s';
+                    setTimeout(() => notification.remove(), 500);
+                }, 2000);
+            }
+        };
+        
+        // Initialize TextScript
+        const textScript = new TextScript(mockEngine);
+        
+        // Parse the script content
+        textScript.parseScript(scriptContent);
+        
+        // Display the script content
+        document.getElementById('script-code').textContent = scriptContent;
+        
+        // Update the line indicator
+        function updateLineIndicator() {
+            document.querySelector('.current-line-indicator').textContent = 
+                `Line: ${textScript.lineIndex + 1} / ${textScript.scriptQueue.length}`;
+        }
+        
+        // Add event listeners for controls
+        document.getElementById('play-btn').addEventListener('click', () => {
+            textScript.play();
+            updateLineIndicator();
+        });
+        
+        document.getElementById('pause-btn').addEventListener('click', () => {
+            textScript.pause();
+        });
+        
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            textScript.reset();
+            textScript.parseScript(scriptContent);
+            document.querySelector('.textbox-content').innerHTML = '';
+            document.querySelector('.trinkatext-message').innerHTML = '';
+            updateLineIndicator();
+        });
+        
+        // Extend TextScript to update line indicator
+        const originalAdvanceScript = textScript.advanceScript;
+        textScript.advanceScript = function() {
+            originalAdvanceScript.call(textScript);
+            updateLineIndicator();
+        };
+        
+        // Process markdown for display
+        function processMarkdown(text) {
+            return text
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                .replace(/_([^_]+)_/g, '<em>$1</em>');
+        }
+        
+        // Simple typewriter effect
+        function typeText(element, text) {
+            element.classList.add('effect-typing');
+            
+            const typeSpeed = 30; // ms per character
+            let i = 0;
+            
+            // Clear any existing content
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    // Handle HTML tags for markdown
+                    if (text.charAt(i) === '<') {
+                        // Find closing tag
+                        const closeIndex = text.indexOf('>', i);
+                        if (closeIndex > -1) {
+                            element.innerHTML += text.substring(i, closeIndex + 1);
+                            i = closeIndex + 1;
+                        }
+                    } else {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                    }
+                    
+                    setTimeout(type, typeSpeed);
+                } else {
+                    element.classList.remove('effect-typing');
+                }
+            }
+            
+            type();
+        }
+        
+        // Initial update of line indicator
+        updateLineIndicator();
+    </script>
+</body>
+</html>

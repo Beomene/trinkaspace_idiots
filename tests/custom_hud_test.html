@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom HUD Elements Test</title>
+    <link rel="stylesheet" href="../../assets/css/core.css">
+    <style>
+        body {
+            background-color: var(--trinkagrey-dark);
+            color: var(--trinka-text);
+            font-family: 'Noto Sans', sans-serif;
+            padding: 20px;
+            height: 2000px; /* Make page scrollable */
+        }
+        
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(20, 20, 30, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--neoncyan);
+            z-index: 3000;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        button {
+            background: rgba(42, 255, 247, 0.2);
+            border: 1px solid var(--neoncyan);
+            color: var(--neoncyan);
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+        }
+        
+        button:hover {
+            background: rgba(42, 255, 247, 0.4);
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(42, 255, 247, 0.3);
+            color: var(--trinka-text);
+            border-radius: 4px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        h1 {
+            color: var(--neoncyan);
+            text-align: center;
+            margin-top: 100px;
+        }
+        
+        .test-info {
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom HUD Elements Test</h1>
+    
+    <div class="test-info">
+        <p>This page demonstrates the custom HUD elements: TRINKATEXT and Sound Toggle.</p>
+        <p>Use the controls to test the HUD elements with different messages and settings.</p>
+    </div>
+    
+    <div class="controls">
+        <div class="control-group">
+            <h3>TRINKATEXT Controls</h3>
+            <button id="message1">Show Message 1</button>
+            <button id="message2">Show Message 2</button>
+            <button id="message3">Show Message 3</button>
+            <input type="text" id="customMessage" placeholder="Enter custom message...">
+            <button id="sendCustom">Send Custom</button>
+        </div>
+        
+        <div class="control-group">
+            <h3>Sound Toggle Controls</h3>
+            <button id="soundOn">Enable Sound</button>
+            <button id="soundOff">Disable Sound</button>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { TrinkaspaceEngine } from '../../assets/js/trinkaspaceEngine.js';
+        
+        // Initialize the engine
+        const trinkaspaceEngine = new TrinkaspaceEngine({
+            pageId: 'hud_test',
+            container: document.body
+        });
+        
+        // Wait for the engine to initialize before setting up controls
+        window.addEventListener('load', () => {
+            // TRINKATEXT controls
+            document.getElementById('message1').addEventListener('click', () => {
+                trinkaspaceEngine.setTrinkatextMessage('Welcome to Trinkaspace. This is a test of the TRINKATEXT HUD element.');
+            });
+            
+            document.getElementById('message2').addEventListener('click', () => {
+                trinkaspaceEngine.setTrinkatextMessage('TRINKATEXT uses a typewriter effect for immersive messages.');
+            });
+            
+            document.getElementById('message3').addEventListener('click', () => {
+                trinkaspaceEngine.setTrinkatextMessage('This system can be used for story narration, instructions, or important notifications.');
+            });
+            
+            document.getElementById('sendCustom').addEventListener('click', () => {
+                const customMessage = document.getElementById('customMessage').value;
+                if (customMessage.trim() !== '') {
+                    trinkaspaceEngine.setTrinkatextMessage(customMessage);
+                }
+            });
+            
+            // Sound toggle controls
+            document.getElementById('soundOn').addEventListener('click', () => {
+                trinkaspaceEngine.toggleSound(true);
+            });
+            
+            document.getElementById('soundOff').addEventListener('click', () => {
+                trinkaspaceEngine.toggleSound(false);
+            });
+            
+            // Initialize with a welcome message
+            setTimeout(() => {
+                trinkaspaceEngine.setTrinkatextMessage('Welcome to the Custom HUD Elements Test');
+            }, 500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+/* Asset Debugging Tools CSS */
+
+.asset-debug-overlay {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 15px;
+  border-radius: 6px;
+  font-family: monospace;
+  z-index: 9999;
+  max-width: 400px;
+  max-height: 300px;
+  overflow: auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.asset-debug-overlay h3 {
+  margin-top: 0;
+  color: #2AFFF7;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 5px;
+}
+
+.asset-debug-overlay p {
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.asset-debug-overlay strong {
+  color: #2AFFF7;
+  font-weight: bold;
+}
+
+.asset-debug-overlay ul {
+  margin: 5px 0;
+  padding-left: 20px;
+}
+
+.asset-debug-overlay li {
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+
+.asset-debug-overlay .asset-list {
+  margin-top: 10px;
+  max-height: 80px;
+  overflow-y: auto;
+  border-top: 1px dotted rgba(255, 255, 255, 0.2);
+  padding-top: 5px;
+}
+
+/* Color indicators for device classes */
+.asset-debug-overlay .asset-XL { color: #FF9500; }
+.asset-debug-overlay .asset-L { color: #76FF03; }
+.asset-debug-overlay .asset-M { color: #2979FF; }
+.asset-debug-overlay .asset-S { color: #FF4081; }
+.asset-debug-overlay .asset-XS { color: #B388FF; }
+.asset-debug-overlay .asset-unknown { color: #757575; }
+
+/* Controls */
+.asset-debug-overlay button {
+  background: rgba(42, 255, 247, 0.2);
+  border: 1px solid rgba(42, 255, 247, 0.5);
+  color: #2AFFF7;
+  padding: 4px 8px;
+  font-size: 11px;
+  margin-right: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.asset-debug-overlay button:hover {
+  background: rgba(42, 255, 247, 0.4);
+}
+
+/* Visual markers for checking assets in page */
+.asset-debug-active .diorama-container {
+  border: 2px dashed rgba(255, 255, 0, 0.5) !important;
+}
+
+.asset-debug-active .dime-layer {
+  outline: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+/* Device class indicator on layers when debugging */
+.asset-debug-active .dime-layer::before {
+  content: attr(data-device-class);
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #2AFFF7;
+  padding: 2px 5px;
+  font-size: 10px;
+  z-index: 9999;
+  pointer-events: none;
+}

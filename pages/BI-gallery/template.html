@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[CHARACTER_NAME] - BI-kin Gallery</title>
+    <link rel="stylesheet" href="../../assets/css/core.css">
+    <link rel="stylesheet" href="../../assets/css/bi-gallery.css">
+    <style>
+        /* Parallax specific styles */
+        .parallax-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .parallax-y {
+            will-change: transform;
+        }
+        
+        .parallax-x {
+            will-change: transform;
+        }
+        
+        .parallax-title {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .bi-image-container {
+            overflow: hidden;
+        }
+        
+        .bi-lower-section {
+            position: relative;
+            overflow: hidden;
+            height: 50vh;
+        }
+        
+        .bi-long-image {
+            width: 100%;
+            position: relative;
+        }
+        
+        /* Banner styles */
+        .banner-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            height: 150px;
+        }
+        
+        .banner-image {
+            position: absolute;
+            transform-origin: center center;
+        }
+        
+        .upper-banner {
+            top: 0;
+            width: 150%;
+            left: -25%;
+            z-index: 5;
+        }
+        
+        .midline-banner {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 140%;
+            left: -20%;
+            z-index: 6;
+        }
+        
+        .lower-banner {
+            bottom: 0;
+            width: 150%;
+            left: -25%;
+            z-index: 5;
+        }
+        
+        .decoration-banner {
+            width: 200%;
+            left: -50%;
+            height: 200px;
+            opacity: 0.7;
+        }
+        
+        /* Oversize container styles */
+        .parallax-oversized {
+            position: absolute;
+        }
+        
+        .oversize-x {
+            position: absolute;
+            left: 0;
+        }
+        
+        .oversize-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="theme-[CHARACTER_ID]">
+    <!-- Navigation -->
+    <div class="bi-nav">
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span> Back to Gallery
+        </a>
+    </div>    <div class="bi-page parallax-container">
+        <!-- Upper banner -->
+        <div class="banner-container">
+            <img data-character-image="upper_banner" alt="Upper Banner" class="banner-image upper-banner parallax-x" data-parallax data-parallax-speed-x="-0.05">
+        </div>
+        
+        <!-- Title area - now on right side -->
+        <div class="bi-title-area parallax-y" data-parallax data-parallax-speed="0.2">
+            <h1 class="parallax-title">[CHARACTER_NAME]</h1>
+            <h3 class="parallax-title">[CHARACTER_SUBTITLE]</h3>
+        </div>
+          <!-- Upper section (first viewport) - inverted layout -->
+        <div class="bi-upper-section parallax-container">
+            <!-- Left side - Character Image - now on left side -->
+            <div class="bi-image-container parallax-y" data-parallax data-parallax-speed="0.4">
+                <img data-character-image="portrait" alt="[CHARACTER_NAME]" class="bi-image">
+            </div>
+              <!-- Right side - Text Content - now on right side -->
+            <div class="bi-text-container parallax-y" data-parallax data-parallax-speed="0.1">
+                <div class="bi-text-content">
+                    <h3>Who is [CHARACTER_NAME]</h3>
+                    <p>[SHORT_DESCRIPTION]</p>
+                    
+                    <h3>Form</h3>
+                    <p>[FORM_DESCRIPTION]</p>
+                    
+                    <h3>Nature</h3>
+                    <p>[NATURE_DESCRIPTION]</p>
+                    
+                    <h3>Role in the Saga</h3>
+                    <p>[ROLE_DESCRIPTION]</p>
+                    
+                    <h3>Origin</h3>
+                    <p>[ORIGIN_DESCRIPTION]</p>
+                    
+                    <h3>Philosophy</h3>
+                    <p>[PHILOSOPHY_DESCRIPTION]</p>
+                </div>                <div class="scroll-indicator"></div>
+            </div>
+        </div>
+        
+        <!-- Midline Banner -->
+        <div class="banner-container">
+            <img data-character-image="midline_banner" alt="Midline Banner" class="banner-image midline-banner parallax-x" data-parallax data-parallax-speed-x="0.08">
+        </div>
+        
+        <!-- Decoration Banner - oversized and only moves horizontally -->
+        <div class="oversize-container" style="height: 200px;">
+            <img data-character-image="decoration_banner" alt="Decorative Elements" 
+                 class="decoration-banner parallax-oversized oversize-x parallax-x" 
+                 data-parallax data-parallax-speed-x="-0.03"
+                 data-oversize-factor="2.0">
+        </div>
+          
+        <!-- Lower section - Long Image -->        <div class="bi-lower-section parallax-container">
+            <img data-character-image="landscape" alt="[CHARACTER_NAME]'s World" class="bi-long-image parallax-y" data-parallax data-parallax-speed="0.6">
+        </div>
+        
+        <!-- Lower Banner -->
+        <div class="banner-container">
+            <img data-character-image="lower_banner" alt="Lower Banner" class="banner-image lower-banner parallax-x" data-parallax data-parallax-speed-x="0.05">
+        </div>
+    </div>    <script type="module">
+        // Import our BI Gallery Manager
+        import biGalleryManager from '../../assets/js/biGalleryManager.js';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize our gallery manager
+            biGalleryManager.init();
+            
+            // Check if content needs scroll indicator
+            const textContent = document.querySelector('.bi-text-content');
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            
+            if (textContent.scrollHeight > textContent.clientHeight) {
+                scrollIndicator.style.display = 'block';
+            }
+            
+            // Hide scroll indicator when scrolled to bottom
+            textContent.addEventListener('scroll', function() {
+                if (textContent.scrollHeight - textContent.scrollTop <= textContent.clientHeight + 10) {
+                    scrollIndicator.style.display = 'none';
+                } else {
+                    scrollIndicator.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

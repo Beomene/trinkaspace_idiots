@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demonic Voices Test</title>
+  <link rel="stylesheet" href="../../assets/css/core.css">
+  <style>
+    body { background: #1A1A1A; color: #ACABBB; padding: 2em; }
+    .test-section { 
+      margin: 2em 0; 
+      padding: 1em; 
+      background: rgba(0,0,0,0.5); 
+      border-radius: 10px; 
+      border-left: 4px solid #FF6B47;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 Quick Demonic Voice Test</h1>
+  
+  <div class="test-section">
+    <h2>Dharvath (Amber Pauses)</h2>
+    <div id="diorama-dharvath-test" style="height: 100px; background: #2A1A0A; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+      <span>Amber Chamber</span>
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>Fjottskran (Sudden English)</h2>
+    <div id="diorama-fjott-test" style="height: 100px; background: #1A1A1A; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+      <span>Chaos Zone</span>
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>Grottgnag (Decay)</h2>
+    <div id="diorama-grott-test" style="height: 100px; background: #0A0A0A; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+      <span>Decay Chamber</span>
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>Piplisk (Feedback)</h2>
+    <div id="diorama-pipl-test" style="height: 100px; background: #1A1A2A; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+      <span>Feedback Zone</span>
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>Runix (Tech-Magic)</h2>
+    <div id="diorama-runix-test" style="height: 100px; background: #0A1A2A; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+      <span>Matrix</span>
+    </div>
+  </div>
+
+  <script type="module">
+    import { addTextBox } from '../../assets/js/secondaryArena.js';
+
+    setTimeout(() => {
+      // Test Dharvath
+      addTextBox({
+        id: "dharvath-test",
+        text: "Ancient power flows through amber veins.",
+        speaker: "Dharvath",
+        voice: "dharvath",
+        anchorTo: "dharvath-test",
+        offsetY: "10px"
+      });
+
+      // Test Fjottskran
+      setTimeout(() => {
+        addTextBox({
+          id: "fjott-test", 
+          text: "Hvor er min kaffe? This is so stupid!",
+          speaker: "Panic Demon",
+          voice: "fjottskran",
+          anchorTo: "fjott-test", 
+          offsetY: "10px"
+        });
+      }, 2000);
+
+      // Test Grottgnag
+      setTimeout(() => {
+        addTextBox({
+          id: "grott-test",
+          text: "I must tell you the important truth but words always fail me and",
+          speaker: "Cursed One",
+          voice: "grottgnag",
+          anchorTo: "grott-test",
+          offsetY: "10px"
+        });
+      }, 4000);
+
+      // Test Piplisk
+      setTimeout(() => {
+        addTextBox({
+          id: "pipl-test",
+          text: "Napp sniff! Napp napp NAPP!",
+          speaker: "Excited Imp",
+          voice: "piplisk", 
+          anchorTo: "pipl-test",
+          offsetY: "10px"
+        });
+      }, 6000);
+
+      // Test Runix
+      setTimeout(() => {
+        addTextBox({
+          id: "runix-test",
+          text: "THE CNUBE RESPONDS WITH BRANCHING PATHWAYS OF LIGHT",
+          speaker: "Matrix",
+          voice: "runix",
+          anchorTo: "runix-test", 
+          offsetY: "10px"
+        });
+      }, 8000);
+
+    }, 1000);
+  </script>
+</body>
+</html>

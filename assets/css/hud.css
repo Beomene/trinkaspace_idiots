@@ -1,0 +1,113 @@
+/* HUD Layout Styles */
+.hud-layout-wide {
+  --hud-spacing: 2rem;
+  --hud-button-size: 50px;
+  --hud-font-size: 1.5rem;
+  --hud-margin-x: 15px;
+  --hud-margin-y: 15px;
+}
+
+.hud-layout-narrow {
+  --hud-spacing: 1rem;
+  --hud-button-size: 40px;
+  --hud-font-size: 1.2rem;
+  --hud-margin-x: 10px;
+  --hud-margin-y: 10px;
+}
+
+/* HUD Container */
+.arena-hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2100; /* Above Arena 3A menu (2000) */
+}
+
+/* All HUD elements can receive pointer events */
+.arena-hud-element {
+  pointer-events: auto;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* Text Elements */
+.hud-text {
+  font-family: 'Noto Sans', sans-serif;
+  line-height: 1.4;
+}
+
+/* Chapter Title Element */
+.hud-chapter-title {
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* Progress Bar */
+.hud-progress {
+  height: 8px;
+  background: rgba(20, 20, 30, 0.5);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.hud-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(42, 255, 247, 0.7), rgba(42, 195, 247, 0.7));
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* Navigation Controls */
+.hud-nav-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.hud-button {
+  width: var(--hud-button-size);
+  height: var(--hud-button-size);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 30, 0.7);
+  border: 1px solid rgba(42, 255, 247, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hud-button:hover {
+  background: rgba(30, 30, 40, 0.8);
+  border-color: rgba(42, 255, 247, 0.5);
+}
+
+.hud-button img {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+}
+
+/* Tooltip */
+.hud-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+.hud-button:hover .hud-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}

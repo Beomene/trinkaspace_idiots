@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  <meta charset="UTF-8">
+  <title>Trinka.space Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">  <link rel="stylesheet" href="assets/css/user-interface.css">
+  <link rel="stylesheet" href="assets/css/trinkatitles.css">    <link rel="stylesheet" href="assets/css/keyboard-navigation.css">
+  <link rel="stylesheet" href="assets/css/header-fixes.css">  <link rel="stylesheet" href="assets/css/profile-modal-landscape.css">
+  <link rel="stylesheet" href="assets/css/portal-parallax.css">
+  <link rel="stylesheet" href="assets/css/title-glow.css">
+  <link rel="stylesheet" href="assets/css/pronoun-selector.css">  <link rel="stylesheet" href="assets/css/clickable-user-elements.css">
+  <link rel="stylesheet" href="assets/css/cursor-effects.css">
+  <style>
+    :root {
+      --trinka-text: #ACABBB;
+      --trinkagrey-dark: #202029;
+      --trinkagrey-light: #444444;
+      --trinkagrey-red: #A6A4AC;
+      --trinkagrey-yellow: #A7A6A9;
+      --trinkagrey-green: #A4A6AB;
+      --trinkagrey-bright: #A4A6AB;
+      --darkblue: #161721;
+      --darkpurple: #181621;
+      --darkgreen: #161A1D;
+      --darkknow: #161621;
+      --trinkapurple: #161670;
+      --trinkablack: #050011;
+      --neoncyan: #2AFFF7;
+      --neonteal: #00FFD4;
+      --neonpurple: #6A00FF;
+    }
+    
+    body { 
+      background: var(--trinkagrey-dark); 
+      color: var(--trinka-text); 
+      font-family: 'Noto Sans', sans-serif; 
+    }    /* Removing potentially conflicting portal style */
+    .trinkatitle-container {
+      margin-bottom: 2rem;
+    }
+    .trinkatitle {
+      max-width: 90%;
+      height: auto;
+    }
+    .main-button {
+      display: block;
+      margin: 1em auto;
+      padding: 1.2em 2em;
+      background: var(--trinkagrey-light, #444444);
+      color: var(--trinka-text, #ACABBB);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1.3em;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      min-width: 200px;
+    }
+    .main-button:hover, .main-button:focus {
+      background: var(--trinkagrey-bright, #A4A6AB);
+      color: var(--trinkablack, #050011);
+      transform: scale(1.05);
+      outline: none;
+      box-shadow: 0 0 0 3px var(--neoncyan, #2AFFF7);
+    }    .continue-button {
+      display: block;
+      margin: 0.5em auto;
+      padding: 0.8em 1.5em;
+      background: var(--trinkagrey-red, #A6A4AC);
+      color: #2F2F2F;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      min-width: 180px;
+    }    .continue-button:hover, .continue-button:focus {
+      background: var(--trinkagrey-bright, #A4A6AB);
+      color: #050011;
+      transform: scale(1.05);
+      outline: none;
+      box-shadow: 0 0 0 3px var(--neoncyan, #2AFFF7);
+    }
+    
+    /* User interface area */
+    header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      padding: 15px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: flex-end;
+      z-index: 1000;
+    }
+    
+    /* Chapter selection modal */
+    .chapter-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--trinkagrey-dark);
+      border: 2px solid var(--neoncyan);
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 2000;
+      max-width: 90%;
+      width: 500px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    
+    .chapter-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .chapter-list li {
+      margin: 10px 0;
+    }
+    
+    .chapter-button {
+      display: block;
+      width: 100%;
+      padding: 10px 15px;
+      background: var(--trinkagrey-light);
+      color: var(--trinka-text);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 1.1em;
+      transition: all 0.2s ease;
+    }
+    
+    .chapter-button:hover, .chapter-button:focus {
+      background: var(--trinkagrey-bright);
+      color: var(--trinkablack);
+      transform: scale(1.02);
+      outline: none;
+      box-shadow: 0 0 0 2px var(--neoncyan);
+    }
+    
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(5, 0, 17, 0.8);
+      z-index: 1999;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      color: var(--neoncyan);
+      font-size: 1.5em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .close-modal:hover, .close-modal:focus {
+      transform: scale(1.1);
+      color: var(--neonteal);
+      outline: none;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>  <script>
+    function showChapterSelect() {
+      // Create modal and overlay with proper ARIA attributes
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-overlay';
+      
+      const modal = document.createElement('div');
+      modal.className = 'chapter-modal';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-labelledby', 'chapter-select-title');
+      
+      // Create title
+      const title = document.createElement('h2');
+      title.id = 'chapter-select-title';
+      title.style.color = 'var(--neoncyan, #2AFFF7)';
+      title.style.marginBottom = '1em';
+      title.textContent = 'Select Chapter';
+      
+      // Create close button
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'close-modal';
+      closeBtn.setAttribute('aria-label', 'Close chapter selection');
+      closeBtn.textContent = '×';
+      
+      // Create chapter list
+      const chapterList = document.createElement('ul');
+      chapterList.className = 'chapter-list';
+      
+      const chapters = [
+        { number: 'I', path: 'pages/CHAPTER_1/001_001/index.html' },
+        { number: 'II', path: 'pages/CHAPTER_2/002_001/index.html' },
+        { number: 'III', path: 'pages/CHAPTER_3/003_001/index.html' }
+      ];
+      
+      chapters.forEach(chapter => {
+        const li = document.createElement('li');
+        const button = document.createElement('button');
+        button.className = 'chapter-button';
+        button.textContent = `Chapter ${chapter.number}`;
+        button.addEventListener('click', () => {
+          location.href = chapter.path;
+        });
+        li.appendChild(button);
+        chapterList.appendChild(li);
+      });
+      
+      // Add everything to modal
+      modal.appendChild(title);
+      modal.appendChild(closeBtn);
+      modal.appendChild(chapterList);
+      
+      // Add to DOM
+      document.body.appendChild(overlay);
+      document.body.appendChild(modal);
+      
+      // Set focus to the first chapter button
+      const firstButton = modal.querySelector('.chapter-button');
+      if (firstButton) {
+        firstButton.focus();
+      }
+      
+      // Close modal function
+      const closeModal = () => {
+        document.body.removeChild(modal);
+        document.body.removeChild(overlay);
+        // Return focus to the button that opened the modal
+        const opener = document.querySelector('button[onclick="showChapterSelect()"]');
+        if (opener) opener.focus();
+      };
+      
+      // Add event listeners for closing
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', closeModal);
+      
+      // Add keyboard event listeners for accessibility
+      modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeModal();
+        } else if (e.key === 'Tab') {
+          // Get all focusable elements
+          const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          const firstFocusable = focusable[0];
+          const lastFocusable = focusable[focusable.length - 1];
+          
+          // If shift+tab and on first element, focus last element
+          if (e.shiftKey && document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable.focus();
+          }
+          // If tab and on last element, focus first element
+          else if (!e.shiftKey && document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable.focus();
+          }
+        }
+      });
+    }
+    
+    function showUtilityMenu() {
+      // Create modal and overlay with proper ARIA attributes
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-overlay';
+      
+      const modal = document.createElement('div');
+      modal.className = 'chapter-modal';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-labelledby', 'utility-menu-title');
+      
+      // Create title
+      const title = document.createElement('h2');
+      title.id = 'utility-menu-title';
+      title.style.color = 'var(--neoncyan, #2AFFF7)';
+      title.style.marginBottom = '1em';
+      title.textContent = 'Utilities & Settings';
+      
+      // Create close button
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'close-modal';
+      closeBtn.setAttribute('aria-label', 'Close utilities menu');
+      closeBtn.textContent = '×';
+      
+      // Create menu list
+      const menuList = document.createElement('ul');
+      menuList.className = 'chapter-list';
+      
+      const menuItems = [
+        { name: 'User Settings', path: 'pages/general/user-settings/index.html', style: 'var(--trinkagrey-light, #444444)' },
+        { name: 'Test User System', path: 'other/tests/user_auth_test.html', style: 'var(--trinkagrey-red, #A6A4AC)' },
+        { name: 'About the Artist', path: 'pages/general/about-artist/index.html', style: 'var(--trinkagrey-yellow, #A7A6A9)' },
+        { name: 'Support the Project', path: 'pages/general/support/index.html', style: 'var(--trinkagrey-green, #A4A6AB)' }
+      ];
+      
+      menuItems.forEach(item => {
+        const li = document.createElement('li');
+        const button = document.createElement('button');
+        button.className = 'chapter-button';
+        button.style.background = item.style;
+        button.textContent = item.name;
+        button.addEventListener('click', () => {
+          location.href = item.path;
+        });
+        li.appendChild(button);
+        menuList.appendChild(li);
+      });
+      
+      // Add everything to modal
+      modal.appendChild(title);
+      modal.appendChild(closeBtn);
+      modal.appendChild(menuList);
+      
+      // Add to DOM
+      document.body.appendChild(overlay);
+      document.body.appendChild(modal);
+      
+      // Set focus to the first menu button
+      const firstButton = modal.querySelector('.chapter-button');
+      if (firstButton) {
+        firstButton.focus();
+      }
+      
+      // Close modal function
+      const closeModal = () => {
+        document.body.removeChild(modal);
+        document.body.removeChild(overlay);
+        // Return focus to the button that opened the modal
+        const opener = document.querySelector('button[onclick="showUtilityMenu()"]');
+        if (opener) opener.focus();
+      };
+      
+      // Add event listeners for closing
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', closeModal);
+      
+      // Add keyboard event listeners for accessibility
+      modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeModal();
+        } else if (e.key === 'Tab') {
+          // Get all focusable elements
+          const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          const firstFocusable = focusable[0];
+          const lastFocusable = focusable[focusable.length - 1];
+          
+          // If shift+tab and on first element, focus last element
+          if (e.shiftKey && document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable.focus();
+          }
+          // If tab and on last element, focus first element
+          else if (!e.shiftKey && document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable.focus();
+          }
+        }
+      });
+    }
+  </script>
+</head>
+<body>  <header>
+    <div id="trinkaspace-user-display" class="trinkaspace-user-area">
+      <!-- User interface will be injected here by userManager.js -->
+    </div>
+  </header>  <div class="portal">    <div class="trinkatitle-container">
+      <!-- Layered images with subtle parallax effect -->
+      <img src="assets/images/trinkatitles/portal-title-3.png" alt="The Trinkaloop Saga Background Layer" class="trinkatitle-layer trinkatitle-3">
+      <img src="assets/images/trinkatitles/portal-title-2.png" alt="The Trinkaloop Saga Middle Layer" class="trinkatitle-layer trinkatitle-2">
+      <img src="assets/images/trinkatitles/portal-title-1.png" alt="The Trinkaloop Saga Foreground Layer" class="trinkatitle-layer trinkatitle-1">    
+    </div>    <!-- Buttons in a standard vertical layout -->
+    <div class="portal-buttons-container">
+      <button onclick="location.href='pages/CHAPTER_1/001_001/index.html'" class="main-button">Begin Journey</button>
+      <div class="small-buttons-container">
+        <button onclick="showChapterSelect()" class="continue-button">Continue</button>
+        <button onclick="showUtilityMenu()" class="continue-button" style="background: var(--trinkagrey-light);">Settings</button>
+      </div>
+    </div><div class="portal-footer">
+      <!-- Legal links and copyright at the bottom -->
+      <div class="legal-links">
+        <a href="pages/general/legal/privacy-policy.html" style="color: #ACABBB; text-decoration: none; margin: 0 10px;">Privacy Policy</a>
+        <span style="color: #666;">•</span>
+        <a href="pages/general/legal/privacy-policy.html#terms" style="color: #ACABBB; text-decoration: none; margin: 0 10px;">Terms of Service</a>
+        <p style="margin-top: 0.5em;">© 2025 Trinkaloop Saga. All rights reserved.</p>
+      </div>
+    </div>
+    
+    <style>
+      @keyframes fadeInOut {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+      }
+    </style>
+  </div>
+    <script type="module">
+    import userManager from './assets/js/userManager.js';
+    import storageConsent from './assets/js/storageConsent.js';
+    
+    // Initialize user system when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      userManager.init();
+      
+      // Add event listeners for bookmark functionality
+      const bookmarkButtons = document.querySelectorAll('.bookmark-button');
+      bookmarkButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          if (!userManager.isUserLoggedIn()) {
+            // Show login prompt if not logged in
+            alert('Please login to bookmark pages');
+            return;
+          }
+          
+          const pageId = this.dataset.pageId;
+          const pageTitle = this.dataset.pageTitle;
+          const pageUrl = window.location.href;
+          
+          // Toggle bookmark status
+          if (this.classList.contains('active')) {
+            userManager.removeBookmark(pageId);
+            this.classList.remove('active');
+            this.setAttribute('title', 'Add Bookmark');
+            this.innerHTML = '☆';
+          } else {
+            userManager.saveBookmark(pageId, pageTitle, { url: pageUrl });
+            this.classList.add('active');
+            this.setAttribute('title', 'Remove Bookmark');
+            this.innerHTML = '★';
+          }
+        });      });
+    });
+  </script>
+    <!-- Import portal parallax script -->  <script type="module">
+    import portalParallax from './assets/js/portalParallax.js';
+    import { initPortalTitleEffects } from './assets/js/portalEffects.js';
+    import { initPageParticles } from './assets/js/pageParticles.js';
+      
+    // Initialize parallax, cursor effects and particles
+    document.addEventListener('DOMContentLoaded', () => {
+      // Apply cursor chase effects to the portal title layers
+      initPortalTitleEffects({
+        selector: '.trinkatitle-layer', // Apply to all title layers
+        intensity: 0.03,                // How strongly elements follow cursor (subtle)
+        delay: 0.08,                    // Higher values make movement more laggy/dreamy
+        behavior: 'hover',              // 'hover' makes elements shift slightly with cursor
+        maxDistance: 40,                // Maximum pixel distance elements can move
+        hoverDistance: 300              // How far cursor can be to trigger effect (px)
+      });
+      
+      // Initialize Aria's particle effects
+      initPageParticles({
+        autoEnable: true,               // Enable particles by default
+        preset: 'aria',                 // Use Aria's preset (cyan/blue particles)
+        container: document.body,       // Apply to entire page
+        particleConfig: {               // Custom configuration
+          particleCount: 12,            // Number of particles
+          particleSize: 7,              // Size in pixels
+          colors: ['rgba(42, 255, 247, 0.8)', 'rgba(156, 217, 249, 0.7)'],
+          followSpeed: 0.05,            // How quickly particles follow cursor
+          lifespan: 3000,              // Particle lifetime in milliseconds
+          glow: true,                   // Enable glow effect
+          trailEffect: false           // No trailing effect
+        }
+      });
+        // Add helpful message to the page about the effect
+      const message = document.createElement('div');
+      message.className = 'cursor-effects-toggle';
+      message.textContent = 'Cursor effects toggled! (Alt+E to toggle)';
+      document.body.appendChild(message);
+      
+      // Create message for particle effects
+      const particleMessage = document.createElement('div');
+      particleMessage.className = 'cursor-effects-toggle particle-toggle';
+      particleMessage.textContent = 'Particle effects toggled! (Alt+P to toggle)';
+      document.body.appendChild(particleMessage);
+      
+      // Show/hide the message when toggling effects
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'e' && e.altKey) {
+          message.classList.add('visible');
+          setTimeout(() => message.classList.remove('visible'), 2000);
+        }
+        else if (e.key === 'p' && e.altKey) {
+          particleMessage.classList.add('visible');
+          setTimeout(() => particleMessage.classList.remove('visible'), 2000);
+        }
+      });
+      
+      console.log('✨ Portal effects initialized (Alt+E: cursor chase, Alt+P: particles)');
+    });
+  </script>
+</body>
+</html>

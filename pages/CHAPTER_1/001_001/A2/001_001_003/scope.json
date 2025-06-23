@@ -1,0 +1,12 @@
+{
+  "id": "001_001_003",
+  "y-coordinate": "50vh",
+  "x-coordinate": "50vw",
+  "align": "left",
+  "boxColor": "rgba(0, 0, 0, 0.7)",
+  "textColor": "#ACABBB",
+  "opacity": 1.0,
+  "font": "Noto Sans",
+  "speaker": "???",
+  "voice": "eene"
+}

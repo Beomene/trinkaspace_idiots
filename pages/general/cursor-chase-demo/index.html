@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor Chase Demo - Trinkaspace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/core.css">
+  <link rel="stylesheet" href="../../assets/css/cursor-effects.css">
+  <style>
+    body {
+      background: #181621;
+      color: #ACABBB;
+      font-family: 'Noto Sans', sans-serif;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    
+    h1 {
+      margin-top: 2rem;
+      text-align: center;
+      color: #2AFFF7;
+      font-size: 2rem;
+    }
+    
+    .demo-section {
+      margin: 2rem 0;
+      padding: 2rem;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 20px rgba(42, 255, 247, 0.1);
+      width: 80%;
+      max-width: 1000px;
+    }
+    
+    .demo-title {
+      margin-bottom: 1rem;
+      font-weight: bold;
+      color: #2AFFF7;
+      font-size: 1.2rem;
+    }
+    
+    .demo-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .demo-item {
+      width: 200px;
+      height: 200px;
+      background: #202029;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      position: relative;
+      transition: background-color 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .demo-item img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    
+    .demo-item::after {
+      content: attr(data-behavior);
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #2AFFF7;
+      text-transform: uppercase;
+    }
+    
+    .controls {
+      margin: 2rem 0;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .controls button {
+      background: #2AFFF7;
+      color: #050011;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      margin: 0 0.5rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .controls button:hover {
+      background: #6A00FF;
+      color: white;
+    }
+    
+    .instruction {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      text-align: center;
+      color: #A4A6AB;
+      font-style: italic;
+    }
+    
+    kbd {
+      background: #050011;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      color: #2AFFF7;
+      font-family: monospace;
+    }
+    
+    .demo-image {
+      height: 150px;
+      width: auto;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cursor Chase Effect Demo</h1>
+  
+  <div class="demo-section">
+    <div class="demo-title">Portal Title Effects</div>
+    <p>Move your cursor around to see how the portal title layers react differently.</p>
+    <div class="demo-container">
+      <div class="demo-item" data-behavior="hover" data-cursor-effect="hover">
+        <img src="../../assets/images/trinkatitles/portal-title-1.png" alt="Title Layer 1" class="demo-image">
+      </div>
+      <div class="demo-item" data-behavior="hover" data-cursor-effect="hover">
+        <img src="../../assets/images/trinkatitles/portal-title-2.png" alt="Title Layer 2" class="demo-image">
+      </div>
+      <div class="demo-item" data-behavior="hover" data-cursor-effect="hover">
+        <img src="../../assets/images/trinkatitles/portal-title-3.png" alt="Title Layer 3" class="demo-image">
+      </div>
+    </div>
+  </div>
+  
+  <div class="demo-section">
+    <div class="demo-title">Different Behaviors</div>
+    <p>Compare how different cursor chase behaviors work:</p>
+    <div class="demo-container">
+      <div class="demo-item" data-behavior="chase" data-cursor-effect="chase">CHASE</div>
+      <div class="demo-item" data-behavior="flee" data-cursor-effect="flee">FLEE</div>
+      <div class="demo-item" data-behavior="hover" data-cursor-effect="hover">HOVER</div>
+    </div>
+  </div>
+  
+  <div class="demo-section">
+    <div class="demo-title">Intensity &amp; Distance</div>
+    <p>Elements can respond differently based on intensity settings:</p>
+    <div class="demo-container">
+      <div class="demo-item" data-behavior="subtle" data-cursor-effect="hover" data-intensity="0.02">SUBTLE</div>
+      <div class="demo-item" data-behavior="medium" data-cursor-effect="hover" data-intensity="0.05">MEDIUM</div>
+      <div class="demo-item" data-behavior="strong" data-cursor-effect="hover" data-intensity="0.1">STRONG</div>
+    </div>
+  </div>
+  
+  <div class="controls">
+    <button id="toggle-effects">Toggle All Effects</button>
+    <button id="reset-positions">Reset Positions</button>
+  </div>
+  
+  <div class="instruction">
+    Press <kbd>Alt</kbd>+<kbd>E</kbd> to toggle cursor chase effects site-wide
+  </div>
+
+  <script type="module">
+    import defaultCursorChase, { CursorChase } from '../../assets/js/cursorChase.js';
+    import { applyElementEffect } from '../../assets/js/portalEffects.js';
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      // Apply effects to all demo items
+      document.querySelectorAll('.demo-item').forEach(item => {
+        const behavior = item.getAttribute('data-behavior');
+        const intensity = parseFloat(item.getAttribute('data-intensity') || 0.05);
+        
+        applyElementEffect(item, behavior === 'chase' ? 'chase' : 
+                                  behavior === 'flee' ? 'flee' : 'hover', 
+                           { intensity });
+      });
+      
+      // Handle toggle button
+      document.getElementById('toggle-effects').addEventListener('click', () => {
+        const firstItem = document.querySelector('.demo-item');
+        const isActive = firstItem.classList.contains('cursor-chase-active');
+        
+        document.querySelectorAll('.demo-item').forEach(item => {
+          if (isActive) {
+            defaultCursorChase.removeElement(item);
+          } else {
+            const behavior = item.getAttribute('data-behavior');
+            const intensity = parseFloat(item.getAttribute('data-intensity') || 0.05);
+            
+            applyElementEffect(item, behavior === 'chase' ? 'chase' : 
+                                      behavior === 'flee' ? 'flee' : 'hover', 
+                               { intensity });
+          }
+        });
+        
+        // Show message
+        const message = document.createElement('div');
+        message.className = 'cursor-effects-toggle visible';
+        message.textContent = isActive ? 'Effects disabled!' : 'Effects enabled!';
+        document.body.appendChild(message);
+        setTimeout(() => {
+          message.classList.remove('visible');
+          setTimeout(() => message.remove(), 300);
+        }, 2000);
+      });
+      
+      // Handle reset button
+      document.getElementById('reset-positions').addEventListener('click', () => {
+        document.querySelectorAll('.demo-item').forEach(item => {
+          item.style.transform = 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

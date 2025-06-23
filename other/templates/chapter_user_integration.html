@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter Integration Template - User Authentication</title>
+  <link rel="stylesheet" href="/assets/css/core.css">
+  <link rel="stylesheet" href="/assets/css/user-interface.css">
+  <style>
+    /* Example styles for demonstration */
+    body {
+      background: #444444;
+      color: #ACABBB;
+      font-family: 'Noto Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+    }
+    
+    .chapter-title {
+      color: #2AFFF7;
+      margin: 0;
+      font-size: 1.2em;
+    }
+    
+    .page-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .navigation-button {
+      background: #161670;
+      color: #ACABBB;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 15px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: all 0.2s ease;
+    }
+    
+    .navigation-button:hover {
+      background: #2626a0;
+      transform: scale(1.05);
+    }
+    
+    /* Position bookmark button to not interfere with controls */
+    .bookmark-button {
+      margin-right: 15px;
+    }
+    
+    /* Container for the chapter content */
+    .chapter-content {
+      margin-top: 60px; /* Space for fixed header */
+      padding: 20px;
+    }
+    
+    /* Custom theme support for user preferences */
+    body[data-theme="forest"] {
+      background: #2a3a2a;
+      color: #b0c8b0;
+    }
+    
+    body[data-theme="night"] {
+      background: #0F0F20;
+      color: #9898b0;
+    }
+    
+    body[data-theme="sunset"] {
+      background: #402030;
+      color: #c8b0b8;
+    }
+    
+    /* Text size preferences */
+    html {
+      font-size: var(--user-text-size, 16px);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="chapter-title">Chapter X: Template</div>
+    
+    <div class="page-controls">
+      <div id="trinkaspace-user-display" class="trinkaspace-user-area">
+        <!-- User interface will be injected here by userManager.js -->
+      </div>
+      
+      <button class="navigation-button" onclick="window.location.href='/portal.html'">Home</button>
+    </div>
+  </header>
+  
+  <div class="chapter-content">
+    <h1>Chapter Integration Template</h1>
+    <p>This is a template showing how to integrate the user authentication system into a chapter page.</p>
+  </div>
+  
+  <!-- TrinkaspaceEngine integration example -->
+  <script type="module">
+    import TrinkaspaceEngine from '/assets/js/trinkaspaceEngine.js';
+    import { initUserInterface } from '/assets/js/userIntegration.js';
+    
+    // Initialize the engine and user system when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('🚀 Initializing Trinkaspace Engine...');
+      
+      // Initialize the user interface
+      initUserInterface({
+        pageId: 'chapter-x-page-y',  // Replace with unique chapter/page ID
+        pageTitle: 'Chapter X: Page Y',  // Replace with actual page title
+        enableBookmarking: true  // Enable bookmarking for this page
+      });
+      
+      // Initialize the engine with appropriate chapter/page ID
+      const engine = new TrinkaspaceEngine({ 
+        pageId: 'chapter-x-page-y'  // Should match the same pageId provided to user system
+      });
+      
+      // Apply user preferences to the engine if applicable
+      applyUserPreferencesToEngine(engine);
+    });
+    
+    /**
+     * Apply user preferences to the Trinkaspace Engine
+     * @param {TrinkaspaceEngine} engine - The engine instance
+     */
+    function applyUserPreferencesToEngine(engine) {
+      // Import userManager directly for preferences
+      import('/assets/js/userManager.js').then(module => {
+        const userManager = module.default;
+        
+        if (userManager.isUserLoggedIn()) {
+          const preferences = userManager.getPreferences();
+          
+          // Apply preferences to engine settings if applicable
+          if (preferences.beatSpeed) {
+            engine.setBeatSpeed(preferences.beatSpeed);
+          }
+          
+          if (preferences.disableIdleChatter) {
+            engine.setIdleChatEnabled(!preferences.disableIdleChatter);
+          }
+          
+          console.log('[User Integration] Applied user preferences to engine');
+        }
+      });
+    }
+    
+    // Listen for bookmark events
+    document.addEventListener('click', function(e) {
+      // Check if user clicked on a moment or section that should be bookmarked
+      if (e.target.classList.contains('bookmark-section')) {
+        // Create a custom bookmark event
+        const bookmarkEvent = new CustomEvent('trinkaspace-bookmark-page', {
+          detail: {
+            id: e.target.dataset.sectionId || 'chapter-x-page-y',
+            title: e.target.dataset.sectionTitle || 'Chapter X: Page Y',
+            url: window.location.href
+          }
+        });
+        document.dispatchEvent(bookmarkEvent);
+      }
+    });
+  </script>
+</body>
+</html>

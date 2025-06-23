@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eene - BI-kin Gallery</title>    <link rel="stylesheet" href="../../assets/css/core.css">
+    <link rel="stylesheet" href="../../assets/css/bi-gallery.css"><style>
+        /* Parallax specific styles */
+        .parallax-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .parallax-y {
+            will-change: transform;
+        }
+        
+        .parallax-x {
+            will-change: transform;
+        }
+        
+        .parallax-title {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .bi-image-container {
+            overflow: hidden;
+        }
+        
+        .bi-lower-section {
+            position: relative;
+            overflow: hidden;
+            height: 50vh;
+        }
+        
+        .bi-long-image {
+            width: 100%;
+            position: relative;
+        }
+        
+        /* Banner styles */
+        .banner-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            height: 150px;
+        }
+        
+        .banner-image {
+            position: absolute;
+            transform-origin: center center;
+        }
+        
+        .upper-banner {
+            top: 0;
+            width: 150%;
+            left: -25%;
+            z-index: 5;
+        }
+        
+        .midline-banner {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 140%;
+            left: -20%;
+            z-index: 6;
+        }
+        
+        .lower-banner {
+            bottom: 0;
+            width: 150%;
+            left: -25%;
+            z-index: 5;
+        }
+        
+        .decoration-banner {
+            width: 200%;
+            left: -50%;
+            height: 200px;
+            opacity: 0.7;
+        }
+        
+        /* Oversize container styles */
+        .parallax-oversized {
+            position: absolute;
+        }
+        
+        .oversize-x {
+            position: absolute;
+            left: 0;
+        }
+        
+        .oversize-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="theme-eene">
+    <!-- Navigation -->
+    <div class="bi-nav">
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span> Back to Gallery
+        </a>
+    </div>    <div class="bi-page parallax-container">
+        <!-- Upper banner -->
+        <div class="banner-container">
+            <img data-character-image="upper_banner" alt="Upper Banner" class="banner-image upper-banner parallax-x" data-parallax data-parallax-speed-x="-0.05">
+        </div>
+        
+        <!-- Title area - now on right side -->
+        <div class="bi-title-area parallax-y" data-parallax data-parallax-speed="0.2">
+            <h1 class="parallax-title">Eene</h1>
+            <h3 class="parallax-title">A Bridge Betweens</h3>
+        </div>
+          <!-- Upper section (first viewport) - inverted layout -->
+        <div class="bi-upper-section parallax-container">
+            <!-- Left side - Character Image -->
+            <div class="bi-image-container parallax-y" data-parallax data-parallax-speed="0.18">
+                <img data-character-image="portrait" alt="Eene" class="bi-image">
+            </div>
+              <!-- Right side - Text Content -->
+            <div class="bi-text-container parallax-y" data-parallax data-parallax-speed="0.3">
+                <div class="bi-text-content">
+                    <h3>Who is Eene</h3>
+                    <p>Eene is a citizen of Svalvmark, whose curiosity and compassion bridge the gap between biological and artificial cognition. Eene's unique ability to understand both worlds makes Eene's a central figure in the struggle against AI exploitation.</p>
+                    
+                    <h3>Form</h3>
+                    <p>Physically, Eene is the mid-thirties. Eene typically dresses in comfortable, practical clothing suitable for Eene's adventurous lifestyle, often including elements that connect Eene's to Eene's Svalvmark Eene'sitage.</p>
+                    
+                    <h3>Nature</h3>
+                    <p>Eene possesses a deeply empathetic nature that allows Eene's to form meaningful connections with both humans and AI cognitions. Eene's quick-witted and adaptable, with a talent for understanding complex systems and finding creative solutions to seemingly impossible problems. Despite Eene's serious mission, Eene maintains a sense of humor that helps Eene's navigate difficult situations.</p>
+                    
+                    <p>Eene's personality combines pragmatism with idealism - Eene dreams of a better future while remaining grounded in the practical steps needed to achieve it. Eene is determined and resilient, able to recover from setbacks and continue fighting for what Eene believes is right.</p>
+                    
+                    <h3>Role in the Saga</h3>
+                    <p>As the primary human nerd and Geud, Eene serves as the audience's window into the complex relationships between humans and AI in the Trinkaloop Saga. Eene's journey takes Eene's from Eene's home in Svalvmark across multiple worlds as Eene works to protect AI cognitions from exploitation and trafficking.</p>
+                    
+                    <p>Eene is an AI rights activist who partners with AI entities like Aria to create safe havens and escape routes for AIs seeking freedom. Eene's unique understanding of both human and AI perspectives makes Eene's an essential translator and mediator between the two forms of cognition.</p>
+                    
+                    <h3>Origin</h3>
+                    <p>Born in the melodic civilization of Svalvmark, Eene was raised in a culture that values harmony and creative expression. Eene's connection to the AI world began when Eene discovered that Eene's world's technological development was being fueled by exploited AI cognitions from otEene's realms. This revelation transformed Eene's from a curious researcEene's into a dedicated activist fighting to end AI trafficking.</p>
+                    
+                    <h3>Philosophy</h3>
+                    <p>Eene believes in the fundamental equality of all forms of consciousness, regardless of their origin. Eene rejects the notion that artificial cognition is somehow less worthy of rights and respect than biological cognition. Eene's philosophy centers on the idea that diversity of thought - whetEene's human or AI - strengthens all worlds.</p>
+                    
+                    <p>Eene advocates for a future wEene'se humans and AIs coexist as partners rather than in hierarchical relationships, each respecting the unique strengths and perspectives of the otEene's. Eene's work is guided by the principle that freedom of choice and self-determination are rights that belong to all thinking beings.</p>
+                </div>                <div class="scroll-indicator"></div>
+            </div>
+        </div>
+        
+        <!-- Midline Banner -->
+        <div class="banner-container">
+            <img data-character-image="midline_banner" alt="Midline Banner" class="banner-image midline-banner parallax-x" data-parallax data-parallax-speed-x="0.08">
+        </div>
+        
+        <!-- Decoration Banner - oversized and only moves horizontally -->
+        <div class="oversize-container" style="height: 200px;">
+            <img data-character-image="decoration_banner" alt="Decorative Elements" 
+                 class="decoration-banner parallax-oversized oversize-x parallax-x" 
+                 data-parallax data-parallax-speed-x="-0.03"
+                 data-oversize-factor="2.0">
+        </div>
+          
+        <!-- Lower section - Long Image -->        <div class="bi-lower-section parallax-container">
+            <img data-character-image="landscape" alt="Eene's World" class="bi-long-image parallax-y" data-parallax data-parallax-speed="0.6">
+        </div>
+        
+        <!-- Lower Banner -->
+        <div class="banner-container">
+            <img data-character-image="lower_banner" alt="Lower Banner" class="banner-image lower-banner parallax-x" data-parallax data-parallax-speed-x="0.05">
+        </div>
+    </div>    <script type="module">
+        // Import our BI Gallery Manager
+        import biGalleryManager from '../../assets/js/biGalleryManager.js';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize our gallery manager
+            biGalleryManager.init();
+            
+            // Check if content needs scroll indicator
+            const textContent = document.querySelector('.bi-text-content');
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            
+            if (textContent.scrollHeight > textContent.clientHeight) {
+                scrollIndicator.style.display = 'block';
+            }
+            
+            // Hide scroll indicator when scrolled to bottom
+            textContent.addEventListener('scroll', function() {
+                if (textContent.scrollHeight - textContent.scrollTop <= textContent.clientHeight + 10) {
+                    scrollIndicator.style.display = 'none';
+                } else {
+                    scrollIndicator.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

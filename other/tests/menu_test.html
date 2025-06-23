@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena 3A Menu Test</title>
+    <link rel="stylesheet" href="assets/css/core.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            font-family: 'Noto Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .test-content {
+            text-align: center;
+            color: #ACABBB;
+            max-width: 600px;
+            padding: 2rem;
+        }
+        
+        .test-content h1 {
+            color: #A4A6AB;
+            margin-bottom: 2rem;
+        }
+        
+        .test-content p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .test-instructions {
+            background: rgba(68, 68, 68, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border-left: 4px solid #A4A6AB;
+        }
+        
+        .test-instructions h3 {
+            color: #A4A6AB;
+            margin-top: 0;
+        }
+        
+        .test-instructions ul {
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-content">
+        <h1>🎯 Arena 3A Menu System Test</h1>
+        <p>This page tests the updated menu system with all the requested changes:</p>
+          <div class="test-instructions">
+            <h3>✅ Implemented Features:</h3>
+            <ul>
+                <li><strong>20px grey indicator</strong> at pageLEFT with 0.6 opacity</li>
+                <li><strong>Rounded corners</strong> (10px top-right/bottom-right only)</li>
+                <li><strong>94vh total height</strong> with 3vh gaps (centered menu)</li>
+                <li><strong>3vh spacing</strong> between menu items</li>
+                <li><strong>Trinka-grey palette</strong> (removed cyan colors)</li>
+                <li><strong>Removed elements</strong>: "Trinkaloop" header, "Arena debug", "Fullscreen mode"</li>
+                <li><strong>Top-right secondary menu</strong>: Bookmark 🔖, Fullscreen ⛶, Audio 🔊/🔇</li>
+                <li><strong>No scrollbar</strong> - floating veil-like submenus</li>
+                <li><strong>Semi-transparent layers</strong> - 15% opacity with 20px backdrop blur</li>
+            </ul>
+        </div>
+        
+        <p style="margin-top: 2rem; opacity: 0.7;">
+            <strong>Test Instructions:</strong><br>
+            • Hover over the 20px indicator on the left to see highlight<br>
+            • Click the indicator to open the menu<br>
+            • Click "Chapter" to see floating veil-like submenu (no scrollbar!)<br>
+            • Try the top-right buttons for secondary functions<br>
+            • Use Escape key to close menu, Ctrl+M to toggle<br>
+        </p>
+    </div>
+
+    <script type="module">
+        import { initArena3Menu } from './assets/js/tertiaryArena.js';
+        
+        // Initialize the Arena 3A menu system
+        const menu = initArena3Menu({
+            opacity: 0.6,
+            baseColor: '#444444',
+            textColor: '#ACABBB',
+            width: '25vw',
+            height: '94vh',
+            indicatorWidth: '20px',
+            zIndex: 2000,
+            animationDuration: 300
+        });
+        
+        console.log('[Menu Test] Arena 3A menu initialized successfully');
+        
+        // Test notification system
+        setTimeout(() => {
+            if (menu.showNotification) {
+                menu.showNotification('Arena 3A menu system ready!');
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

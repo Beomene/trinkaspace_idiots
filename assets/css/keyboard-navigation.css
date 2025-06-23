@@ -1,0 +1,111 @@
+/**
+ * keyboard-navigation.css
+ * 
+ * Styles for keyboard navigation features in Trinkaspace
+ */
+
+/* Skip Links */
+.skip-links-container {
+  position: absolute;
+  top: -1000px;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  text-align: center;
+  transition: top 0.3s ease;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 10px 15px;
+  font-weight: bold;
+  border: 2px solid #2AFFF7;
+  border-radius: 0 0 8px 8px;
+  transition: top 0.3s ease;
+  display: block;
+  text-decoration: none;
+  z-index: 10000;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 16px;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: none;
+  box-shadow: 0 0 10px rgba(42, 255, 247, 0.8);
+}
+
+/* Focus styling */
+:focus {
+  outline: 2px solid #2AFFF7;
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid #2AFFF7;
+  outline-offset: 2px;
+}
+
+/* Button focus */
+button:focus, 
+[role="button"]:focus {
+  box-shadow: 0 0 0 2px #2AFFF7;
+}
+
+/* Keyboard help modal */
+.keyboard-help-modal {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.keyboard-help-modal kbd {
+  display: inline-block;
+  background: #555;
+  border-radius: 3px;
+  padding: 2px 6px;
+  margin: 0 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.keyboard-help-modal ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.keyboard-help-modal li {
+  margin-bottom: 8px;
+}
+
+/* HUD elements keyboard focus */
+.arena-hud-element .hud-button:focus {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px #2AFFF7;
+  outline: none;
+}
+
+/* Textbox keyboard navigation */
+.textBox:focus {
+  box-shadow: 0 0 0 2px #2AFFF7;
+}
+
+/* Ensure interactive elements have appropriate hover/focus states */
+[tabindex]:focus,
+[tabindex]:hover {
+  cursor: pointer;
+}
+
+/* Make currently focused element visible */
+[tabindex]:focus {
+  position: relative;
+  z-index: 5; 
+}

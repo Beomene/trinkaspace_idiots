@@ -1,0 +1,53 @@
+/**
+ * trinkatitles.css
+ * 
+ * Styling for Trinkaloop Saga page titles (Trinkatitles)
+ * These are custom PNG titles that can be displayed at the top of story pages
+ */
+
+.trinkatitle-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem auto 2rem;
+}
+
+.trinkatitle {
+  max-width: 90%;
+  height: auto;
+}
+
+/* Size variants */
+.trinkatitle.small {
+  max-width: 60%;
+}
+
+.trinkatitle.medium {
+  max-width: 75%; 
+}
+
+.trinkatitle.large {
+  max-width: 90%;
+}
+
+/* For chapter pages - positioned at the top */
+.chapter-page .trinkatitle-container {
+  margin: 2rem auto;
+}
+
+/* Glow effect option */
+.trinkatitle.glow {
+  filter: drop-shadow(0 0 5px var(--neoncyan, #2AFFF7));
+}
+
+/* For responsive design */
+@media (max-width: 768px) {
+  .trinkatitle {
+    max-width: 95%;
+  }
+  
+  .trinkatitle.small {
+    max-width: 80%;
+  }
+}

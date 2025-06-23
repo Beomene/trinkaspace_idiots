@@ -1,0 +1,43 @@
+/**
+ * header-fixes.css
+ * 
+ * Fixes for header and user display area in Trinkaspace
+ */
+
+/* Ensure header is properly styled */
+header {
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  box-sizing: border-box;
+}
+
+/* Fix for user area */
+.trinkaspace-user-area {
+  min-width: 200px; /* Ensure minimum width for login/register buttons */
+  height: auto;
+  min-height: 44px; /* Accessibility minimum touch target size */
+  position: relative;
+  z-index: 1001;
+}
+
+/* Make login/register buttons more visible */
+.login-btn,
+.register-btn {
+  min-width: 120px;
+  padding: 10px 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Ensure user menu is accessible */
+.user-menu {
+  min-width: 150px;
+  background: var(--trinkagrey-dark);
+  border: 1px solid var(--neoncyan);
+  border-radius: 6px;
+  padding: 8px 0;
+}

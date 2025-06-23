@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Trinkaloop Saga</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/core.css">
+  <link rel="stylesheet" href="/assets/css/user-interface.css">
+  <style>
+    body {
+      background: #333344;
+      color: #ACABBB;
+      font-family: 'Noto Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+    
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #2AFFF7;
+      background: none;
+      border: none;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+    
+    main {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+    
+    .legal-container {
+      background: #252535;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      margin-bottom: 2em;
+    }
+    
+    .legal-header {
+      background: #1C1C2C;
+      padding: 1.5em;
+      border-bottom: 2px solid #2AFFF7;
+    }
+    
+    .legal-header h1 {
+      margin: 0;
+      color: #2AFFF7;
+    }
+    
+    .legal-content {
+      padding: 2em;
+    }
+    
+    h2 {
+      color: #2AFFF7;
+      border-bottom: 1px solid #444455;
+      padding-bottom: 0.5em;
+    }
+    
+    h3 {
+      color: #2AFFF7;
+      margin-top: 1.5em;
+    }
+    
+    p, ul, ol {
+      margin-bottom: 1em;
+    }
+    
+    ul, ol {
+      padding-left: 2em;
+    }
+    
+    .effective-date {
+      text-align: right;
+      font-style: italic;
+      margin-top: 2em;
+      font-size: 0.9em;
+      color: #999;
+    }
+    
+    .legal-footer {
+      background: #1C1C2C;
+      padding: 1.5em;
+      border-top: 1px solid #444455;
+      font-size: 0.9em;
+      color: #999;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button onclick="location.href='/portal.html'" class="back-btn">← Back to Portal</button>
+    <div id="trinkaspace-user-display" class="trinkaspace-user-area">
+      <!-- User interface will be injected here by userManager.js -->
+    </div>
+  </header>
+  
+  <main>
+    <div class="legal-container">
+      <div class="legal-header">
+        <h1>Privacy Policy</h1>
+      </div>
+      <div class="legal-content">
+        <h2>Introduction</h2>
+        <p>Welcome to Trinkaloop Saga. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
+        
+        <h2>Important Information</h2>
+        <p>Trinkaloop Saga is an interactive fiction experience. This Privacy Policy explains how we collect, use, and store information when you use our website.</p>
+        
+        <h3>Data Controller</h3>
+        <p>Trinkaloop Saga is the controller responsible for your personal data (collectively referred to as "we," "us," or "our" in this privacy policy).</p>
+        
+        <h2>The Data We Collect</h2>
+        <p>We collect and process the following data when you create an account:</p>
+        <ul>
+          <li><strong>Personal Information</strong>: Username, email address</li>
+          <li><strong>Account Information</strong>: Password (stored locally in your browser)</li>
+          <li><strong>Usage Information</strong>: Bookmarks, preferences, and settings</li>
+        </ul>
+        
+        <h3>Client-Side Storage</h3>
+        <p>Our website uses localStorage, a client-side storage technology that keeps data in your browser. Unlike cookies, localStorage data is not sent to our servers and remains exclusively on your device. This means:</p>
+        <ul>
+          <li>All your user data (account, preferences, bookmarks) is stored only on your device</li>
+          <li>We do not have access to this data and cannot retrieve it</li>
+          <li>If you clear your browser data or use a different browser/device, your account information will not be available</li>
+        </ul>
+        
+        <h2>How We Use Your Data</h2>
+        <p>We use the information stored in localStorage to:</p>
+        <ul>
+          <li>Provide account functionality (login/logout)</li>
+          <li>Remember your preferences and settings</li>
+          <li>Save your bookmarks and progress in the story</li>
+          <li>Personalize your experience based on your preferences</li>
+        </ul>
+        
+        <h2>Data Security</h2>
+        <p>While we implement reasonable precautions to protect your information, please be aware that:</p>
+        <ul>
+          <li>LocalStorage is not encrypted by default</li>
+          <li>Passwords are stored in plaintext in localStorage, not sent to our servers</li>
+          <li>If you share your device with others, they could potentially access your account information</li>
+        </ul>
+        <p>For security best practices, we recommend:</p>
+        <ul>
+          <li>Do not use the same password you use for other services</li>
+          <li>Log out when using a shared or public device</li>
+          <li>Use private/incognito browsing on shared devices</li>
+        </ul>
+        
+        <h2>Your Legal Rights</h2>
+        <p>Under data protection laws, you have rights including:</p>
+        <ul>
+          <li><strong>Access</strong>: You can view your account information at any time in your profile settings.</li>
+          <li><strong>Correction</strong>: You can update your information through your profile settings.</li>
+          <li><strong>Erasure</strong>: You can delete your account and associated data using the logout function and clearing your browser data.</li>
+          <li><strong>Data Portability</strong>: Since data is only stored locally on your device, you can export it by using browser developer tools to examine localStorage contents.</li>
+        </ul>
+        
+        <h2>Third-Party Services</h2>
+        <p>Our website does not currently use third-party analytics, advertising, or tracking services. All functionality is implemented locally without sending data to external servers.</p>
+        
+        <h2>Changes to This Privacy Policy</h2>
+        <p>We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page and updating the effective date below.</p>
+        
+        <p class="effective-date">Last updated: June 23, 2025</p>
+      </div>
+      <div class="legal-footer">
+        <p>If you have any questions about this Privacy Policy, please contact us.</p>
+      </div>
+    </div>
+    
+    <div class="legal-container">
+      <div class="legal-header">
+        <h1>Terms of Service</h1>
+      </div>
+      <div class="legal-content">
+        <h2>Introduction</h2>
+        <p>These Terms of Service govern your use of Trinkaloop Saga, an interactive fiction experience accessible via the website.</p>
+        
+        <h2>Account Registration</h2>
+        <p>When you create an account with us, you must provide information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your account.</p>
+        
+        <p>You are responsible for safeguarding the password that you use to access the service and for any activities or actions under your password. We encourage you to use passwords that are at least 8 characters long and contain a combination of upperCase and lowerCase letters, numbers, and special characters.</p>
+        
+        <h2>User-Generated Content</h2>
+        <p>Our service may allow you to create bookmarks and customize preferences. You are solely responsible for the information saved in your account.</p>
+        
+        <h2>Intellectual Property</h2>
+        <p>The service and its original content, features, and functionality are and will remain the exclusive property of Trinkaloop Saga and its licensors. The service is protected by copyright, trademark, and other laws.</p>
+        
+        <h2>Termination</h2>
+        <p>We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+        
+        <h2>Limitation of Liability</h2>
+        <p>In no event shall Trinkaloop Saga, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+        <ul>
+          <li>Your access to or use of or inability to access or use the service;</li>
+          <li>Any conduct or content of any third party on the service;</li>
+          <li>Any content obtained from the service; and</li>
+          <li>Unauthorized access, use or alteration of your transmissions or content.</li>
+        </ul>
+        
+        <h2>Changes to Terms</h2>
+        <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days' notice prior to any new terms taking effect.</p>
+        
+        <p class="effective-date">Last updated: June 23, 2025</p>
+      </div>
+      <div class="legal-footer">
+        <p>By using the Trinkaloop Saga services, you agree to these Terms of Service.</p>
+      </div>
+    </div>
+  </main>
+  
+  <script type="module">
+    import { initUserInterface } from '/assets/js/userIntegration.js';
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      initUserInterface({
+        pageId: 'privacy-policy',
+        pageTitle: 'Privacy Policy',
+        enableBookmarking: false
+      });
+    });
+  </script>
+</body>
+</html>

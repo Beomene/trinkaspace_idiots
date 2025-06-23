@@ -1,0 +1,12 @@
+This is a placeholder for frame images.
+
+IMPORTANT: Each frame piece should extend to and include the corners!
+
+For scopeRIGHT frames:
+- Create a vertical PNG image that spans the entire right edge
+- The image should cover the upper right corner, right edge, and lower right corner
+- The opaque parts (#202029) create the frame
+- The transparent parts define the visible area of your diorama
+- The transition between them creates your decorative frame effect (jagged, twigs, etc.)
+
+Think of it like placing decorative twigs around a painting on the ground - each frame piece covers a complete side including its corners.

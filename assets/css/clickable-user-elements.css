@@ -1,0 +1,61 @@
+/* Styling for clickable username and avatar */
+.user-name {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 1em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.user-name:hover {
+  background-color: rgba(42, 255, 247, 0.1);
+  color: #fff;
+}
+
+.user-name:focus {
+  outline: 2px solid rgba(42, 255, 247, 0.5);
+  outline-offset: 2px;
+}
+
+.user-pronouns {
+  font-size: 0.85em;
+  color: rgba(204, 204, 204, 0.7);
+  font-weight: normal;
+}
+
+.user-avatar.clickable {
+  cursor: pointer;
+}
+
+.user-avatar.clickable:focus {
+  outline: 2px solid rgba(42, 255, 247, 0.5);
+  outline-offset: 2px;
+}
+
+.user-avatar.clickable:hover .avatar-frame {
+  border-color: var(--neoncyan, #2AFFF7);
+}
+
+.user-avatar.clickable .avatar-frame::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42, 255, 247, 0.2) 0%, rgba(42, 255, 247, 0) 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.user-avatar.clickable:hover .avatar-frame::after {
+  opacity: 1;
+}

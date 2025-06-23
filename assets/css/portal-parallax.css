@@ -1,0 +1,319 @@
+/**
+ * Portal Page Parallax Styling
+ * Provides specific styles for the parallax effects on the portal page
+ */
+
+.portal {
+  position: relative;
+  min-height: 100vh; /* Standard viewport height */
+  overflow: visible; /* Prevent button cropping */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.trinkatitle-container {
+  position: relative;
+  width: 30vw; /* Back to original size */
+  height: 30vh; /* Back to original size */
+  margin: 0 auto;
+  margin-top: 8vh; 
+  max-width: 575px; /* Original max size */
+  /* Removed will-change property */
+}
+
+.trinkatitle-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease-out; /* Smooth, slow transition for subtle movement */
+}
+
+.trinkatitle-1 {
+  z-index: 3; /* Highest z-index - foreground */
+  filter: drop-shadow(0 0 5px rgba(42, 255, 247, 0.4)); /* Base glow */
+}
+
+.trinkatitle-2 {
+  z-index: 1; /* Lowest z-index - background */
+}
+
+.trinkatitle-3 {
+  z-index: 2; /* Mid z-index - middle layer */
+}
+
+/* Button styling for standard vertical layout */
+.portal .main-button,
+.portal .continue-button {
+  position: relative;
+  z-index: 10;
+}
+
+/* Begin Journey button */
+.portal .main-button {
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy effect on hover */
+}
+
+/* Container for smaller buttons */
+.small-buttons-container {
+  display: flex;
+  flex-direction: column; /* Changed from row to column layout */
+  align-items: center;    /* Center buttons horizontally */
+  gap: 1rem;              /* Space between the buttons */
+  width: 100%;
+}
+
+/* Continue and Settings buttons */
+.portal .continue-button {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy effect on hover */
+}
+
+/* Perfect glow effect for the title - keeping it forever! */
+@keyframes titleGlow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(42, 255, 247, 0.3)); }
+  50% { filter: drop-shadow(0 0 12px rgba(42, 255, 247, 0.6)); }
+}
+
+@keyframes titleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.trinkatitle-1 {
+  animation: titleGlow 4s infinite ease-in-out, titleFloat 8s infinite ease-in-out;
+}
+
+.portal-buttons-container {
+  position: relative;
+  width: 100%;
+  z-index: 5;
+  overflow: visible; /* Ensure buttons aren't cropped */
+  margin-top: 2rem; /* Add spacing below the title */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Override the flex styling from earlier changes */
+.portal .continue-button {
+  display: inline-block; /* Override the block display */
+  margin: 0; /* Reset margins */
+}
+
+/* Ensure buttons are visible and properly sized regardless of position */
+.portal .main-button,
+.portal .continue-button {
+  min-width: 150px; /* Ensure buttons have reasonable width */
+  white-space: nowrap;
+}
+
+/* Portal footer styling */
+.portal-footer {
+  width: 100%;
+  text-align: center;
+  font-size: 0.8em;
+  margin-top: 3rem;
+}
+
+/* Legal links styling */
+.legal-links {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-indicator p {
+  position: relative;
+  display: inline-block;
+}
+
+.scroll-indicator .arrow {
+  animation: float 1.5s infinite ease-in-out;
+  display: block;
+  font-size: 1.5em;
+  color: var(--neoncyan, #2AFFF7);
+  text-shadow: 0 0 8px rgba(42, 255, 247, 0.5);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Hide scroll indicator when user has scrolled down */
+.has-scrolled .scroll-indicator {
+  opacity: 0;
+}
+
+/* Style for deep-scroll state */
+.deep-scroll .scroll-indicator {
+  display: none;
+}
+
+/* Legal links at the bottom of the 200vh area */
+.legal-links {
+  position: absolute;
+  bottom: 2vh;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  opacity: 0.5;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Responsive positioning adjustments for different screens */
+@media (max-aspect-ratio: 16/9) {
+  /* Adjust for screens with different aspect ratios than 1920x1080 (16:9) */
+  .trinkatitle-container {
+    margin-top: 6vh;
+    height: 35vh; /* Smaller height for non-standard aspect ratios */
+  }
+  
+  /* Adjustments to button positions for different aspect ratios */
+  .portal .main-button {
+    top: 48vh;
+  }
+  
+  /* Keep the continue and settings buttons in line */
+  .portal .continue-button:nth-of-type(1) {
+    left: 40%;
+    top: 61vh;
+  }
+  
+  .portal .continue-button:nth-of-type(2) {
+    left: 60%;
+    top: 61vh;
+  }
+}
+
+/* Larger screens - wider spacing and larger title */
+@media (min-width: 1600px) {
+  .trinkatitle-container {
+    width: 32vw;
+    height: 42vh;
+    margin-top: 7vh;
+  }
+  
+  .portal .continue-button:nth-of-type(1) {
+    left: 38%; /* More spread out */
+  }
+  
+  .portal .continue-button:nth-of-type(2) {
+    left: 62%; /* More spread out */
+  }
+  
+  /* Enhance the glow effect on large screens */
+  .trinkatitle-1 {
+    filter: drop-shadow(0 0 8px rgba(42, 255, 247, 0.5)) brightness(1.05);
+  }
+}
+
+/* Ultra-wide screens - adjust for extreme aspect ratios */
+@media (min-aspect-ratio: 21/9) {
+  .trinkatitle-container {
+    width: 28vw;
+    height: 45vh;
+  }
+  
+  /* Adjust for the wider layout */
+  .portal .continue-button:nth-of-type(1) {
+    left: 36%;
+  }
+  
+  .portal .continue-button:nth-of-type(2) {
+    left: 64%;
+  }
+}
+
+/* For very small screens, reset to a standard vertical layout */
+@media (max-width: 768px) {
+  /* Adjust overall portal height for better mobile experience */
+  .portal {
+    min-height: 180vh; /* Slightly shorter for mobile to avoid excessive scrolling */
+  }
+  
+  /* Reset button positioning for mobile layout */
+  .portal .main-button,
+  .portal .continue-button:nth-of-type(1),
+  .portal .continue-button:nth-of-type(2) {
+    position: relative;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    margin: 15px auto;
+    display: block;
+    width: 85%; /* Make buttons wider on mobile */
+    max-width: 275px;
+    top: auto; /* Reset top positioning */
+  }
+  
+  /* Mobile friendly button container */
+  .portal-buttons-container {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 52vh; /* Position below the title */
+    padding-top: 20px; /* Add some space above the first button */
+  }
+  
+  /* Adjust title size for mobile devices */
+  .trinkatitle-container {
+    width: 90vw;
+    height: 40vh; /* Slightly reduced height */
+    max-width: none;
+    margin-top: 12vh; /* Push down a bit on mobile */
+  }
+  
+  /* Mobile layout for buttons with enhanced spacing */
+  .portal .main-button {
+    margin-bottom: 25px; /* More separation for the main button */
+    font-size: 1.2em; /* Slightly larger font */
+  }
+  
+  .portal .continue-button:nth-of-type(1) {
+    margin-bottom: 15px;
+  }
+  
+  /* Adjust scroll indicator for mobile */
+  .scroll-indicator {
+    bottom: 5vh;
+  }
+  
+  /* Mobile footer adjustments */
+  .legal-links {
+    position: absolute;
+    bottom: 5vh;
+    font-size: 0.75em; /* Smaller text on mobile */
+  }
+  
+  /* Disable mouse parallax on mobile for better performance */
+  .trinkatitle-layer {
+    transition: none; /* Disable transitions on mobile for better performance */
+  }
+}
+
+/* Specifically for small height screens like landscape on phones */
+@media (max-height: 500px) {
+  .trinkatitle-container {
+    height: 50vh; /* Larger relative to viewport height */
+    margin-top: 5vh; /* Less margin on small height screens */
+  }
+  
+  .portal-buttons-container {
+    top: 60vh;
+  }
+  
+  .scroll-indicator {
+    display: none; /* Hide scroll indicator on very small screens */
+  }
+}

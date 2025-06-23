@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veil Submenu Test - Arena 3A</title>
+    <link rel="stylesheet" href="assets/css/core.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            font-family: 'Noto Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .test-content {
+            text-align: center;
+            color: #ACABBB;
+            max-width: 700px;
+            padding: 2rem;
+        }
+        
+        .test-content h1 {
+            color: #A4A6AB;
+            margin-bottom: 2rem;
+        }
+        
+        .veil-demo {
+            background: rgba(68, 68, 68, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(164, 166, 171, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .veil-demo h3 {
+            color: #A4A6AB;
+            margin-top: 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(68, 68, 68, 0.1);
+            border: 1px solid rgba(164, 166, 171, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-card h4 {
+            color: #A4A6AB;
+            margin-top: 0;
+        }
+        
+        .test-instructions {
+            background: rgba(164, 166, 171, 0.1);
+            border-left: 4px solid #A4A6AB;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .highlight {
+            color: #A4A6AB;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-content">
+        <h1>🌫️ Veil-Like Submenu System Test</h1>
+        <p>Testing the new floating, semi-transparent submenu system that prevents scrollbars</p>
+        
+        <div class="veil-demo">
+            <h3>✨ Veil-Like Layer System</h3>
+            <p>This website now uses beautiful semi-transparent layers with backdrop blur effects for all interface elements, creating a dreamy, ethereal experience.</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4>🚫 No Scrollbars</h4>
+                <p>Submenus now float as overlays instead of pushing content down, completely eliminating unwanted scrollbars.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>🌫️ Backdrop Blur</h4>
+                <p>20px backdrop blur with 15% opacity creates ethereal veil-like appearance for all submenu layers.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>✨ Smooth Animations</h4>
+                <p>300ms cubic-bezier transitions with opacity and transform effects for elegant appearance/disappearance.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>🎯 Smart Positioning</h4>
+                <p>Submenus automatically position themselves to the right of parent items without affecting layout.</p>
+            </div>
+        </div>
+
+        <div class="test-instructions">
+            <h3>🧪 Test Instructions</h3>
+            <p><strong>1.</strong> Click the <span class="highlight">20px indicator</span> on the left to open the main menu</p>
+            <p><strong>2.</strong> Click <span class="highlight">"Chapter"</span> to see the floating veil-like submenu</p>
+            <p><strong>3.</strong> Notice how the submenu <span class="highlight">floats to the right</span> without creating scrollbars</p>
+            <p><strong>4.</strong> Try <span class="highlight">"Gallery"</span> and <span class="highlight">"About"</span> submenus as well</p>
+            <p><strong>5.</strong> Click outside the submenu to see it <span class="highlight">fade away elegantly</span></p>
+            <p><strong>6.</strong> Observe the <span class="highlight">semi-transparent layering</span> effect throughout</p>
+        </div>
+        
+        <p style="margin-top: 2rem; opacity: 0.6; font-style: italic;">
+            The veil-like submenu system creates beautiful floating layers that enhance the mystical atmosphere while maintaining perfect functionality.
+        </p>
+    </div>
+
+    <script type="module">
+        import { initArena3Menu } from './assets/js/tertiaryArena.js';
+        
+        // Initialize the Arena 3A menu system with veil-like submenus
+        const menu = initArena3Menu({
+            opacity: 0.6,
+            baseColor: '#444444',
+            textColor: '#ACABBB',
+            width: '25vw',
+            height: '94vh',
+            indicatorWidth: '20px',
+            zIndex: 2000,
+            animationDuration: 300
+        });
+        
+        console.log('[Veil Menu Test] Arena 3A menu with floating veil submenus initialized');
+        
+        // Show welcome notification
+        setTimeout(() => {
+            if (menu.showNotification) {
+                menu.showNotification('🌫️ Veil-like submenu system ready!');
+            }
+        }, 1500);
+    </script>
+</body>
+</html>

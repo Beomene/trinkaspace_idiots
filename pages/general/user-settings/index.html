@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Settings - Trinkaloop Saga</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/core.css">
+  <link rel="stylesheet" href="../../assets/css/user-interface.css">
+  <style>
+    body {
+      background: #333344;
+      color: #ACABBB;
+      font-family: 'Noto Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+    
+    main {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+    
+    .settings-container {
+      background: #252535;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .settings-header {
+      background: #1C1C2C;
+      padding: 1.5em;
+      border-bottom: 2px solid #2AFFF7;
+    }
+    
+    .settings-header h1 {
+      margin: 0;
+      color: #2AFFF7;
+    }
+    
+    .settings-section {
+      padding: 2em;
+      border-bottom: 1px solid #444455;
+    }
+    
+    .settings-section:last-child {
+      border-bottom: none;
+    }
+    
+    .settings-section h2 {
+      color: #2AFFF7;
+      margin-top: 0;
+    }
+    
+    .setting-group {
+      margin-bottom: 1.5em;
+    }
+    
+    .setting-label {
+      display: block;
+      margin-bottom: 0.5em;
+      font-weight: 600;
+    }
+    
+    .setting-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5em;
+    }
+    
+    .setting-option input[type="radio"],
+    .setting-option input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    
+    .color-scheme-option {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 0 2px #444455;
+      transition: box-shadow 0.2s ease;
+    }
+    
+    .color-scheme-option.active {
+      box-shadow: 0 0 0 3px #2AFFF7;
+    }
+    
+    .color-scheme-default {
+      background: linear-gradient(135deg, #161670 50%, #252535 50%);
+    }
+    
+    .color-scheme-forest {
+      background: linear-gradient(135deg, #2A4A2A 50%, #243024 50%);
+    }
+    
+    .color-scheme-night {
+      background: linear-gradient(135deg, #0F0F20 50%, #1A1A25 50%);
+    }
+    
+    .color-scheme-sunset {
+      background: linear-gradient(135deg, #703030 50%, #352535 50%);
+    }
+    
+    .btn-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1em;
+      margin-top: 2em;
+    }
+    
+    .save-btn {
+      background: #2AFFF7;
+      color: #252535;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .save-btn:hover {
+      background: #1CE8E0;
+      transform: scale(1.05);
+    }
+    
+    .reset-btn {
+      background: #444455;
+      color: #ACABBB;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .reset-btn:hover {
+      background: #55556A;
+    }
+    
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #2AFFF7;
+      background: none;
+      border: none;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 600px) {
+      .settings-section {
+        padding: 1.5em;
+      }
+      
+      .btn-row {
+        flex-direction: column;
+      }
+      
+      .save-btn,
+      .reset-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button onclick="location.href='../../portal.html'" class="back-btn">← Back to Portal</button>
+    <div id="trinkaspace-user-display" class="trinkaspace-user-area">
+      <!-- User interface will be injected by userManager.js -->
+    </div>
+  </header>
+  
+  <main>
+    <div class="settings-container">
+      <div class="settings-header">
+        <h1>User Settings</h1>
+      </div>
+      
+      <div class="settings-section">
+        <h2>Profile</h2>
+        <div id="profile-info">
+          <!-- Will be populated with user info -->
+          <p>Please log in to view your profile settings.</p>
+        </div>
+      </div>
+      
+      <div class="settings-section">
+        <h2>Appearance</h2>
+        <div class="setting-group">
+          <span class="setting-label">Color Scheme</span>
+          <div class="color-options">
+            <span class="color-scheme-option color-scheme-default active" data-theme="default" title="Default"></span>
+            <span class="color-scheme-option color-scheme-forest" data-theme="forest" title="Forest"></span>
+            <span class="color-scheme-option color-scheme-night" data-theme="night" title="Night"></span>
+            <span class="color-scheme-option color-scheme-sunset" data-theme="sunset" title="Sunset"></span>
+          </div>
+        </div>
+        
+        <div class="setting-group">
+          <span class="setting-label">Text Size</span>
+          <div class="setting-option">
+            <input type="radio" id="text-small" name="text-size" value="0.9em">
+            <label for="text-small">Small</label>
+          </div>
+          <div class="setting-option">
+            <input type="radio" id="text-medium" name="text-size" value="1em" checked>
+            <label for="text-medium">Medium</label>
+          </div>
+          <div class="setting-option">
+            <input type="radio" id="text-large" name="text-size" value="1.1em">
+            <label for="text-large">Large</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="settings-section">
+        <h2>Reading Experience</h2>
+        <div class="setting-group">
+          <div class="setting-option">
+            <input type="checkbox" id="disable-idle-chatter" name="disable-idle-chatter">
+            <label for="disable-idle-chatter">Disable Idle Chatter</label>
+          </div>
+          <div class="setting-option">
+            <input type="checkbox" id="auto-bookmark" name="auto-bookmark">
+            <label for="auto-bookmark">Auto-bookmark when leaving a page</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="settings-section">
+        <div class="btn-row">
+          <button class="reset-btn" id="reset-settings">Reset to Defaults</button>
+          <button class="save-btn" id="save-settings">Save Settings</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <script type="module">
+    import userManager from '../../assets/js/userManager.js';
+    import { initUserInterface } from '../../assets/js/userIntegration.js';
+    
+    // Initialize user interface
+    document.addEventListener('DOMContentLoaded', () => {
+      initUserInterface({
+        pageId: 'user-settings',
+        pageTitle: 'User Settings',
+        enableBookmarking: false
+      });
+      
+      // Check if user is logged in
+      updateUIForUserState();
+      
+      // Event listeners for user login/logout
+      document.addEventListener('trinkaspace-user-login', updateUIForUserState);
+      document.addEventListener('trinkaspace-user-logout', updateUIForUserState);
+      
+      // Set up settings interactions
+      setupSettingsInteractions();
+    });
+    
+    function updateUIForUserState() {
+      const profileInfo = document.getElementById('profile-info');
+      const user = userManager.getCurrentUser();
+      
+      if (user) {
+        // User is logged in, show profile info
+        profileInfo.innerHTML = `
+          <div class="user-profile-summary">
+            <p><strong>Username:</strong> ${user.username}</p>
+            <p><strong>Email:</strong> ${user.email}</p>
+            <p><strong>Account Created:</strong> ${new Date(user.created).toLocaleDateString()}</p>
+            <p><strong>Last Login:</strong> ${new Date(user.lastLogin).toLocaleDateString()}</p>
+          </div>
+          <button id="change-password" class="secondary-btn">Change Password</button>
+        `;
+        
+        // Add event listener for change password
+        document.getElementById('change-password').addEventListener('click', showChangePasswordForm);
+        
+        // Load user preferences
+        loadUserPreferences();
+      } else {
+        // Not logged in
+        profileInfo.innerHTML = `<p>Please log in to view your profile settings.</p>`;
+        
+        // Disable form elements
+        const inputs = document.querySelectorAll('input, button.save-btn, button.reset-btn');
+        inputs.forEach(input => input.disabled = true);
+      }
+    }
+    
+    function showChangePasswordForm() {
+      // Create change password form inside profile section
+      const profileInfo = document.getElementById('profile-info');
+      profileInfo.innerHTML = `
+        <form id="password-form" class="user-form">
+          <div class="form-group">
+            <label for="current-password">Current Password:</label>
+            <input type="password" id="current-password" required>
+          </div>
+          <div class="form-group">
+            <label for="new-password">New Password:</label>
+            <input type="password" id="new-password" required minlength="6">
+            <small>At least 6 characters</small>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm New Password:</label>
+            <input type="password" id="confirm-password" required>
+          </div>
+          <div class="form-error" style="display: none;"></div>
+          <div class="form-actions">
+            <button type="button" id="cancel-password-change" class="secondary-btn">Cancel</button>
+            <button type="submit" class="primary-btn">Update Password</button>
+          </div>
+        </form>
+      `;
+      
+      // Add event listeners
+      document.getElementById('cancel-password-change').addEventListener('click', updateUIForUserState);
+      document.getElementById('password-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const currentPassword = document.getElementById('current-password').value;
+        const newPassword = document.getElementById('new-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        const errorDisplay = document.querySelector('.form-error');
+        
+        // Validate
+        if (newPassword !== confirmPassword) {
+          errorDisplay.textContent = 'New passwords do not match.';
+          errorDisplay.style.display = 'block';
+          return;
+        }
+        
+        try {
+          const result = userManager.updateProfile({
+            currentPassword: currentPassword,
+            newPassword: newPassword
+          });
+          
+          if (result.success) {
+            alert('Password updated successfully!');
+            updateUIForUserState();
+          } else {
+            errorDisplay.textContent = result.error;
+            errorDisplay.style.display = 'block';
+          }
+        } catch (err) {
+          errorDisplay.textContent = err.message;
+          errorDisplay.style.display = 'block';
+        }
+      });
+    }
+    
+    function setupSettingsInteractions() {
+      // Color scheme selection
+      const colorOptions = document.querySelectorAll('.color-scheme-option');
+      colorOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Clear active class from all options
+          colorOptions.forEach(opt => opt.classList.remove('active'));
+          // Add active to selected option
+          this.classList.add('active');
+        });
+      });
+      
+      // Save settings button
+      document.getElementById('save-settings').addEventListener('click', saveUserPreferences);
+      
+      // Reset settings button
+      document.getElementById('reset-settings').addEventListener('click', resetUserPreferences);
+    }
+    
+    function loadUserPreferences() {
+      if (!userManager.isUserLoggedIn()) return;
+      
+      const preferences = userManager.getPreferences();
+      
+      // Set color scheme
+      if (preferences.theme) {
+        const themeOption = document.querySelector(`.color-scheme-option[data-theme="${preferences.theme}"]`);
+        if (themeOption) {
+          document.querySelectorAll('.color-scheme-option').forEach(opt => opt.classList.remove('active'));
+          themeOption.classList.add('active');
+        }
+      }
+      
+      // Set text size
+      if (preferences.textSize) {
+        const textSizeRadio = document.querySelector(`input[name="text-size"][value="${preferences.textSize}"]`);
+        if (textSizeRadio) {
+          textSizeRadio.checked = true;
+        }
+      }
+      
+      // Set checkbox options
+      if (preferences.disableIdleChatter !== undefined) {
+        document.getElementById('disable-idle-chatter').checked = preferences.disableIdleChatter;
+      }
+      
+      if (preferences.autoBookmark !== undefined) {
+        document.getElementById('auto-bookmark').checked = preferences.autoBookmark;
+      }
+      
+      // Enable form elements
+      const inputs = document.querySelectorAll('input, button.save-btn, button.reset-btn');
+      inputs.forEach(input => input.disabled = false);
+    }
+    
+    function saveUserPreferences() {
+      if (!userManager.isUserLoggedIn()) {
+        alert('Please log in to save your preferences.');
+        return;
+      }
+      
+      // Gather preferences from the form
+      const activeTheme = document.querySelector('.color-scheme-option.active').dataset.theme;
+      const textSize = document.querySelector('input[name="text-size"]:checked').value;
+      const disableIdleChatter = document.getElementById('disable-idle-chatter').checked;
+      const autoBookmark = document.getElementById('auto-bookmark').checked;
+      
+      // Save preferences
+      const preferences = {
+        theme: activeTheme,
+        textSize: textSize,
+        disableIdleChatter: disableIdleChatter,
+        autoBookmark: autoBookmark
+      };
+      
+      const result = userManager.savePreferences(preferences);
+      
+      if (result.success) {
+        alert('Settings saved successfully!');
+        
+        // Apply preferences immediately
+        document.body.setAttribute('data-theme', activeTheme);
+        document.documentElement.style.setProperty('--user-text-size', textSize);
+        
+        if (disableIdleChatter) {
+          document.body.classList.add('disable-idle-chatter');
+        } else {
+          document.body.classList.remove('disable-idle-chatter');
+        }
+      }
+    }
+    
+    function resetUserPreferences() {
+      if (!userManager.isUserLoggedIn()) {
+        alert('Please log in to reset your preferences.');
+        return;
+      }
+      
+      if (confirm('Reset all settings to default values?')) {
+        // Default preferences
+        const defaultPreferences = {
+          theme: 'default',
+          textSize: '1em',
+          disableIdleChatter: false,
+          autoBookmark: true
+        };
+        
+        // Save defaults
+        userManager.savePreferences(defaultPreferences);
+        
+        // Update UI to match defaults
+        document.querySelectorAll('.color-scheme-option').forEach(opt => opt.classList.remove('active'));
+        document.querySelector('.color-scheme-default').classList.add('active');
+        
+        document.getElementById('text-medium').checked = true;
+        document.getElementById('disable-idle-chatter').checked = false;
+        document.getElementById('auto-bookmark').checked = true;
+        
+        // Apply preferences immediately
+        document.body.setAttribute('data-theme', 'default');
+        document.documentElement.style.setProperty('--user-text-size', '1em');
+        document.body.classList.remove('disable-idle-chatter');
+        
+        alert('Settings have been reset to defaults.');
+      }
+    }
+  </script>
+</body>
+</html>

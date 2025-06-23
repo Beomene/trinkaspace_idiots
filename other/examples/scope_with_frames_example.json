@@ -1,0 +1,20 @@
+{
+  "scopeType": "vertical",
+  "width": "70vw",
+  "height": "60vh",
+  "left": "15vw",
+  "top": "20vh",
+  "zIndex": 1,
+  "scopeVerticalOffset": 0,
+  "frames": {
+    "upper": "jagged_edge.png",
+    "lower": "rough_border.png",
+    "left": "torn_edge_left.png",
+    "right": "torn_edge_right.png"
+  },
+  "filter": {
+    "path": "subtle_grain.png",
+    "opacity": 0.3,
+    "blendMode": "overlay"
+  }
+}

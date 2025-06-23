@@ -1,0 +1,65 @@
+/**
+ * story-user-display.css
+ *
+ * Styles for fixing user profile display on story pages
+ * Ensures consistent positioning of the user avatar and menu
+ */
+
+/* Position the user display properly in story pages */
+#trinkaspace-user-display {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+  background: rgba(32, 32, 41, 0.8);
+  border-radius: 8px;
+  padding: 5px 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+/* Override the large avatar size in story pages */
+.story-page .avatar-frame.large,
+.story-page .avatar-frame.large img {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+/* Ensure the avatar frame is properly sized */
+.story-page .avatar-frame.large::before {
+  top: -3px !important;
+  left: -3px !important;
+  right: -3px !important;
+  bottom: -3px !important;
+}
+
+/* Fix positioning of user info in story pages */
+.story-page .user-info {
+  padding: 0;
+  margin: 0;
+}
+
+/* Make sure the current profile header is properly sized */
+.story-page .current-profile-header {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Make sure the user menu appears in the right place */
+.story-page .user-menu {
+  top: 100%;
+  right: 0;
+  margin-top: 5px;
+}
+
+/* Ensure the user name is readable */
+.story-page .user-name {
+  font-size: 0.9em;
+}
+
+/* Apply story-page class to the body in story pages */
+body:not(.portal-page) {
+  position: relative;
+  min-height: 100vh;
+}

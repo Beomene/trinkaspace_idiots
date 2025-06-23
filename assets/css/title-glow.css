@@ -1,0 +1,34 @@
+/**
+ * Title Glow Effect
+ * 
+ * Applies the beautiful glow effect to titles across all pages
+ */
+
+/* Title glow animation */
+@keyframes globalTitleGlow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(42, 255, 247, 0.3)); }
+  50% { filter: drop-shadow(0 0 12px rgba(42, 255, 247, 0.6)); }
+}
+
+/* Apply to all title images across pages */
+.trinkatitle, 
+.page-title img,
+.chapter-title img,
+.story-title img,
+img.title-image,
+.title-container img {
+  animation: globalTitleGlow 4s infinite ease-in-out;
+}
+
+/* Very subtle float animation for titles that aren't part of parallax */
+@keyframes subtleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* Only apply float to titles not in parallax containers */
+.page-title img,
+.chapter-title img,
+.story-title img {
+  animation: globalTitleGlow 4s infinite ease-in-out, subtleFloat 8s infinite ease-in-out;
+}

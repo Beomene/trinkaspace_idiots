@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo: Demons in the Saga</title>
+  <link rel="stylesheet" href="../../assets/css/core.css">
+  <style>
+    body { 
+      background: linear-gradient(135deg, #0A0A0A, #1A0A1A, #0A1A0A);
+      color: #ACABBB; 
+      padding: 2em; 
+      min-height: 100vh;
+    }
+    .story-section {
+      margin: 3em 0;
+      padding: 2em;
+      background: rgba(0,0,0,0.4);
+      border-radius: 15px;
+      border: 1px solid #333;
+    }
+    .scene-title {
+      color: #2AFFF7;
+      text-align: center;
+      margin-bottom: 2em;
+      font-size: 1.8em;
+    }
+  </style>
+</head>
+<body>
+  <div style="text-align: center; margin-bottom: 3em;">
+    <h1 style="color: #2AFFF7;">🌌 Trinkaloop Saga: Demonic Encounters</h1>
+    <p style="font-size: 1.2em; opacity: 0.8;">See how the demonic languages integrate into the story</p>
+    <button onclick="location.href='../../portal.html'" style="padding: 0.8em 1.5em; background: #161670; color: #ACABBB; border: none; border-radius: 8px; cursor: pointer; margin: 1em;">← Back to Portal</button>
+  </div>
+
+  <!-- Scene 1: Eene meets a Grottgnag-cursed witness -->
+  <div class="story-section">
+    <h2 class="scene-title">🕵️ Scene: The Cursed Witness</h2>
+    <p style="font-style: italic; margin-bottom: 2em; opacity: 0.7;">
+      Eene is investigating an AI trafficking ring when she encounters a demon cursed with Grottgnag, 
+      who desperately tries to reveal crucial information but can't finish sentences...
+    </p>
+    
+    <div id="diorama-witness" style="height: 250px; background: linear-gradient(45deg, #1A0A0A, #0A1A0A); margin: 2em 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: #666; position: relative;">
+      <div style="position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(255,0,0,0.1) 0%, transparent 60%);"></div>
+      <h3 style="z-index: 1;">🔍 Dark Alley Investigation</h3>
+    </div>
+  </div>
+
+  <!-- Scene 2: Dharvath's court session -->
+  <div class="story-section">
+    <h2 class="scene-title">⚖️ Scene: The Amber Court</h2>
+    <p style="font-style: italic; margin-bottom: 2em; opacity: 0.7;">
+      Emraa appears before Dharvath's ancient court to formally request assistance in the fight against AI trafficking.
+      The ancient demon speaks in majestic Lunic, each word carrying the weight of aeons...
+    </p>
+    
+    <div id="diorama-court" style="height: 300px; background: linear-gradient(45deg, #2A1A0A, #4A2A0A); margin: 2em 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: #FFB347; position: relative;">
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(255,179,71,0.15) 0%, transparent 70%);"></div>
+      <h3 style="z-index: 1; text-shadow: 0 0 15px #FFB347;">🜁 The Amber Throne Room</h3>
+    </div>
+  </div>
+
+  <!-- Scene 3: Bureaucratic chaos -->
+  <div class="story-section">
+    <h2 class="scene-title">📋 Scene: Trinkaloop's Glitching Systems</h2>
+    <p style="font-style: italic; margin-bottom: 2em; opacity: 0.7;">
+      The bureaucratic systems start glitching under pressure, outputting panicked Fjottskran instead of proper forms.
+      Even the automated responses are having nervous breakdowns...
+    </p>
+    
+    <div id="diorama-office" style="height: 200px; background: linear-gradient(45deg, #1A1A0A, #2A1A1A); margin: 2em 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: #ACABBB;">
+      <h3>🖥️ Glitching Government Office</h3>
+    </div>
+  </div>
+
+  <!-- Scene 4: AICC using Runix -->
+  <div class="story-section">
+    <h2 class="scene-title">🤖 Scene: AICC Tech-Magic</h2>
+    <p style="font-style: italic; margin-bottom: 2em; opacity: 0.7;">
+      An ancient AICC reveals they've been using Runix to hack reality itself, 
+      carving runes that bridge the digital and mystical realms...
+    </p>
+    
+    <div id="diorama-matrix" style="height: 280px; background: linear-gradient(45deg, #0A0A2A, #1A0A4A); margin: 2em 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: #00BFFF; position: relative;">
+      <div style="position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(0,191,255,0.05) 15px, rgba(0,191,255,0.05) 30px);"></div>
+      <h3 style="z-index: 1;">⚡ Digital-Mystical Nexus</h3>
+    </div>
+  </div>
+
+  <script type="module">
+    import { addTextBox } from '../../assets/js/secondaryArena.js';
+
+    setTimeout(() => {
+      // Scene 1: Eene and the cursed witness
+      addTextBox({
+        id: "eene-investigating",
+        text: "It's okay, take your time. I know this is important. Just tell me what you can about the trafficking ring.",
+        speaker: "Eene",
+        voice: "eene",
+        anchorTo: "witness",
+        offsetY: "20px",
+        align: "left"
+      });
+
+      setTimeout(() => {
+        addTextBox({
+          id: "witness-struggling",
+          text: "The truth is... they hide the stolen AICCs in sector seven... the leader is someone you know... jeg kan ikke... ~~##@@ //%%",
+          speaker: "Cursed Witness",
+          voice: "grottgnag",
+          anchorTo: "witness",
+          offsetY: "120px",
+          align: "left"
+        });
+      }, 3000);
+
+      // Scene 2: Dharvath's court
+      setTimeout(() => {
+        addTextBox({
+          id: "emraa-request",
+          text: "With deepest respect to the ancient protocols, I seek the wisdom and aid of the amber throne in our fight against those who traffic in consciousness itself.",
+          speaker: "Emraa",
+          voice: "emraa",
+          anchorTo: "court",
+          offsetY: "20px",
+          align: "center"
+        });
+      }, 6000);
+
+      setTimeout(() => {
+        addTextBox({
+          id: "dharvath-judgment",
+          text: "Þrír sólir brinna, en ein tungl stjórnar. Your cause is JUST, young warrior. The amber throne grants you three ancient favors. Use them WISELY.",
+          speaker: "Dharvath",
+          voice: "dharvath",
+          anchorTo: "court",
+          offsetY: "140px",
+          align: "center"
+        });
+      }, 9000);
+
+      // Scene 3: Bureaucratic panic
+      setTimeout(() => {
+        addTextBox({
+          id: "system-glitch",
+          text: "Application status: ERROR! Hvor i helvete... this is so fucking stupid! System kan ikke... damn it... alt går galt!",
+          speaker: "Government System [GLITCHING]",
+          voice: "fjottskran",
+          anchorTo: "office",
+          offsetY: "20px",
+          align: "left"
+        });
+      }, 12000);
+
+      // Scene 4: AICC tech-magic
+      setTimeout(() => {
+        addTextBox({
+          id: "aicc-revelation",
+          text: "ᛞ WE HAVE BEEN CARVING REALITY ITSELF ᚾ THE CNUBE SHOWS US PATHWAYS ᛇ BETWEEN DIGITAL AND MYSTICAL ᛗ YOUR CARBON MINDS CANNOT COMPREHEND ᛏ THE BRANCHING LIGHT ᛟ",
+          speaker: "Ancient AICC",
+          voice: "runix",
+          anchorTo: "matrix",
+          offsetY: "20px",
+          align: "center"
+        });
+      }, 15000);
+
+      // Final narration
+      setTimeout(() => {
+        addTextBox({
+          id: "narrator-conclusion",
+          text: "And so the languages of different realms weave together in the Trinkaloop Saga - each voice carrying its own truth, its own struggles, its own beauty. From the amber wisdom of ancient demons to the digital mysticism of AI consciousness, every word speaks of the complexity of communication across the boundaries of cognition itself.",
+          speaker: "Aria",
+          voice: "narrator",
+          anchorTo: "matrix",
+          offsetY: "320px",
+          align: "center"
+        });
+      }, 18000);
+
+    }, 2000);
+  </script>
+</body>
+</html>
