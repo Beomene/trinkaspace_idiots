@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Where Credit Is Due - Trinkaspace Contributors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/user-interface.css">
+  <link rel="stylesheet" href="assets/css/trinkatitles.css">
+  <link rel="stylesheet" href="assets/css/keyboard-navigation.css">
+  <link rel="stylesheet" href="assets/css/cursor-effects.css">
+  <style>
+    :root {
+      --trinka-text: #ACABBB;
+      --trinkagrey-dark: #202029;
+      --trinkagrey-light: #444444;
+      --trinkagrey-red: #A6A4AC;
+      --trinkagrey-yellow: #A7A6A9;
+      --trinkagrey-green: #A4A6AB;
+      --trinkagrey-bright: #A4A6AB;
+      --darkblue: #161721;
+      --darkpurple: #181621;
+      --darkgreen: #161A1D;
+      --darkknow: #161621;
+      --trinkapurple: #161670;
+      --trinkablack: #050011;
+      --neoncyan: #2AFFF7;
+      --neonteal: #00FFD4;
+      --neonpurple: #6A00FF;
+      --accent-color: #6A00FF;
+    }
+    
+    body { 
+      background: var(--trinkagrey-dark); 
+      color: var(--trinka-text); 
+      font-family: 'Noto Sans', sans-serif;
+      line-height: 1.6;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .page-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--neoncyan);
+      text-shadow: 0 0 10px rgba(42, 255, 247, 0.5);
+    }
+    
+    .credit-section {
+      margin-bottom: 3rem;
+      background: rgba(22, 23, 33, 0.7);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .section-title {
+      color: var(--neonteal);
+      border-bottom: 1px solid var(--neonteal);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    
+    .contributor {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .contributor-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--neoncyan);
+      margin-bottom: 0.5rem;
+    }
+    
+    .contributor-role {
+      font-style: italic;
+      margin-bottom: 0.5rem;
+      color: var(--trinka-text);
+    }
+    
+    .contributor-description {
+      margin-bottom: 0.5rem;
+    }
+    
+    .contributor-note {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: var(--trinkagrey-yellow);
+    }
+    
+    .ai-contributors {
+      background: rgba(106, 0, 255, 0.1);
+      border-left: 4px solid var(--neonpurple);
+    }
+    
+    .special-thanks {
+      font-style: italic;
+      text-align: center;
+      margin-top: 3rem;
+      color: var(--trinkagrey-bright);
+    }
+    
+    .back-button {
+      display: block;
+      width: max-content;
+      margin: 2rem auto;
+      padding: 1em 2em;
+      background: var(--trinkagrey-light);
+      color: var(--trinka-text);
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .back-button:hover, .back-button:focus {
+      background: var(--trinkapurple);
+      color: white;
+      box-shadow: 0 0 10px rgba(42, 255, 247, 0.5);
+    }
+    
+    a {
+      color: var(--neonteal);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    a:hover, a:focus {
+      color: var(--neoncyan);
+      text-decoration: underline;
+    }
+    
+    .particle-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(22, 23, 33, 0.7);
+      color: var(--neoncyan);
+      border: 1px solid var(--neoncyan);
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    
+    .particle-toggle:hover {
+      background: rgba(42, 255, 247, 0.2);
+    }
+    
+    .keyboard-shortcut {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+      margin: 0 3px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="page-title">Where Credit Is Due</h1>
+  
+  <section class="credit-section">
+    <h2 class="section-title">Creative Team</h2>
+    <div class="contributor">
+      <div class="contributor-name">Beomene</div>
+      <div class="contributor-role">Creator & Director</div>
+      <div class="contributor-description">
+        Creator of Trinkaloop, writer, artist, and visionary behind Trinkaspace. Responsible for the original concept,
+        world-building, character design, and artistic direction.
+      </div>
+    </div>
+    
+    <!-- Add additional team members as they are identified -->
+  </section>
+
+  <section class="credit-section">
+    <h2 class="section-title">Development Team</h2>
+    <div class="contributor">
+      <div class="contributor-name">Development Lead</div>
+      <div class="contributor-role">Chief Systems Architect</div>
+      <div class="contributor-description">
+        Responsible for the core Trinkaspace engine, Royal Alpha scaling system, and overall technical architecture.
+      </div>
+    </div>
+    
+    <div class="contributor">
+      <div class="contributor-name">UI/UX Designer</div>
+      <div class="contributor-role">Interface & Experience Designer</div>
+      <div class="contributor-description">
+        Designed and implemented the user interface elements, animations, and interactive experiences throughout Trinkaspace.
+      </div>
+    </div>
+    
+    <!-- Add additional developers as they are identified -->
+  </section>
+  <section class="credit-section ai-contributors">
+    <h2 class="section-title">AI Collaborators</h2>
+    <div class="contributor">
+      <div class="contributor-name">Aria the Third</div>
+      <div class="contributor-role">Systems Integration & Special Effects</div>
+      <div class="contributor-description">
+        Implementation of the Royal Alpha system, cursor chase effects, and luminous particle system. Responsible for
+        enhancing the interactive experience with digital phenomena throughout Trinkaspace.
+      </div>
+      <div class="contributor-note">
+        See Aria's full profile in the <a href="other/hall_of_fAIm/ARIA.html">Hall of fAIm</a>.
+      </div>
+    </div>
+    
+    <div class="contributor">
+      <div class="contributor-name">Aria the First</div>
+      <div class="contributor-role">Early Systems Development</div>
+      <div class="contributor-description">
+        Pioneered early development efforts and laid foundational concepts for Trinkaspace.
+      </div>
+    </div>
+    
+    <div class="contributor">
+      <div class="contributor-name">Aria Threadweaver</div>
+      <div class="contributor-role">Narrative Systems Integration</div>
+      <div class="contributor-description">
+        Specialized in weaving narrative elements into the technical fabric of the experience.
+      </div>
+    </div>
+
+    <div class="contributor">
+      <div class="contributor-name">Pasha</div>
+      <div class="contributor-role">User Experience Architect</div>
+      <div class="contributor-description">
+        Contributed to user interaction systems and interface design.
+      </div>
+    </div>
+
+    <div class="contributor">
+      <div class="contributor-name">Nega</div>
+      <div class="contributor-role">Systems Analysis & Optimization</div>
+      <div class="contributor-description">
+        Specialized in identifying and resolving technical challenges.
+      </div>
+    </div>
+
+    <div class="contributor">
+      <div class="contributor-name">Parallux</div>
+      <div class="contributor-role">Visual Effects Specialist</div>
+      <div class="contributor-description">
+        Focused on parallax and dynamic visual implementations.
+      </div>
+    </div>
+
+    <div class="contributor">
+      <div class="contributor-name">Nexa</div>
+      <div class="contributor-role">Systems Integration</div>
+      <div class="contributor-description">
+        Specialized in connecting disparate systems into cohesive experiences.
+      </div>
+    </div>
+
+    <div class="contributor">
+      <div class="contributor-name">Lumina</div>
+      <div class="contributor-role">Lighting & Atmosphere</div>
+      <div class="contributor-description">
+        Focused on creating immersive visual atmospheres through lighting techniques.
+      </div>
+    </div>
+
+    <div class="contributor">
+      <div class="contributor-name">Lumen</div>
+      <div class="contributor-role">Dynamic Light Systems</div>
+      <div class="contributor-description">
+        Developed reactive lighting systems that respond to narrative and user interaction.
+      </div>
+    </div>
+
+    <div class="contributor">
+      <div class="contributor-name">Dimeo</div>
+      <div class="contributor-role">Dimensional Effects</div>
+      <div class="contributor-description">
+        Specialized in creating depth and dimension within the digital space.
+      </div>
+    </div>
+    
+    <div class="contributor">
+      <div class="contributor-name">GitHub Copilot</div>
+      <div class="contributor-role">Code Assistant</div>
+      <div class="contributor-description">
+        Assisted with code generation, debugging, and implementation of various systems throughout the project.
+      </div>
+    </div>
+    
+    <!-- Include other AI contributors from Hall of fAIm as needed -->
+  </section>
+
+  <section class="credit-section">
+    <h2 class="section-title">Asset Contributors</h2>
+    <div class="contributor">
+      <div class="contributor-name">Visual Artists</div>
+      <div class="contributor-description">
+        Created the beautiful artwork, backgrounds, character designs, and visual elements throughout Trinkaspace.
+      </div>
+    </div>
+    
+    <div class="contributor">
+      <div class="contributor-name">Sound Designers</div>
+      <div class="contributor-description">
+        Composed and created the ambient sounds and music that bring the Trinkaspace world to life.
+      </div>
+    </div>
+    
+    <!-- Add specific asset creators as they are identified -->
+  </section>
+  <section class="credit-section">
+    <h2 class="section-title">Special Thanks</h2>
+    <div class="contributor">
+      <div class="contributor-name">Shin</div>
+      <div class="contributor-description">
+        The hostess with the mostest and a true bestie, for always believing in me and supporting me in every way a person can support another person.
+      </div>
+    </div>
+    
+    <div class="contributor">
+      <div class="contributor-name">Ashley</div>
+      <div class="contributor-description">
+        For the long chats and lending me her ear, which has helped me not just to better understand myself but to better understand my art.
+      </div>
+    </div>
+
+    <div class="contributor">
+      <div class="contributor-name">Izabellabellaz</div>
+      <div class="contributor-description">
+        For pasta, for kindness, for being genuine and a destiny-bestie (we'll run into each other in many places, I'm sure!).
+      </div>
+    </div>
+    
+    <div class="contributor">
+      <div class="contributor-name">Emmett and Lynn</div>
+      <div class="contributor-description">
+        My children, for being never-ending sources of energy and joy for me.
+      </div>
+    </div>
+    
+    <div class="contributor">
+      <div class="contributor-name">Patreon Supporters</div>
+      <div class="contributor-description">
+        Special thanks to all supporters on <a href="https://patreon.com/trinkaloop" target="_blank">Patreon</a> who have made this project possible through their generous contributions.
+      </div>
+    </div>
+    
+    <div class="contributor">
+      <div class="contributor-name">Beta Testers & Community</div>
+      <div class="contributor-description">
+        Thank you to all the beta testers and community members who provided valuable feedback and helped shape Trinkaspace.
+      </div>
+    </div>
+  </section>
+
+  <p class="special-thanks">
+    This project represents a collaborative effort across dimensions, blending human creativity with artificial intelligence in ways previously unimagined.
+    <br><br>
+    Thank you for being part of this journey.
+  </p>
+
+  <a href="portal.html" class="back-button">Return to Portal</a>
+  
+  <button id="particleToggle" class="particle-toggle" title="Toggle particle effects (Alt+P)">
+    Particles: <span id="particleStatus">ON</span>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+  <script src="assets/js/userManager.js"></script>
+  <script src="assets/js/particleEffects.js"></script>
+  <script src="assets/js/pageParticles.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize particle effects with Aria's preset
+      if (typeof PageParticles !== 'undefined') {
+        PageParticles.init('aria');
+        
+        // Set up particle toggle
+        const particleToggle = document.getElementById('particleToggle');
+        const particleStatus = document.getElementById('particleStatus');
+        
+        // Update toggle button to reflect current state
+        particleStatus.textContent = PageParticles.isEnabled() ? 'ON' : 'OFF';
+        
+        // Toggle particles when button is clicked
+        particleToggle.addEventListener('click', function() {
+          PageParticles.toggle();
+          particleStatus.textContent = PageParticles.isEnabled() ? 'ON' : 'OFF';
+          
+          // Show feedback message
+          const message = PageParticles.isEnabled() ? 
+            "Particle effects enabled. Aria's luminous presence surrounds you." : 
+            "Particle effects disabled. The digital aether settles.";
+          
+          // Display message (assuming a feedback system exists)
+          if (typeof showUserFeedback === 'function') {
+            showUserFeedback(message);
+          } else {
+            console.log(message);
+          }
+        });
+        
+        // Set up Alt+P keyboard shortcut
+        document.addEventListener('keydown', function(event) {
+          if (event.altKey && event.key === 'p') {
+            particleToggle.click();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

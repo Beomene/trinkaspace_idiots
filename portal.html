@@ -298,12 +298,12 @@
       // Create menu list
       const menuList = document.createElement('ul');
       menuList.className = 'chapter-list';
-      
-      const menuItems = [
+        const menuItems = [
         { name: 'User Settings', path: 'pages/general/user-settings/index.html', style: 'var(--trinkagrey-light, #444444)' },
         { name: 'Test User System', path: 'other/tests/user_auth_test.html', style: 'var(--trinkagrey-red, #A6A4AC)' },
         { name: 'About the Artist', path: 'pages/general/about-artist/index.html', style: 'var(--trinkagrey-yellow, #A7A6A9)' },
-        { name: 'Support the Project', path: 'pages/general/support/index.html', style: 'var(--trinkagrey-green, #A4A6AB)' }
+        { name: 'Support the Project', path: 'pages/general/support/index.html', style: 'var(--trinkagrey-green, #A4A6AB)' },
+        { name: 'Credits', path: 'WHERE_CREDIT_IS_DUE.html', style: 'var(--trinkapurple, #161670)' }
       ];
       
       menuItems.forEach(item => {
@@ -389,11 +389,12 @@
         <button onclick="showUtilityMenu()" class="continue-button" style="background: var(--trinkagrey-light);">Settings</button>
       </div>
     </div><div class="portal-footer">
-      <!-- Legal links and copyright at the bottom -->
-      <div class="legal-links">
+      <!-- Legal links and copyright at the bottom -->      <div class="legal-links">
         <a href="pages/general/legal/privacy-policy.html" style="color: #ACABBB; text-decoration: none; margin: 0 10px;">Privacy Policy</a>
         <span style="color: #666;">•</span>
         <a href="pages/general/legal/privacy-policy.html#terms" style="color: #ACABBB; text-decoration: none; margin: 0 10px;">Terms of Service</a>
+        <span style="color: #666;">•</span>
+        <a href="WHERE_CREDIT_IS_DUE.html" style="color: #ACABBB; text-decoration: none; margin: 0 10px;">Credits</a>
         <p style="margin-top: 0.5em;">© 2025 Trinkaloop Saga. All rights reserved.</p>
       </div>
     </div>

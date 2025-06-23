@@ -585,7 +585,7 @@ class UserManager {
         <div class="user-info">
           <div class="user-avatar clickable" tabindex="0" role="button" aria-label="View profile">
             <div class="avatar-frame">
-              <img src="/assets/images/profile-pics/${profilePic}" alt="${this.currentUser.username}'s avatar">
+              <img src="./assets/images/profile-pics/${profilePic}" alt="${this.currentUser.username}'s avatar">
             </div>
           </div>
           <button class="user-name" aria-haspopup="true" aria-expanded="false" tabindex="0">
@@ -889,7 +889,7 @@ class UserManager {
           <div class="current-profile-header">
             <div class="current-profile-pic">
               <div class="avatar-frame large">
-                <img src="/assets/images/profile-pics/${currentPic}" alt="Current Profile">
+                <img src="./assets/images/profile-pics/${currentPic}" alt="Current Profile">
               </div>
             </div>
             <div class="current-profile-name">${this.currentUser.username}</div>
@@ -911,7 +911,7 @@ class UserManager {
                 aria-selected="${currentPic === pic.filename ? 'true' : 'false'}"
                 data-index="${index}">
                 <div class="avatar-frame small">
-                  <img src="/assets/images/profile-pics/${pic.filename}" alt="${pic.name}">
+                  <img src="./assets/images/profile-pics/${pic.filename}" alt="${pic.name}">
                 </div>
                 <span>${pic.name}</span>
               </div>
