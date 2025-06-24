@@ -1,0 +1,46 @@
+/**
+ * Custom scrollbar styling for Trinkaspace
+ */
+
+/* Make scrollbars smaller and themed with Trinkaspace colors */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(22, 23, 33, 0.7);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neoncyan, #2AFFF7);
+  border-radius: 10px;
+  opacity: 0.7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neonteal, #00FFD4);
+}
+
+/* Hide scrollbar arrows */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--neoncyan, #2AFFF7) rgba(22, 23, 33, 0.7);
+}
+
+/* Specific styling for different elements */
+.profile-pic-options {
+  scrollbar-width: thin;
+  scrollbar-color: var(--neoncyan, #2AFFF7) rgba(22, 23, 33, 0.3);
+}
+
+.trinkaspace-modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: var(--neoncyan, #2AFFF7) rgba(22, 23, 33, 0.5);
+}

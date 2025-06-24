@@ -371,7 +371,7 @@ class UserManager {
       { filename: 'png/pride.png', name: 'Pride', type: 'png' },
       { filename: 'png/demi.png', name: 'Demisexual', type: 'png' },
       { filename: 'png/pan.png', name: 'Pansexual', type: 'png' },
-/*    { filename: 'png/bi.png', name: 'Bisexual', type: 'png' },*/
+      { filename: 'png/bi.png', name: 'Bi Pride', type: 'png' },
       { filename: 'png/asexual.png', name: 'Asexual', type: 'png' },
       { filename: 'png/queer.png', name: 'Queer', type: 'png' },
       { filename: 'png/polyamorous.png', name: 'Polyamorous', type: 'png' },
@@ -379,8 +379,9 @@ class UserManager {
   /*    { filename: 'png/unknown.png', name: 'Unknown', type: 'png' },*/
       { filename: 'png/fox.png', name: 'Fox', type: 'png' },
       { filename: 'png/palestine.png', name: 'Palestine', type: 'png' },
-      { filename: 'png/rhearipley.png', name: 'Rhea Ripley', type: 'png' },
-/*    { filename: 'png/eyes-emoji.png', name: 'Eyes Emoji', type: 'png' },*/
+      { filename: 'png/rhea-ripley.png', name: 'Rhea Ripley', type: 'png' },
+      { filename: 'png/demon.png', name: 'Demonic Ripley', type: 'png' },
+      /*    { filename: 'png/eyes-emoji.png', name: 'Eyes Emoji', type: 'png' },*/
       { filename: 'png/trans.png', name: 'Transgender', type: 'png' },
 /*    { filename: 'png/ace.png', name: 'Ace', type: 'png' },
   */  { filename: 'png/lesbian.png', name: 'Lesbian', type: 'png' },/*
@@ -963,12 +964,16 @@ class UserManager {
                 <input type="checkbox" id="profile-pronoun-figuring" value="figuring it out" class="pronoun-checkbox"
                   ${this.currentUser.pronouns && this.currentUser.pronouns.includes('figuring it out') ? 'checked' : ''}>
                 <label for="profile-pronoun-figuring">figuring it out</label>
-              </div>              <div class="pronoun-option">
+              </div>
+              <div class="pronoun-option">
                 <input type="checkbox" id="profile-pronoun-none" value="prefer not to say" class="pronoun-checkbox"
                   ${this.currentUser.pronouns && this.currentUser.pronouns.includes('prefer not to say') ? 'checked' : ''}>
                 <label for="profile-pronoun-none">prefer not to say</label>
               </div>            </div>            <small>
-              Are your pronouns missing? Let me know at: beomene@gmail.com
+              Are your pronouns missing?<br>
+              Let me know at: beomene@gmail.com<br>
+              or on: patreon.com/trinkaloop<br>
+              (free memberships and public posts!)
             </small>
           </div>
         </div>

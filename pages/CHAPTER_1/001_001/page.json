@@ -39,8 +39,7 @@
       }
     ],    "textboxes": [
       {
-        "id": "001_001_003",
-        "content": "Have you ever felt a pull that is just… erratic?",
+        "id": "001_001_003",        "contentPath": "A2/001_001_003/001_001_003.md",
         "scopePath": "A2/001_001_003/scope.json",
         "anchorY": 500,
         "speaker": "???",
