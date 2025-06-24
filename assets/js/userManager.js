@@ -963,16 +963,12 @@ class UserManager {
                 <input type="checkbox" id="profile-pronoun-figuring" value="figuring it out" class="pronoun-checkbox"
                   ${this.currentUser.pronouns && this.currentUser.pronouns.includes('figuring it out') ? 'checked' : ''}>
                 <label for="profile-pronoun-figuring">figuring it out</label>
-              </div>
-              <div class="pronoun-option">
+              </div>              <div class="pronoun-option">
                 <input type="checkbox" id="profile-pronoun-none" value="prefer not to say" class="pronoun-checkbox"
                   ${this.currentUser.pronouns && this.currentUser.pronouns.includes('prefer not to say') ? 'checked' : ''}>
                 <label for="profile-pronoun-none">prefer not to say</label>
               </div>            </div>            <small>
-              Are your pronouns missing?<br>
-              Let me know at: beomene@gmail.com<br>
-              or on: patreon.com/trinkaloop<br>
-              (free memberships and public posts!)
+              Are your pronouns missing? Let me know at: beomene@gmail.com
             </small>
           </div>
         </div>

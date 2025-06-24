@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trinka.space Portal</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">  <link rel="stylesheet" href="assets/css/user-interface.css">
   <link rel="stylesheet" href="assets/css/trinkatitles.css">    <link rel="stylesheet" href="assets/css/keyboard-navigation.css">
@@ -8,8 +9,20 @@
   <link rel="stylesheet" href="assets/css/portal-parallax.css">
   <link rel="stylesheet" href="assets/css/title-glow.css">
   <link rel="stylesheet" href="assets/css/pronoun-selector.css">  <link rel="stylesheet" href="assets/css/clickable-user-elements.css">
-  <link rel="stylesheet" href="assets/css/cursor-effects.css">
-  <style>
+  <link rel="stylesheet" href="assets/css/cursor-effects.css">  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+    
     :root {
       --trinka-text: #ACABBB;
       --trinkagrey-dark: #202029;
@@ -28,12 +41,16 @@
       --neonteal: #00FFD4;
       --neonpurple: #6A00FF;
     }
-    
-    body { 
+      body { 
       background: var(--trinkagrey-dark); 
       color: var(--trinka-text); 
-      font-family: 'Noto Sans', sans-serif; 
-    }    /* Removing potentially conflicting portal style */
+      font-family: 'Noto Sans', sans-serif;
+      width: 100vw;
+      max-width: 100%;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }/* Removing potentially conflicting portal style */
     .trinkatitle-container {
       margin-bottom: 2rem;
     }
@@ -78,7 +95,14 @@
       color: #050011;
       transform: scale(1.05);
       outline: none;
-      box-shadow: 0 0 0 3px var(--neoncyan, #2AFFF7);
+      box-shadow: 0 0 0 3px var(--neoncyan, #2AFFF7);    }
+    
+    /* Button spacing fixes */
+    .portal-buttons-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0; /* Remove default gap */
     }
     
     /* User interface area */
@@ -94,8 +118,7 @@
       z-index: 1000;
     }
     
-    /* Chapter selection modal */
-    .chapter-modal {
+    /* Chapter selection modal */    .chapter-modal {
       position: fixed;
       top: 50%;
       left: 50%;
@@ -109,6 +132,29 @@
       width: 500px;
       max-height: 80vh;
       overflow-y: auto;
+      scrollbar-width: thin; /* Firefox */
+      scrollbar-color: var(--neoncyan) var(--trinkagrey-light); /* Firefox */
+    }
+    
+    /* Custom scrollbar for Webkit browsers (Chrome, Safari, Edge) */
+    .chapter-modal::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .chapter-modal::-webkit-scrollbar-track {
+      background: var(--trinkagrey-light);
+      border-radius: 4px;
+    }
+    
+    .chapter-modal::-webkit-scrollbar-thumb {
+      background-color: var(--neoncyan);
+      border-radius: 4px;
+      box-shadow: 0 0 5px rgba(42, 255, 247, 0.3);
+    }
+    
+    .chapter-modal::-webkit-scrollbar-thumb:hover {
+      background-color: var(--neonteal);
+      box-shadow: 0 0 8px rgba(42, 255, 247, 0.5);
     }
     
     .chapter-list {
@@ -376,7 +422,7 @@
     <div id="trinkaspace-user-display" class="trinkaspace-user-area">
       <!-- User interface will be injected here by userManager.js -->
     </div>
-  </header>  <div class="portal">    <div class="trinkatitle-container">
+  </header>  <div class="portal" style="width: 100%; max-width: 100vw; overflow-x: hidden;">    <div class="trinkatitle-container">
       <!-- Layered images with subtle parallax effect -->
       <img src="assets/images/trinkatitles/portal-title-3.png" alt="The Trinkaloop Saga Background Layer" class="trinkatitle-layer trinkatitle-3">
       <img src="assets/images/trinkatitles/portal-title-2.png" alt="The Trinkaloop Saga Middle Layer" class="trinkatitle-layer trinkatitle-2">
@@ -384,8 +430,8 @@
     </div>    <!-- Buttons in a standard vertical layout -->
     <div class="portal-buttons-container">
       <button onclick="location.href='pages/CHAPTER_1/001_001/index.html'" class="main-button">Begin Journey</button>
-      <div class="small-buttons-container">
-        <button onclick="showChapterSelect()" class="continue-button">Continue</button>
+      <button onclick="showChapterSelect()" class="continue-button" style="margin-top: -5px;">Continue</button>
+      <div class="small-buttons-container" style="margin-top: 15px;">
         <button onclick="showUtilityMenu()" class="continue-button" style="background: var(--trinkagrey-light);">Settings</button>
       </div>
     </div><div class="portal-footer">
