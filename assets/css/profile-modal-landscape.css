@@ -7,6 +7,8 @@
 /* Landscape profile form layout */
 .profile-form-landscape {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile-form-header {
@@ -32,16 +34,20 @@
   padding: 15px;
   border: 1px solid rgba(42, 255, 247, 0.2);
   margin-bottom: 20px;
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
-/* Enhanced profile picture grid */
+/* Enhanced profile picture grid - now with 3 rows */
 .profile-form-landscape .profile-pic-options {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(8, 1fr); /* Increased from 6 to 8 columns */
+  grid-template-rows: repeat(3, auto); /* Explicitly set to 3 rows */
   gap: 12px;
-  max-height: 320px;
-  overflow-y: auto;
-  padding: 10px 5px;
+  height: auto; /* Allow natural height instead of max-height */
+  max-height: none; /* Remove height limitation */
+  overflow-y: visible; /* No vertical scrolling needed anymore */
+  padding: 15px 10px;
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.1);
   scrollbar-width: thin;
@@ -67,16 +73,33 @@
   background: rgba(42, 255, 247, 0.5);
 }
 
-/* Compact profile picture options for landscape layout */
+/* Compact profile picture options for landscape layout with 3 rows */
 .profile-form-landscape .profile-pic-option {
   padding: 6px;
   transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.profile-form-landscape .profile-pic-option span {
+  margin-top: 5px;
+  font-size: 0.8em;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .profile-form-landscape .profile-pic-option:hover,
 .profile-form-landscape .profile-pic-option:focus {
   transform: translateY(-2px);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  background: rgba(42, 255, 247, 0.05);
 }
 
 .profile-form-landscape .profile-pic-option.selected {
@@ -90,4 +113,18 @@
   justify-content: flex-end;
   gap: 10px;
   margin-top: 10px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .profile-form-landscape .profile-pic-options {
+    grid-template-columns: repeat(4, 1fr); /* Reduce to 4 columns on smaller screens */
+    grid-template-rows: repeat(6, auto); /* Allow more rows */
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-form-landscape .profile-pic-options {
+    grid-template-columns: repeat(3, 1fr); /* Further reduce to 3 columns on very small screens */
+  }
 }

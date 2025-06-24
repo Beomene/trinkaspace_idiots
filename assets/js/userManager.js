@@ -1205,13 +1205,12 @@ class UserManager {
       z-index: 2000;
     `;
       const modalContent = document.createElement('div');
-    modalContent.classList.add('trinkaspace-modal-content');
-    modalContent.style.cssText = `
+    modalContent.classList.add('trinkaspace-modal-content');    modalContent.style.cssText = `
       background: #333;
       padding: 2em;
       border-radius: 15px;
       width: 95%;
-      max-width: 800px; /* Wider to accommodate landscape layout */
+      max-width: 920px; /* 15% wider: 800px * 1.15 = 920px */
       max-height: 90vh;
       overflow-y: auto;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
