@@ -104,7 +104,7 @@ export class Arena3Menu {  constructor(options = {}) {
       zIndex: 2000, // Above Arena 2A (1000)
       animationDuration: 300,
       hudLayout: 'WIDE', // Royal Alpha HUD layout (WIDE or NARROW)
-      cuc: 1, // Royal Alpha Coordinate Unifying Coefficient
+      cuc: 1, // HUD uses actual viewport, not A1 coordinate system
       ...options
     };
     
@@ -525,7 +525,7 @@ export class ArenaHUD {
       showBorder: true,
       showBackground: true,
       hudLayout: 'WIDE', // Royal Alpha HUD layout (WIDE or NARROW)
-      cuc: 1, // Royal Alpha Coordinate Unifying Coefficient
+      cuc: 1, // HUD uses actual viewport, not A1 coordinate system
       ...options
     };
     

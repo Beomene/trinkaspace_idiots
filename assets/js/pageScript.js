@@ -58,7 +58,7 @@ export class PageScript extends TextScript {  constructor(trinkaspaceEngine) {
    */
   async loadPageScriptConfig(pageId) {
     try {
-      const response = await fetch(`/pages/CHAPTER_1/${pageId}/page_script.json`);
+      const response = await fetch(`/pages/chapter_001/${pageId}/page_script.json`);
       
       if (response.ok) {
         this.pageScriptConfig = await response.json();

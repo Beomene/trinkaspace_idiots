@@ -6,13 +6,14 @@
   "top": "20vh",
   "zIndex": 1,
   "scopeVerticalOffset": 0,
-  "frames": {
+  "_FRAME_SLEEP_NOTE": "Frames and filters temporarily disabled for frame-sleep action",
+  "_frames_SLEEPING": {
     "upper": "jagged_edge.png",
     "lower": "rough_border.png",
     "left": "torn_edge_left.png",
     "right": "torn_edge_right.png"
   },
-  "filter": {
+  "_filter_SLEEPING": {
     "path": "subtle_grain.png",
     "opacity": 0.3,
     "blendMode": "overlay"

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>001_002 - Pure A1 Diorama</title>
+  
+  <!-- Core Trinkaspace CSS -->
+  <link rel="stylesheet" href="../../../assets/css/core.css">
+  <link rel="stylesheet" href="../../../assets/css/royal-alpha.css">
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0a0a0a;
+      color: #2AFFF7;
+      font-family: 'Arial', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* Pure A1 container - exactly 400px (70.4% of 568px) centered */
+    .a1-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px; /* Royal Alpha: 70.4% of 568px */
+      height: 400px; /* 1:1 aspect ratio for alpha viewport */
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border: 1px solid rgba(42, 255, 247, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    /* Scope - Fixed "theatre opening" - NEVER modify at runtime */
+    .scope {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #1a1a2e;
+    }
+    
+    /* Natscene - The expanding stage behind the fixed scope (400x4000px arena) */
+    .natscene {
+      position: relative;
+      width: 100%;
+      height: 4000px; /* Full A1 arena height */
+      min-height: 4000px;
+    }
+    
+    /* Dime layers - Aligned to dimeLOWER_CHIP */
+    .dime-layer {
+      position: absolute;
+      bottom: 60px; /* safetyZone offset from scopeLOWER */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 500px;
+      background-size: cover;
+      background-position: center bottom; /* Align to dimeLOWER */
+      background-repeat: no-repeat;
+    }
+    /* Debug mode - Press 'D' to toggle */
+    body.debug .scope {
+      border: 2px solid var(--debug-cyan, #2AFFF7);
+      position: relative;
+    }
+    
+    body.debug .scope::after {
+      content: 'SCOPE (Holy Portal)';
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      color: var(--debug-cyan, #2AFFF7);
+      font-size: 10px;
+      background: rgba(0,0,0,0.7);
+      padding: 2px 4px;
+      border-radius: 2px;
+    }
+    
+    body.debug .natscene {
+      border: 1px dashed #ff6b6b;
+    }
+    
+    body.debug .natscene::after {
+      content: 'NATSCENE (Expanding Stage)';
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: #ff6b6b;
+      font-size: 10px;
+      background: rgba(0,0,0,0.7);
+      padding: 2px 4px;
+      border-radius: 2px;
+    }
+    
+    body.debug .dime-layer:nth-child(odd) {
+      border: 1px solid #ffeb3b;
+    }
+    
+    body.debug .dime-layer:nth-child(even) {
+      border: 1px solid #4caf50;
+    }
+    
+    /* SafetyZone visualization - Updated to 60px */
+    body.debug .natscene::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(to top, rgba(255,0,0,0.2), rgba(255,0,0,0.05));
+      pointer-events: none;
+      border-top: 1px dashed #ff0000;
+    }
+  </style>
+</head>
+<body>
+  <!-- A1 Container: Fixed scope portal -->
+  <div class="a1-container">
+    <div class="scope" id="scope-001_002_001">
+      <div class="natscene" id="natscene-001_002_001">
+        <!-- Dime layers will be injected here by the engine -->
+        <!-- All dimes align to dimeLOWER_CHIP at bottom: 60px (safetyZone) -->
+        <!-- Full A1 arena: 400x4000px stage -->
+        <div style="position: absolute; bottom: 50%; left: 50%; transform: translate(-50%, 50%); color: #A4A6AB; text-align: center;">
+          <p>Loading diorama...</p>
+          <p style="font-size: 0.8em;">Waiting for dimeLOWER_CHIP alignment...</p>
+          <p style="font-size: 0.7em;">A1 Arena: 400x4000px</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Engine -->
+  <script type="module">
+    import TrinkaspaceEngine from '../../../assets/js/trinkaspaceEngine.js';
+    
+    // Initialize the engine for pure A1 experience
+    const engine = new TrinkaspaceEngine();
+    
+    // Initialize page
+    async function initPage() {
+      console.log('🎭 Initializing Pure A1 Experience');
+      console.log('👑 Using Royal Alpha blueprint with pageOrigo system');
+      
+      try {
+        // Load the working page configuration (transcribed from page_alpha.json DNA)
+        const response = await fetch('./page.json');
+        if (!response.ok) {
+          throw new Error(`Failed to load working page config: ${response.status}`);
+        }
+        
+        const pageConfig = await response.json();
+        console.log('📄 Working page config loaded (transcribed from DNA):', pageConfig);
+        console.log('🧬 Original DNA blueprint at:', pageConfig.meta.transcribedFrom);
+        
+        // Initialize A1 dioramas only
+        await engine.initPage(pageConfig);
+        
+        console.log('✅ Pure A1 experience initialized successfully');
+        
+      } catch (error) {
+        console.error('❌ Error initializing A1 experience:', error);
+        
+        // Show error in natscene container
+        const container = document.getElementById('natscene-001_002_001');
+        if (container) {
+          container.innerHTML = `
+            <div style="position: absolute; bottom: 50%; left: 50%; transform: translate(-50%, 50%); color: #ff6b6b; text-align: center;">
+              <p>Error loading diorama:</p>
+              <p style="font-size: 0.8em;">${error.message}</p>
+            </div>
+          `;
+        }
+      }
+    }
+    
+    // Start the experience
+    initPage();
+    
+    // Debug toggle - Press 'D' to toggle debug mode
+    document.addEventListener('keydown', (e) => {
+      if (e.key.toLowerCase() === 'd') {
+        document.body.classList.toggle('debug');
+        console.log('🔧 Debug mode:', document.body.classList.contains('debug') ? 'ON' : 'OFF');
+      }
+    });
+    
+    // Make engine globally available for debugging
+    window.trinkaspaceEngine = engine;
+    
+    // Lumen's Diagnostic Tools
+    window.checkDimeLOWER_CHIP = function() {
+      const dimes = Array.from(document.querySelectorAll('.dime-layer'));
+      return dimes.map(d => {
+        const rect = d.getBoundingClientRect();
+        return {
+          id: d.id || d.className,
+          chipY: window.innerHeight - rect.bottom,
+          speed: d.dataset.parallaxSpeed || 'unknown',
+          bottom: rect.bottom
+        };
+      });
+    };
+    
+    window.checkNatsceneStructure = function() {
+      const natscene = document.querySelector('.natscene');
+      console.log('🎭 Natscene DOM structure:');
+      console.log('Parent:', natscene?.parentElement?.className);
+      console.log('Children:', Array.from(natscene?.children || []).map(c => c.tagName));
+      return natscene?.children[0]?.tagName;
+    };
+    
+    // Sacred DNA reader - use sparingly, never modify
+    window.readAlphaDNA = async function() {
+      try {
+        const response = await fetch('./page_alpha.json');
+        const alphaDNA = await response.json();
+        console.log('🧬 Alpha DNA (read-only):', alphaDNA);
+        console.log('⚠️  This is sacred blueprint - never modify directly!');
+        return alphaDNA;
+      } catch (error) {
+        console.error('❌ Failed to read alpha DNA:', error);
+      }
+    };
+    
+    // Console welcome message
+    console.log('🎭 Pure A1 Diorama System Initialized');
+    console.log('🧬 DNA Transcription Model: page.json ← page_alpha.json');
+    console.log('🔧 Debug: Press "D" to toggle visual debugging');
+    console.log('📊 Diagnostics: checkDimeLOWER_CHIP(), checkNatsceneStructure(), readAlphaDNA()');
+    console.log('⊙ Lumen\'s guidance: "The scope is a temple, dimes are rebellious artists"');
+  </script>
+</body>
+</html>

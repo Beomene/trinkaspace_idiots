@@ -4,6 +4,7 @@ import { ScopeSystem } from './scope.js';
 import { initArena3Menu } from './tertiaryArena.js';
 import { initHUDManager } from './hudManager.js';
 import keyboardNavigation from './keyboardNavigation.js';
+import QuaternaryArena from './quaternaryArena.js';
 // Import the asset debugger
 import { initAssetDebugger } from './assetDebugger.js';
 
@@ -26,6 +27,7 @@ export default class TrinkaspaceEngine {
     this.dioramaAnchors = new Map(); // Store anchorY for each diorama
     this.arena3Menu = null; // Arena 3A menu system
     this.hudManager = null; // Arena 3 HUD manager
+    this.quaternaryArena = null; // Arena 4 - The Director
     this.hudLayout = this.determineHUDLayout(); // Calculate based on viewport
     
     // Apply Royal Alpha root variables for CSS
@@ -108,6 +110,10 @@ export default class TrinkaspaceEngine {
         console.log('👑 Royal Alpha Debug Mode activated');
       });
     }
+
+    // Initialize Quaternary Arena (The Director)
+    this.quaternaryArena = new QuaternaryArena(this);
+    await this.quaternaryArena.init();
     
     await this.loadPage(this.pageId);
     
@@ -215,32 +221,30 @@ export default class TrinkaspaceEngine {
     document.body.classList.remove('hud-layout-wide', 'hud-layout-narrow');
     document.body.classList.add(`hud-layout-${this.hudLayout.toLowerCase()}`);
 
-    let firstScope = null;
-
-    // Check if we have scenes or dioramas (older structure)
-    const scenes = pageData.scenes || pageData.elements?.dioramas || [];
+    let firstScope = null;    // Check if we have dioramas (current structure)
+    const dioramas = pageData.dioramas || pageData.elements?.dioramas || [];
     
-    if (!scenes.length) {
-      console.log('⚠️ No scenes/dioramas found in pageData');
+    if (!dioramas.length) {
+      console.log('⚠️ No dioramas found in pageData');
       return;
     }
-    
-    for (const scene of scenes) {
-      console.log(`🎪 Processing scene: ${scene.id}`);
+
+    for (const diorama of dioramas) {
+      console.log(`🎪 Processing diorama: ${diorama.id}`);
       
       // Extract folder prefix (A1/, A2/, etc.) from configPath if present
-      const configPathParts = scene.configPath.split('/');
+      const configPathParts = diorama.configPath.split('/');
       const folderPrefix = configPathParts.length > 1 ? configPathParts[0] + '/' : '';
-      const sceneFolderPath = folderPrefix + scene.id;
+      const dioramaFolderPath = folderPrefix + diorama.id;
       
-      console.log(`📂 Resolved scene folder path: ${sceneFolderPath}`);
+      console.log(`📂 Resolved diorama folder path: ${dioramaFolderPath}`);
       
       const [config, scope] = await Promise.all([
-        fetch(scene.configPath).then(r => r.json()),
-        fetch(scene.scopePath).then(r => r.json())
+        fetch(diorama.configPath).then(r => r.json()),
+        fetch(diorama.scopePath).then(r => r.json())
       ]);
-      console.log(`⚙️  Config loaded for ${scene.id}:`, config);
-      console.log(`📐 Scope loaded for ${scene.id}:`, scope);
+      console.log(`⚙️  Config loaded for ${diorama.id}:`, config);
+      console.log(`📐 Scope loaded for ${diorama.id}:`, scope);
 
       if (!firstScope) {
         firstScope = scope;
@@ -249,48 +253,66 @@ export default class TrinkaspaceEngine {
         console.log('🎯 First scope set for parallax:', firstScope);
       }
 
-      console.log(`🏗️  Building diorama for ${scene.id}...`);
+      console.log(`🏗️  Building diorama for ${diorama.id}...`);
       // Pass the folder path prefix to the buildDiorama method
-      this.buildDiorama(config, scope, sceneFolderPath);
+      this.buildDiorama(config, scope, dioramaFolderPath);
       
       // Store anchor for diorama
-      this.dioramaAnchors.set(scene.id, config.anchorY || 0);
+      this.dioramaAnchors.set(diorama.id, config.anchorY || 0);
     }
     
-    // Load HUD if we have A3 folder and HUD config
-    if (pageData.arena3?.hud) {
-      await this.loadHUD(pageData.arena3.hud);
-    } else {
-      console.log('⚠️ No HUD configuration found in pageData');
+    // Initialize A3 HUD system
+    if (!this.hudManager) {
+      this.hudManager = initHUDManager({
+        hudLayout: this.hudLayout,
+        cuc: this.cuc
+      });
     }
-
+    
     // Initialize A3 menu system if we have one
     if (pageData.arena3?.menu) {
       this.initArena3Menu(pageData.arena3.menu);
     }
     
-    // Process textboxes if defined
-    if (pageData.elements?.textboxes) {
-      this.loadTextBoxes(pageData.elements.textboxes);
+    // A4 Director takes over moment coordination
+    if (this.quaternaryArena) {
+      // Connect A4 to the built dioramas
+      this.quaternaryArena.setDioramas(this.dioramaAnchors);
+      console.log('� A4 Director connected to dioramas');
     }
   }
 
-  buildDiorama(config, scope, blockId) {
+  buildDiorama(config, scope, dioramaId) {
+    // Use local asset path for pages structure with Royal Alpha size folders
+    const assetBase = `./A1/${dioramaId}`;
+    console.log(`📁 Using local asset base: ${assetBase}`);
+    
     const container = document.createElement('div');
     container.className = 'diorama-container';
-    container.id = `diorama-${blockId}`;
+    container.id = `diorama-${dioramaId}`;
     
-    // Apply Royal Alpha sizing to the container
-    container.style.width = `${this.a1Width}px`;
-    container.style.height = `${this.a1Width}px`;
+    // Apply Royal Alpha sizing with CUC scaling
+    const scaledWidth = config.useAlphaBlueprint ? 400 * this.cuc : this.a1Width;
+    const scaledHeight = config.useAlphaBlueprint ? 400 * this.cuc : this.a1Width;
     
-    // Set CSS custom properties for internal use
-    container.style.setProperty('--a1-width', `${this.a1Width}px`);
+    container.style.width = `${scaledWidth}px`;
+    container.style.height = `${scaledHeight}px`;
+    container.style.position = 'absolute';
+    container.style.left = '50%';
+    container.style.transform = 'translateX(-50%)';
+    
+    console.log(`📐 Diorama ${dioramaId} sized: ${scaledWidth}x${scaledHeight}px (CUC: ${this.cuc})`);
+    
+    // Set CSS custom properties
+    container.style.setProperty('--a1-width', `${scaledWidth}px`);
     container.style.setProperty('--cuc', this.cuc);
 
     // Create natscene container
     const natscene = document.createElement('div');
     natscene.className = 'natscene';
+    natscene.style.width = '100%';
+    natscene.style.height = '100%';
+    natscene.style.position = 'relative';
 
     // Store layerData for this diorama
     container._layerDatas = [];
@@ -301,91 +323,58 @@ export default class TrinkaspaceEngine {
       layerEl.dataset.parallaxSpeed = layer.parallaxSpeed;
       layerEl.style.zIndex = layer.zIndex;
       layerEl.dataset.layerName = layer.path ? layer.path.split('.')[0] : '';
-      // Store yOffset for parallax
       layerEl.dataset.yOffset = layer.yOffset || 0;
 
       // Fit-to-scope logic
       if (layer.fitToScope) {
         layerEl.classList.add('fit-to-scope');
+        layerEl.style.width = '100%';
+        layerEl.style.height = '100%';
+      }
+
+      // Scale layer dimensions with CUC
+      if (layer.width) {
+        const scaledLayerWidth = config.useAlphaBlueprint ? layer.width * this.cuc : layer.width;
+        layerEl.style.width = `${scaledLayerWidth}px`;
+      }
+      
+      if (layer.minHeight) {
+        const scaledLayerHeight = config.useAlphaBlueprint ? layer.minHeight * this.cuc : layer.minHeight;
+        layerEl.style.minHeight = `${scaledLayerHeight}px`;
       }
 
       const img = new Image();
-        // Define the fallback order according to Royal Alpha (no XL)
+      
+      // Try different device class sizes with fallback
       const fallbackOrder = ['L', 'M', 'S', 'XS'];
-      const currentIdx = fallbackOrder.indexOf(this.deviceClass);      
+      const currentIdx = fallbackOrder.indexOf(this.deviceClass);
       
-      // Check for alpha blueprint path first (A1_alpha format)
-      const useAlphaAssets = layer.useAlphaBlueprint || false;
-      const assetPath = useAlphaAssets 
-        ? `${blockId}/A1_alpha/${layer.path}`
-        : `${blockId}/${this.deviceClass}/${layer.path}`;
+      const assetPath = `${assetBase}/${this.deviceClass}/${layer.path}`;
+      console.log(`🖼️ Loading asset [${this.deviceClass}]: ${assetPath}`);
       
-      console.log(`🖼️ Loading asset [${useAlphaAssets ? 'A1_alpha' : this.deviceClass}]: ${assetPath}`);
-      
-      // Add onload handler to track successful loading
       img.onload = () => {
-        // Extract the device class from the loaded path
-        const loadedPath = img.src;
-        const deviceClassMatch = loadedPath.match(/\/([XLS]+)\//);
-        const loadedDeviceClass = deviceClassMatch ? deviceClassMatch[1] : 'unknown';
-        
-        // Log successful asset loading
-        console.info(`✅ Asset loaded: ${loadedDeviceClass} class for ${layer.path}`);
-        
-        // Set the background image on the layer
+        console.info(`✅ Asset loaded: ${this.deviceClass} class for ${layer.path}`);
         layerEl.style.backgroundImage = `url(${img.src})`;
-        if (layer.blend) {
-          layerEl.style.mixBlendMode = layer.blend;
+        layerEl.style.backgroundSize = layer.fitToScope ? 'cover' : 'contain';
+        layerEl.style.backgroundPosition = 'center';
+        layerEl.style.backgroundRepeat = 'no-repeat';
+        
+        if (layer.blendMode) {
+          layerEl.style.mixBlendMode = layer.blendMode;
         }
+      };
+      
+      img.onerror = () => {
+        console.warn(`⚠️ Asset not found: ${assetPath}`);
+        layerEl.style.background = 'rgba(255,100,100,0.2)';
+        layerEl.style.border = '1px dashed red';
+        layerEl.textContent = `⚠️ ${layer.path}`;
       };
       
       img.src = assetPath;
       
-      // Create a function to try the next device class
-      const tryNextSize = (currentIndex) => {
-        if (currentIndex + 1 >= fallbackOrder.length) {
-          // We've tried all sizes, so show an error
-          console.error(`Missing asset: ${img.src} - tried all device classes`);
-          layerEl.style.background = 'rgba(255,0,0,0.2)';
-          layerEl.textContent = `⚠️ ${layer.path}`;
-          return;
-        }
-        
-        // Try the next smaller size
-        const nextSize = fallbackOrder[currentIndex + 1];
-        const nextSrc = `${blockId}/${nextSize}/${layer.path}`;
-        console.log(`🔄 Fallback: trying ${nextSize} for ${layer.path}`);
-        img.src = nextSrc;
-      };
-      
-      // Handle errors by trying progressively smaller sizes
-      img.onerror = () => {
-        // Try next size
-        tryNextSize(currentIdx);
-        
-        // Set up the next error handler
-        img.onerror = () => {
-          tryNextSize(currentIdx + 1);
-          
-          // Continue setting up error handlers for smaller sizes
-          img.onerror = () => {
-            tryNextSize(currentIdx + 2);
-            
-            img.onerror = () => {
-              tryNextSize(currentIdx + 3);
-              
-              // Final attempt
-              img.onerror = () => {
-                console.error(`All fallbacks failed for: ${layer.path}`);
-                layerEl.style.background = 'rgba(255,0,0,0.2)';
-                layerEl.textContent = `⚠️ ${layer.path}`;
-              };
-            };
-          };
-        };
-      };      this.alignment.position(layerEl, layer);
-      // We don't need to append the img element to the layer anymore
-      // since we're using the image as a background in the onload handler
+      // Position layer
+      this.alignment.position(layerEl, layer);
       natscene.appendChild(layerEl);
 
       // Store the layer config for parallax
@@ -410,7 +399,7 @@ export default class TrinkaspaceEngine {
         scopeSystem.update(layers);
         
         // --- SafetyZone warning ---
-        const safetyZone = scopeSystem.safetyZone || 300;
+        const safetyZone = scopeSystem.safetyZone || 60;
         layers.forEach(layer => {
           const layerRect = layer.getBoundingClientRect();
           const dioramaRect = diorama.getBoundingClientRect();
@@ -556,7 +545,7 @@ export default class TrinkaspaceEngine {
    * Load and display text boxes based on configuration
    * @param {Array} textBoxes - Array of text box configurations
    */
-  loadTextBoxes(textBoxes) {
+  async loadTextBoxes(textBoxes) {
     console.log('📝 Loading text boxes:', textBoxes);
     
     if (!Array.isArray(textBoxes)) {
@@ -565,13 +554,13 @@ export default class TrinkaspaceEngine {
     }
     
     // Process and create each text box
-    textBoxes.forEach((textBox, index) => {
+    for (let i = 0; i < textBoxes.length; i++) {
       try {
-        this.createTextBox(textBox, index);
+        await this.createTextBox(textBoxes[i], i);
       } catch (err) {
-        console.error(`⚠️ Error creating text box ${index}:`, err);
+        console.error(`⚠️ Error creating text box ${i}:`, err);
       }
-    });
+    }
   }
   
   /**
@@ -579,8 +568,8 @@ export default class TrinkaspaceEngine {
    * @param {Object} config - Text box configuration
    * @param {Number} index - Index of the text box
    */
-  createTextBox(config, index) {
-    const { text, speaker, voice, anchorTo, offsetY, align } = config;
+  async createTextBox(config, index) {
+    const { text, contentPath, speaker, voice, anchorTo, offsetY, align } = config;
     
     // Create text box container
     const textBoxElement = document.createElement('div');
@@ -597,10 +586,40 @@ export default class TrinkaspaceEngine {
       textBoxElement.appendChild(speakerElement);
     }
     
-    // Create text content
+    // Load text content
+    let textContent = text || '';
+    
+    // If contentPath is provided, load from markdown file
+    if (contentPath && !text) {
+      try {
+        const contentUrl = `/pages/chapter_001/001_001/${contentPath}`;
+        console.log(`📄 Loading text content from: ${contentUrl}`);
+        
+        const response = await fetch(contentUrl);
+        if (response.ok) {
+          textContent = await response.text();
+          console.log(`✅ Text content loaded successfully from ${contentPath}`);
+        } else {
+          console.error(`❌ Failed to load content from ${contentPath}: ${response.status}`);
+          textContent = `[Content not found: ${contentPath}]`;
+        }
+      } catch (error) {
+        console.error(`❌ Error loading content from ${contentPath}:`, error);
+        textContent = `[Error loading: ${contentPath}]`;
+      }
+    }
+    
+    // Create text content element
     const textElement = document.createElement('div');
     textElement.className = 'text-content';
-    textElement.innerHTML = DOMPurify.sanitize(marked.parse(text));
+    
+    // Parse markdown if we have content
+    if (textContent) {
+      textElement.innerHTML = DOMPurify.sanitize(marked.parse(textContent));
+    } else {
+      textElement.innerHTML = '[No content available]';
+    }
+    
     textBoxElement.appendChild(textElement);
     
     // Position based on anchor if provided
@@ -635,7 +654,7 @@ export default class TrinkaspaceEngine {
     if (textBoxElement) {
       textBoxElement.setAttribute('tabindex', '0');
       textBoxElement.setAttribute('role', 'region');
-      textBoxElement.setAttribute('aria-label', `${speaker ? speaker + ' says: ' : ''}${text}`);
+      textBoxElement.setAttribute('aria-label', `${speaker ? speaker + ' says: ' : ''}${textContent}`);
     }
   }
   

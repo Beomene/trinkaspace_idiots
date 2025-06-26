@@ -146,3 +146,7 @@ To see specific features in action, visit:
 - `pages/general/particle-demo/index.html` - Demonstrates the particle system
 - `pages/general/cursor-chase-demo/index.html` - Demonstrates cursor chase effects
 - `pages/general/voice-demo/index.html` - Demonstrates character voice typing
+
+###BEOMENE'S EDITS:
+
+**Don't forget "TRINKASPACE_OVERVIEW.md" over in the "INTRO_TO_TRINKASPACE" folder... And don't forget to have fun!**

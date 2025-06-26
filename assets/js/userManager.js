@@ -586,7 +586,7 @@ class UserManager {
         <div class="user-info">
           <div class="user-avatar clickable" tabindex="0" role="button" aria-label="View profile">
             <div class="avatar-frame">
-              <img src="./assets/images/profile-pics/${profilePic}" alt="${this.currentUser.username}'s avatar">
+              <img src="/assets/images/profile-pics/${profilePic}" alt="${this.currentUser.username}'s avatar">
             </div>
           </div>
           <button class="user-name" aria-haspopup="true" aria-expanded="false" tabindex="0">

@@ -17,7 +17,7 @@
 /* Main LTT container */
 .ltt-container {
   position: absolute;
-  width: 400px; /* Base width for 1920x1080 with A1_omega at 1200px */
+  width: 400px; /* Base width scales with Royal Alpha CUC system */
   height: 270px;
   border: none; /* We'll use the individual borders instead */
   background-color: var(--ltt-bg-color);

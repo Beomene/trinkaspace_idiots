@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "pageId": "001_002",
+    "chapterId": "001", 
+    "title": "A Pure Diorama - Working Copy",
+    "description": "Transcribed from page_alpha.json DNA - A1 visual storytelling demo",
+    "pageHeight": "400px",
+    "transcribedFrom": "./page_alpha.json",
+    "cuc": 1.0,
+    "deviceWidth": 568,
+    "deviceHeight": 320
+  },
+  "blocks": [
+    {
+      "type": "diorama",
+      "id": "001_002_001",
+      "configPath": "./A1/001_002_001/config_alpha.json",
+      "scopePath": "./A1/001_002_001/scope_alpha.json",
+      "arena": "A1",
+      "anchorY": 0,
+      "pageOrigo": {
+        "x": -200,
+        "y": 1200
+      },
+      "description": "Single diorama transcribed from alpha DNA - shows background before natscene"
+    }
+  ],
+  "arenas": {
+    "A1": {
+      "enabled": true,
+      "width": 400,
+      "height": 400,
+      "positioning": "center"
+    },
+    "A2": {
+      "enabled": false
+    },
+    "A3": {
+      "enabled": false
+    },
+    "A4": {
+      "enabled": false
+    }
+  }
+}

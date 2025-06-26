@@ -1,0 +1,10 @@
+{
+  "width": "12vw",
+  "heightMode": "width-ratio", 
+  "heightValue": 1.25,
+  "safetyZone": 60,
+  "bleed": false,
+  "left": "4vw",
+  "zIndex": 10,
+  "scopeVerticalOffset": -80
+}

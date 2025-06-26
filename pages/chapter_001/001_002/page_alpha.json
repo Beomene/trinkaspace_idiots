@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "pageId": "001_002",
+    "chapterId": "001", 
+    "title": "A Pure Diorama",
+    "description": "Demonstrating A1's core visual storytelling power",
+    "pageHeight": "400px",
+    "useAlphaBlueprint": true,
+    "pageOrigo": {
+      "x": 200,
+      "y": 200
+    }
+  },
+  "dioramas": [
+    {
+      "id": "001_002_001",
+      "configPath": "./A1/001_002_001/config_alpha.json",
+      "scopePath": "./A1/001_002_001/scope_alpha.json",
+      "anchorY": 0,
+      "description": "A single beautiful diorama showcasing A1's visual storytelling"
+    }
+  ]
+}

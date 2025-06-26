@@ -1,0 +1,21 @@
+{
+  "dioramaType": "ROOM",
+  "useAlphaBlueprint": true,
+  "alphaDNA": {
+    "sacred": true,
+    "coordinates": {
+      "cuc": 1.0,
+      "pageOrigo": {
+        "x": -200,
+        "y": 1200
+      }
+    },
+    "dimensions": {
+      "width": 400,
+      "height": 500,
+      "safetyZone": 300
+    },
+    "description": "Sacred DNA blueprint for diorama 001_002_001 - never modify directly"
+  },
+  "transcriptionNotes": "This DNA is referenced by the working config_alpha.json but never directly executed"
+}

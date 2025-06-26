@@ -6,15 +6,17 @@ Trinkaspace is an interactive web experience for the Trinkaloop Saga, combining 
 
 ## Core Architecture: The Arena System
 
-Trinkaspace employs a layered architecture with three main "Arenas":
+Trinkaspace employs a layered architecture with four main "Arenas":
 
-1. **Primary Arena (Arena 1)**: Handles the base layout, page structure, and core content elements.
+1. **Primary Arena (Arena 1)**: Handles the base layout, page structure, and core content elements. The realm of dioramas and visual storytelling.
 
 2. **Secondary Arena (Arena 2)**: Manages interactive text elements, dynamic content, and the symscram system (symbolic scrambling for special text effects). Implemented in `secondaryArena.js`.
 
 3. **Tertiary Arena (Arena 3)**: Controls the HUD layer, including the navigation menu and other overlay elements. Implemented in `tertiaryArena.js`.
 
-This separation of concerns allows for modular design and cleaner code organization while managing different aspects of the user experience.
+4. **Quaternary Arena (Arena 4)**: The Director dimension that orchestrates timing, moments, and coordination between all other arenas. Unlike A1-A3 which are objects, A4 is a temporal dimension. Implemented in `quaternaryArena.js`.
+
+This separation of concerns allows for modular design and cleaner code organization while managing different aspects of the user experience. The addition of A4 enables sophisticated narrative timing and multi-arena coordination.
 
 ## Key Components
 
@@ -68,6 +70,7 @@ The site includes several key interactive systems:
   - `trinkaspaceEngine.js`: Core engine functionality
   - `secondaryArena.js`: Text handling and effects
   - `tertiaryArena.js`: HUD and menu systems
+  - `quaternaryArena.js`: The Director - timing and arena coordination
   - `safety.js`: Content warnings and protection
   - `typingVoices.js`: Character voice simulation
   - Other utility scripts for specific functions
