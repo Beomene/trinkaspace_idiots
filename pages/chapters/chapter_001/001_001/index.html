@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trinkaloop Saga - Chapter 1, Page 1</title>
+  <meta name="viewport" content="width=568, initial-scale=1">
+  <link rel="stylesheet" href="/assets/css/core.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+  <style>
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+    #arena1-container {
+      width: calc(100vw * 320 / 568);
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #181621;
+      position: relative;
+    }
+    .diorama.local-scroll {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      z-index: 10;
+    }
+    .diorama-hidden {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  </style>
+</head>
+<body class="story-page">
+  <!-- A1 Primary Arena - Dioramas -->
+  <div id="arena1-container" tabindex="-1"></div>
+  
+  <!-- A2 Secondary Arena - Text Elements -->
+  <div id="LTT" class="trinkatext left-trinkatext" data-moment="1" data-text="Hello... I'm Eene. I think... I think I'm ready to begin this story." data-voice="eene"></div>
+  <div id="RTT" class="trinkatext right-trinkatext" data-moment="4" data-text="*A warm presence appears* Greetings, young one. I am Emraa." data-voice="emraa"></div>
+  <div id="UTT" class="trinkatext upper-trinkatext" data-moment="6" data-text="(nervous) Oh... someone's here..." data-voice="eene-subconscious"></div>
+  
+  <!-- A3 Tertiary Arena - HUD (loads after A1 is ready) -->
+  <!-- HUD will be initialized by A4 Director when appropriate -->
+  
+  <script type="module">
+    import TrinkaspaceEngine from '/assets/js/common/trinkaspaceEngine.js';
+    import { typeText } from '/assets/js/A2_js/secondaryArena.js';
+    import '/assets/js/A3_js/tertiaryArena.js';
+    
+    // Make typeText globally available
+    window.typeText = typeText;
+
+    // Initialize the engine when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('🚀 Initializing Trinkaspace Engine...');
+      window.trinkaspaceEngine = new TrinkaspaceEngine({ pageId: '001_001' });
+      
+      console.log('🎬 A4 Director will orchestrate the experience');
+    });
+    
+    // Global sanitization helper
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof marked !== 'undefined' && typeof DOMPurify !== 'undefined') {
+        window.sanitizeHTML = function(html) {
+          return DOMPurify.sanitize(marked.parse(html));
+        };
+      }
+    });
+  </script>
+</body>
+</html>

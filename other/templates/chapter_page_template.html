@@ -1,3 +1,8 @@
+<!--
+  NOTE: DIORAMAS should be SECTIONS inside the A1 that is a DIV. 
+  DIORAMAS should have a class (diorama) and id (their folder-name, such as XXX_XXX_XXX).
+-->
+
 <!-- Chapter Page Template with Trinkatitle Integration -->
 <!DOCTYPE html>
 <html lang="en">
@@ -16,8 +21,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
-  <script src="/assets/js/trinkaspaceEngine.js" defer></script>
-  <script type="module" src="/assets/js/userIntegration.js"></script>
+  <script src="/assets/js/common/trinkaspaceEngine.js" defer></script>
+  <script type="module" src="/assets/js/common/userIntegration.js"></script>
   <script>
     // Load and set the page Trinkatitle based on page ID
     document.addEventListener('DOMContentLoaded', () => {
@@ -53,7 +58,7 @@
     </div>
     
     <!-- Main content container -->
-    <div id="trinkaspace-container" tabindex="-1"></div>
+    <div id="arena1-container" tabindex="-1"></div>
     
     <!-- Navigation controls -->
     <div class="page-navigation" role="navigation" aria-label="Chapter Navigation">

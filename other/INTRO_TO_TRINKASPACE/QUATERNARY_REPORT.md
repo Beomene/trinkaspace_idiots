@@ -96,8 +96,10 @@ A4 operates with awareness of all coordinate systems:
 
 - **Viewport coordinates** (like A3 for UI positioning)
 - **CUC coordinates** (like A1 for content scaling)
-- **pageOrigo system** (for absolute story positioning)
+- **Alpha domain coordinates** (all positions are defined relative to the top-left (0,0) of the alpha domain, which is 320px wide and N×320px tall, where N is the number of viewports for the page)
 - **Scroll timeline** (its own dimensional measurement)
+
+> **Note:** The legacy `pageOrigo` system is deprecated. All coordinates should be defined relative to the top-left (0,0) of the alpha domain and scaled at runtime using the CUC (Coordinate Unifying Coefficient: `currentViewportWidth / 320`). This provides full flexibility and future-proofing for any page size or aspect ratio.
 
 This multi-dimensional awareness allows A4 to translate between different arena "languages" and coordinate their interactions.
 
@@ -168,8 +170,10 @@ A4 is designed to enhance, not replace, existing functionality:
 
 A4 fully supports the Royal Alpha system:
 - **CUC awareness**: Understands scaling relationships
-- **pageOrigo integration**: Uses established coordinate systems
+- **Alpha domain origin**: All coordinates are defined relative to (0,0) in the alpha domain (320px × N×320px)
 - **Device adaptation**: Responds to different viewport configurations
+
+> **Legacy Note:** All references to `pageOrigo` are obsolete and should not be used. Use the alpha domain origin and CUC scaling for all positioning and layout.
 
 ---
 

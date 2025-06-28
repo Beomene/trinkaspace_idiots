@@ -1,4 +1,9 @@
-/* Asset Debugging Tools CSS */
+/* Asset Debugging Tools CSS
+   Updated for CHAR-gallery and unified diorama system (2025)
+   - Device classes: L, M, S, XS, unknown (no XL)
+   - .diorama-container: Used in CHAR-gallery and some non-story pages
+   - .dime-layer: Diorama image element, used in all diorama sections (including story pages)
+*/
 
 .asset-debug-overlay {
   position: fixed;
@@ -53,8 +58,7 @@
   padding-top: 5px;
 }
 
-/* Color indicators for device classes */
-.asset-debug-overlay .asset-XL { color: #FF9500; }
+/* Color indicators for device classes (no XL) */
 .asset-debug-overlay .asset-L { color: #76FF03; }
 .asset-debug-overlay .asset-M { color: #2979FF; }
 .asset-debug-overlay .asset-S { color: #FF4081; }

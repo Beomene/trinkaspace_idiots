@@ -1,0 +1,110 @@
+{
+  "meta": {
+    "chapter": 1,
+    "page": 1,
+    "title": "The Soda Cat Awakens",
+    "background": "#202029",
+    "pageHeight": "10000px",
+    "skipLinks": false
+  },
+  "alpha": "alphas/page_alpha.json",
+  "elements": {
+    "scripts": [
+      {
+        "id": "text-system-demo",
+        "path": "chapters/chapter_001/001_001/script.md",
+        "autoplay": true,
+        "startAtScroll": 100
+      }
+    ],
+    "beatSettings": {
+      "defaultHardBeatDuration": 4000,
+      "defaultNormalBeatDuration": 2500,
+      "defaultSoftBeatDuration": 5000,
+      "enableReaderControls": true
+    },
+    "dioramas": [
+      {
+        "id": "001_001_002",
+        "configPath": "chapters/chapter_001/001_001/A1/001_001_002/config_omega.json",
+        "scopePath": "chapters/chapter_001/001_001/A1/001_001_002/scope_omega.json",
+        "anchorY": 2222
+      },
+      {
+        "id": "001_001_004",
+        "configPath": "chapters/chapter_001/001_001/A1/001_001_004/config_omega.json",
+        "scopePath": "chapters/chapter_001/001_001/A1/001_001_004/scope_omega.json",
+        "anchorY": 4444
+      },
+      {
+        "id": "001_001_006",
+        "configPath": "chapters/chapter_001/001_001/A1/001_001_006/config_omega.json",
+        "scopePath": "chapters/chapter_001/001_001/A1/001_001_006/scope_omega.json",
+        "anchorY": 6666
+      }
+    ],
+    "textboxes": [
+      {
+        "id": "001_001_003",
+        "contentPath": "chapters/chapter_001/001_001/A2/001_001_003/001_001_003.md",
+        "scopePath": "chapters/chapter_001/001_001/A2/001_001_003/scope_omega.json",
+        "anchorY": 500,
+        "speaker": "???",
+        "voice": "eene"
+      }
+    ],
+    "scrollTriggers": [
+      {
+        "y": 0,
+        "message": "Welcome to Trinkaspace. Scroll down to explore the story.",
+        "id": "intro",
+        "once": false
+      },
+      {
+        "y": 1800,
+        "message": "The first diorama comes into view...",
+        "id": "diorama-1-approach",
+        "once": true
+      },
+      {
+        "y": 2222,
+        "message": "You've reached the first diorama. Take a moment to observe.",
+        "id": "diorama-1-view",
+        "delay": 500,
+        "once": true
+      },
+      {
+        "y": 3500,
+        "message": "Continuing your journey through the narrative...",
+        "id": "midway",
+        "once": false
+      },
+      {
+        "y": 4444,
+        "message": "The second diorama reveals new details about the story.",
+        "id": "diorama-2-view",
+        "delay": 500,
+        "once": true
+      },
+      {
+        "y": 6000,
+        "message": "As you approach the final diorama, consider what you've learned.",
+        "id": "diorama-3-approach",
+        "once": true
+      },
+      {
+        "y": 6666,
+        "message": "The final diorama ties everything together.",
+        "id": "diorama-3-view",
+        "delay": 500,
+        "once": true
+      },
+      {
+        "y": 8000,
+        "message": "You've reached the end of this chapter. What mysteries await in the next?",
+        "id": "conclusion",
+        "once": true
+      }
+    ]
+  }
+}

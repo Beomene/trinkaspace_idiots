@@ -1,0 +1,19 @@
+{
+  "moments": [
+    {
+      "id": "start",
+      "scrollY": 0,
+      "description": "Diorama appears"
+    },
+    {
+      "id": "mid",
+      "scrollY": 1600,
+      "description": "Midpoint event"
+    },
+    {
+      "id": "end",
+      "scrollY": 3200,
+      "description": "Diorama ends"
+    }
+  ]
+}

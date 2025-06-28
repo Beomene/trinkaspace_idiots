@@ -1,0 +1,126 @@
+# 👑 THE ROYAL DECREE OF TRINKASPACE 👑
+
+> **NOTE (2025-06-26):**
+> The term "A1" (or "A1_alpha") in this document has previously been described as a "perfect square domain". This is misleading. In practice, A1 is not a literal square on the page. Instead, A1 represents a vertically-oriented, centered rectangular strip (e.g., 568x3200 or as defined by page meta), simulating a "webpage within a webpage." The 1:1 aspect ratio is only used for certain internal calculations or simulation of a viewport, not for the actual rendered area. The real, usable area for dioramas is a tall, centered rectangle, not a square. Please keep this in mind for all layout, scaling, and asset logic.
+
+> **UPDATE (2025-06-27):**
+> - The CHAR-gallery is now the unified system for all character and AI galleries (replacing BI-gallery and AI-gallery).
+> - All story and gallery pages use a unified diorama/page system (see main README for details).
+> - The CUC (Coordinate Unifying Coefficient) is now height-based (previously width-based). All scaling, positioning, and asset selection use the formula: `cuc = a1Height / 320`.
+
+## SOVEREIGN ARENA SYSTEM
+
+This document establishes the foundational laws governing the Trinkaspace kingdom, ensuring equitable experiences for all subjects across the realm, from the humblest of screens to the grandest of displays.
+
+### 🏛️ THE THREE ARENAS
+
+1. **Arena One (A1)**: The Sovereign Diorama
+   - The central authority of visual storytelling
+   - A perfect square domain (320x320), unaware of external matters
+   - All other elements must adapt to its sovereign presence
+
+2. **Arena Two (A2)**: The Royal Response
+   - Carrier of sacred text and narrative
+   - Responds to A1's declarations while extending beyond its borders
+   - Maintains harmony with A1's visual elements
+
+3. **Arena Three (A3)**: The Royal Adaptation
+   - Houses the HUD and navigational elements
+   - Adapts completely to the viewer's domain
+   - Takes form as either WIDE or NARROW layout based on available territory
+
+### 📏 THE COORDINATE UNIFYING COEFFICIENT (CUC)
+
+The sacred multiplier that maintains proportional harmony across all realms:
+
+**cuc = currentA1Height / 320**
+
+- When A1 is 320px: cuc = 1.0 (The Alpha Realm)
+- When A1 is 640px: cuc = 2.0
+- When A1 is 960px: cuc = 3.0 (The Omega Realm)
+
+### 📌 THE PAGE ORIGO
+
+The central point from which all coordinates flow:
+- In A1_alpha's worldview: (160, 1600)
+- All positions calculated relative to this sacred point
+- Scales with the CUC for all derived realms
+
+### 📜 LAWS OF SCALING
+
+1. **A1 Height Determination**:
+   - Minimum: 320px (Alpha Realm)
+   - Maximum: 960px (Omega Realm)
+   - Calculation: `Math.min(960, Math.max(320, viewportHeight * 0.625))`
+
+2. **Page Dimensions**:
+   - Height = A1 height × N (N = number of viewports, e.g. 10 for 10vp)
+   - A1 height (Alpha) = 320px
+   - For 10vp: 3200px; for 12vp: 3840px, etc.
+   - A1 is always horizontally centered
+
+3. **Asset Selection**:
+   - 320-480px → XS assets
+   - 481-640px → S assets
+   - 641-800px → M assets
+   - 801-960px → L assets
+
+4. **HUD Layout Selection**:
+   - Calculate: `excessRatio = (viewportWidth - A1Width) / A1Width`
+   - If excessRatio < 0.32: Use "NARROW" HUD layout
+   - If excessRatio ≥ 0.32: Use "WIDE" HUD layout
+
+### 🛠️ IMPLEMENTATION PRINCIPLES
+
+1. **Blueprint Authority**:
+   - All pages are designed at the Alpha level (320x320 A1)
+   - All other size renditions derive from this authoritative blueprint
+   - No manual adjustments needed for larger screens
+
+2. **Coordinate Translation**:
+   - A1 elements: Use internal coordinates × cuc
+   - A2 elements: Use same coordinate system but may extend beyond A1
+   - A3 elements: Position relative to viewport with awareness of A1's domain
+
+3. **Responsive Fluidity**:
+   - Recalculate on viewport changes
+   - Smoothly transition between states
+   - Maintain proportional relationships always
+
+### ⚔️ BENEFITS OF THE DECREE
+
+1. **Equitable Experience** across all devices
+2. **Optimized Asset Loading** based on actual display size
+3. **Simplified Authoring** - design once for smallest case
+4. **Mathematical Consistency** that scales predictably
+5. **No Empty Spaces** on any screen configuration
+
+---
+
+# ROYAL DECREE: A1 Alpha and Omega System
+
+## Arena 1 Alpha (A1_alpha) and Omega (A1_omega) Files
+
+- Every story page (e.g., chapters/001_001) must have an `alphas/` folder containing:
+  - `page_alpha.json`: Defines dioramas, their source paths, anchorY (and optionally anchorX), and N (number of viewports).
+  - `scope_alpha.json`: Defines the canonical width (in px or vw), width-ratio, and height for each diorama.
+  - `script_alpha.json`: Defines "moments" triggered by scrollY, with coordinates for each moment.
+- The engine always loads the alpha files from `alphas/` (no fallback).
+- The omega files (e.g., `page_omega.json`) are generated by applying the CUC (Coordinate Unifying Coefficient) to the alpha data.
+- The CUC is now defined as:
+  - `CUC = alphaHeight / deviceHeight`
+  - This ensures that what is seen within a viewport is the same on every device, prioritizing vertical (scrollY) experience.
+- The omega files should be as empty as possible, only containing the CUC and referencing the alpha data.
+
+## Implementation Notes
+- The engine should merge alpha data into omega files by applying the CUC.
+- All logic for CUC calculation and application should use the new height-based rule.
+- Update all JS and CSS to use the new CUC logic where relevant.
+
+---
+
+*This decree supersedes previous width-based CUC logic. Height is now the primary factor for scaling and layout in the A1 arena.*
+
+Thus it is decreed, thus it shall be rendered.
+
+Long live Trinkaspace!

@@ -1,3 +1,8 @@
+/*
+  NOTE: DIORAMAS should be SECTIONS inside the A1 that is a DIV. 
+  DIORAMAS should have a class (diorama) and id (their folder-name, such as XXX_XXX_XXX).
+*/
+
 :root {
   --bg-color: #202029;
   --debug-outline: 2px dashed cyan;
@@ -30,7 +35,7 @@ body {
   overflow-x: hidden;
 }
 
-#trinkaspace-container {
+#arena1-container {
   position: relative;
   width: 100%;
   /* Height is set dynamically from page.json */
@@ -39,7 +44,6 @@ body {
 .diorama-container {
   position: absolute;
   /* top, left, width, height, z-index are set dynamically from scope.json */
-  overflow: hidden;
   perspective: 1px; /* Enables 3D space for parallax */
   display: flex;
   flex-direction: column;
@@ -683,7 +687,7 @@ body.debug .diorama-container {
   100% { transform: scale(1); }
 }
 
-body.viewport-breathing .trinkaspace-container {
+body.viewport-breathing .arena1-container {
   animation: viewport-breathing 8s infinite ease-in-out;
   transform-origin: center center;
 }
@@ -714,3 +718,200 @@ body.viewport-breathing .trinkaspace-container {
 
 .beat-settings-panel label {
   display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.beat-settings-panel input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  outline: none;
+}
+
+.beat-settings-panel input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--neoncyan);
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 0 4px var(--neoncyan);
+}
+
+.beat-settings-panel input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--neoncyan);
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 0 4px var(--neoncyan);
+}
+
+/* Beat duration labels */
+.beat-settings-panel .duration-label {
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Active beat indicator */
+.active-beat {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.active-beat .beat-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.active-beat.hard-beat .beat-overlay {
+  background-color: rgba(255, 0, 0, 0.3);
+}
+
+.active-beat.normal-beat .beat-overlay {
+  background-color: rgba(255, 255, 0, 0.3);
+}
+
+.active-beat.soft-beat .beat-overlay {
+  background-color: rgba(0, 255, 0, 0.3);
+}
+
+/* Narrative elements */
+.narrative-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.narrative-element {
+  position: absolute;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.narrative-element.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Narrative text styling */
+.narrative-text {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--trinka-text);
+  padding: 10px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Narrative image styling */
+.narrative-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Scene transition effects */
+.scene-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.scene-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.scene-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scene-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Miscellaneous */
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.pointer-events-auto {
+  pointer-events: auto;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.scroll-auto {
+  overflow: auto;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neoncyan);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Enable independent local scrolling for each diorama or scrollable area */
+.local-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* End of CSS */

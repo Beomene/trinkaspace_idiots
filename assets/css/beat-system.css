@@ -72,7 +72,7 @@
   100% { transform: scale(1); }
 }
 
-body.viewport-breathing .trinkaspace-container {
+body.viewport-breathing .arena1-container {
   animation: viewport-breathing 8s infinite ease-in-out;
   transform-origin: center center;
 }

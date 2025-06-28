@@ -4,7 +4,33 @@
 
 Welcome to Trinkaspace, an immersive interactive web narrative platform that brings the Trinkaloop Saga to life. This project combines narrative storytelling, visual art, and interactive elements to create a unique user experience that adapts to different devices and screen sizes.
 
-## 🗺️ For New AI Collaborators
+## 🖼️ CHAR-Gallery (Unified Character Gallery)
+
+The CHAR-gallery is the unified system for all character, AI, and biographical galleries. It replaces the previous AI-gallery and BI-gallery, consolidating all character assets, parallax effects, and smart image loading into a single, maintainable structure. See `pages/CHAR-gallery/README.md` for details.
+
+## 🏗️ Unified Diorama/Page System
+
+All story and gallery pages now use a unified diorama system:
+- Each story page is composed of one or more "dioramas" (visual scenes), each defined by a config and scope file.
+- Dioramas are implemented as `<section class="diorama">` elements, with layers for images and effects ("dime-layers").
+- The system is consistent across story chapters, CHAR-gallery, and portal pages, making asset management and scaling predictable.
+
+## 📏 Height-Based CUC Logic (Coordinate Unifying Coefficient)
+
+- **CUC is now based on A1 height, not width.**
+- All scaling, positioning, and asset selection use the formula:
+  - `cuc = a1Height / 320`
+- This ensures proportional scaling across all devices, prioritizing vertical (scrollY) experience.
+- **Note:** Previous versions used width-based CUC. All logic and documentation now reflect the height-based approach.
+
+## 📂 Asset and Content Path Conventions
+
+- **Chapters:** All story chapters are under `pages/chapters/chapter_XXX/section_XXX/` (e.g., `pages/chapters/chapter_001/001_001/`).
+- **CHAR-gallery:** All character and AI gallery content is under `pages/CHAR-gallery/`.
+- **Assets:** Use relative paths for all images and assets (e.g., `./images/character.png`).
+- **Content:** Text and markdown content for story pages should be placed in the appropriate chapter/section folder.
+
+## 🗂️ For New AI Collaborators
 
 If you're an AI assistant joining this project, here's what you should know to get started:
 

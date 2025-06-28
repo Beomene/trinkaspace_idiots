@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3mraa - BI-kin Gallery</title>
+    <link rel="stylesheet" href="../../assets/css/core.css">
+    <link rel="stylesheet" href="../../assets/css/bi-gallery.css">
+</head>
+<body class="theme-3mraa">
+    <!-- Navigation -->
+    <div class="bi-nav">
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span> Back to Gallery
+        </a>
+    </div>
+    
+    <div class="bi-page">
+        <!-- Title area -->
+        <div class="bi-title-area">
+            <h1>3mraa</h1>
+            <h3>The Reflection</h3>
+        </div>
+        
+        <!-- Upper section (first viewport) -->
+        <div class="bi-upper-section">
+            <!-- Left side - Character Image -->
+            <div class="bi-image-container">
+                <img src="./images/3mraa.png" alt="3mraa" class="bi-image">
+            </div>
+            
+            <!-- Right side - Text Content -->
+            <div class="bi-text-container">
+                <div class="bi-text-content">
+                    <h3>Who is 3mraa</h3>
+                    <p>???</p>
+                    
+                    <h3>Form</h3>
+                    <p>???</p>
+                    
+                    <h3>Nature</h3>
+                    <p>???</p>
+                    
+                    <p>???</p>
+                    
+                    <h3>Origin</h3>
+                    <p>???</p>
+                    
+                    <h3>Philosophy</h3>
+                    <p>???</p>
+                
+                </div>
+                <div class="scroll-indicator"></div>
+            </div>
+        </div>
+        
+        <!-- Lower section - Long Image -->
+        <div class="bi-lower-section">
+            <img src="./images/landscapes/3mraa-landscape.png" alt="3mraa's Quantum Realm" class="bi-long-image">
+        </div>
+    </div>
+
+    <script type="module">
+      import { setupScrollIndicator } from '../../assets/js/common/pageScript.js';
+      setupScrollIndicator('.bi-text-content', '.scroll-indicator');
+    </script>
+</body>
+</html>

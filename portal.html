@@ -402,8 +402,8 @@
     </style>
   </div>
     <script type="module">
-    import userManager from './assets/js/userManager.js';
-    import storageConsent from './assets/js/storageConsent.js';
+    import userManager from './assets/js/common/userManager.js';
+    // import storageConsent from './assets/js/storageConsent.js'; // removed, no longer needed
     
     // Initialize user system when DOM is loaded
     document.addEventListener('DOMContentLoaded', () => {
@@ -439,9 +439,9 @@
     });
   </script>
     <!-- Import portal parallax script -->  <script type="module">
-    import portalParallax from './assets/js/portalParallax.js';
-    import { initPortalTitleEffects } from './assets/js/portalEffects.js';
-    import { initPageParticles } from './assets/js/pageParticles.js';
+    import portalParallax from './assets/js/common/portalParallax.js';
+    import { initPortalTitleEffects } from './assets/js/common/portalEffects.js';
+    import { initPageParticles } from './assets/js/common/pageParticles.js';
       
     // Initialize parallax, cursor effects and particles
     document.addEventListener('DOMContentLoaded', () => {

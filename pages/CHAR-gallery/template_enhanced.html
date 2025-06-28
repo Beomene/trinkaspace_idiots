@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHARACTER_NAME - BI-kin Gallery</title>
+    <link rel="stylesheet" href="../../assets/css/core.css">
+    <link rel="stylesheet" href="../../assets/css/bi-gallery.css">
+</head>
+<body class="theme-CHARACTER_ID">
+    <!-- Navigation -->
+    <div class="bi-nav">
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span> Back to Gallery
+        </a>
+    </div>
+
+    <div class="bi-page parallax-container">
+        <!-- Upper banner -->
+        <div class="banner-container">
+            <img data-character-image="upper_banner" alt="Upper Banner" class="banner-image upper-banner parallax-x" data-parallax data-parallax-speed-x="-0.05">
+        </div>
+        
+        <!-- Title area - on right side -->
+        <div class="bi-title-area parallax-y" data-parallax data-parallax-speed="0.2">
+            <h1 class="parallax-title">CHARACTER_NAME</h1>
+            <h3 class="parallax-title">CHARACTER_TAGLINE</h3>
+        </div>
+
+        <!-- Upper section (first viewport) - inverted layout -->
+        <div class="bi-upper-section parallax-container">
+            <!-- Left side - Character Image with floating interest items -->
+            <div class="bi-image-container parallax-y" data-parallax data-parallax-speed="0.18">
+                <img data-character-image="portrait" alt="CHARACTER_NAME" class="bi-image">
+                <!-- Interest items will be added by biGalleryManager -->
+            </div>
+              
+            <!-- Right side - Text Content with parallax scroll -->
+            <div class="bi-text-container parallax-y" data-parallax data-parallax-speed="0.3">
+                <div class="bi-text-content">
+                    <!-- Custom CSS banner example -->
+                    <div class="bi-banner">CHARACTER_NAME</div>
+                    
+                    <h3>Who is CHARACTER_NAME</h3>
+                    <p>This is a description of CHARACTER_NAME. Replace this text with character-specific content.</p>
+                    
+                    <!-- Decorative box example -->
+                    <div class="bi-content-box">
+                        <h4>CHARACTER_TRAIT</h4>
+                        <p>Special information about the character can go here in a highlighted box.</p>
+                    </div>
+                    
+                    <h3>Form</h3>
+                    <p>Physical description of the character goes here.</p>
+                    
+                    <h3>Nature</h3>
+                    <p>Character's personality and nature description goes here.</p>
+                    
+                    <h3>Role in the Saga</h3>
+                    <p>Character's role and importance in the overall story goes here.</p>
+                    
+                    <h3>Origin</h3>
+                    <p>Character's backstory and origin details go here.</p>
+                    
+                    <h3>Philosophy</h3>
+                    <p>Character's beliefs, values, and philosophical outlook go here.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Midline Banner -->
+        <div class="banner-container">
+            <img data-character-image="midline_banner" alt="Midline Banner" class="banner-image midline-banner parallax-x" data-parallax data-parallax-speed-x="0.08">
+        </div>
+        
+        <!-- Decoration Banner - oversized and only moves horizontally -->
+        <div class="oversize-container" style="height: 200px;">
+            <img data-character-image="decoration_banner" alt="Decorative Elements" 
+                 class="decoration-banner parallax-oversized oversize-x parallax-x" 
+                 data-parallax data-parallax-speed-x="-0.03"
+                 data-oversize-factor="2.0">
+        </div>
+          
+        <!-- Lower section - Long Image with fit-to-width -->
+        <div class="bi-lower-section parallax-container">
+            <img data-character-image="landscape" alt="CHARACTER_NAME's World" class="bi-long-image parallax-y" data-parallax data-parallax-speed="0.6">
+        </div>
+        
+        <!-- Lower Banner -->
+        <div class="banner-container">
+            <img data-character-image="lower_banner" alt="Lower Banner" class="banner-image lower-banner parallax-x" data-parallax data-parallax-speed-x="0.05">
+        </div>
+    </div>
+
+    <script type="module">
+        // Import our CHAR Gallery Manager
+        import charGalleryManager from '../../assets/js/A1_js/charGalleryManager.js';
+        import { setupScrollIndicator } from '../../assets/js/common/pageScript.js';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize our gallery manager
+            charGalleryManager.init();
+            setupScrollIndicator('.bi-text-content', '.scroll-indicator');
+            console.log('Character gallery page initialized');
+            console.log('To customize this character:');
+            console.log('1. Update theme colors in bi-gallery.css (.theme-CHARACTER_ID class)');
+            console.log('2. Add character portrait, landscape, banners and interest items as instructed');
+            console.log('3. Adjust parallax speeds if needed');
+        });
+    </script>
+</body>
+</html>
