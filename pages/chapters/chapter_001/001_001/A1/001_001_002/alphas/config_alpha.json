@@ -6,8 +6,8 @@
       "path": "sky.png",
       "zIndex": 1,
       "parallaxSpeed": 0.9,
-      "width": 400,
-      "minHeight": 500,
+      "width": 320,
+      "minHeight": 400,
       "yOffset": -60,
       "fitToScope": true
     },
@@ -15,8 +15,8 @@
       "path": "wall.png", 
       "zIndex": 10,
       "parallaxSpeed": 0.9,
-      "width": 400,
-      "minHeight": 500,
+      "width": 320,
+      "minHeight": 400,
       "yOffset": -60,
       "fitToScope": true
     },
@@ -24,35 +24,8 @@
       "path": "furniture.png",
       "zIndex": 20,
       "parallaxSpeed": 0.89,
-      "width": 400,
-      "minHeight": 500,
-      "yOffset": -60,
-      "fitToScope": true
-    },
-    {
-      "path": "table.png",
-      "zIndex": 20,
-      "parallaxSpeed": 0.89,
-      "width": 400,
-      "minHeight": 500,
-      "yOffset": -60,
-      "fitToScope": true
-    },
-    {
-      "path": "atmo1.png",
-      "zIndex": 30,
-      "parallaxSpeed": 0.95,
-      "width": 100,
-      "minHeight": 500,
-      "yOffset": -60,
-      "fitToScope": true
-    },
-    {
-      "path": "atmo2.png",
-      "zIndex": 100,
-      "parallaxSpeed": 0.95,
-      "width": 400,
-      "minHeight": 500,
+      "width": 320,
+      "minHeight": 400,
       "yOffset": -60,
       "fitToScope": true
     },
@@ -60,55 +33,17 @@
       "path": "foreground.png",
       "zIndex": 101,
       "parallaxSpeed": 0.5,
-      "width": 400,
-      "minHeight": 500,
+      "width": 320,
+      "minHeight": 400,
       "yOffset": -2,
-      "fitToScope": true
-    },
-    {
-      "path": "light_basic.png",
-      "zIndex": 50,
-      "parallaxSpeed": 0.899,
-      "width": 400,
-      "minHeight": 500,
-      "yOffset": -60,
-      "fitToScope": true
-    },
-    {
-      "path": "fog.png",
-      "zIndex": 60,
-      "parallaxSpeed": 0.95,
-      "width": 400,
-      "minHeight": 500,
-      "blendMode": "plus-lighter",
-      "yOffset": -60,
-      "fitToScope": true
-    },
-    {
-      "path": "fog_up.png",
-      "zIndex": 61,
-      "parallaxSpeed": 0.895,
-      "width": 400,
-      "minHeight": 500,
-      "blendMode": "plus-lighter",
-      "yOffset": -60,
-      "fitToScope": true
-    },
-    {
-      "path": "light_side.png",
-      "zIndex": 51,
-      "parallaxSpeed": 0.898,
-      "width": 400,
-      "minHeight": 500,
-      "yOffset": -60,
       "fitToScope": true
     },
     {
       "path": "light_extra.png",
       "zIndex": 52,
       "parallaxSpeed": 0.899,
-      "width": 400,
-      "minHeight": 500,
+      "width": 320,
+      "minHeight": 320,
       "blendMode": "color-dodge",
       "yOffset": -60,
       "fitToScope": true
