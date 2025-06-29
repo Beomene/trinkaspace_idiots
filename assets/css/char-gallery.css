@@ -1,489 +1,84 @@
-/* BI Gallery Styles - A chiral (mirrored) version of the AI Gallery */
+/* BI Gallery - Chiral Mirror of AI Gallery */
+.gallery-container { max-width: 100%; padding: 2rem; height: 100vh; }
+.gallery-title { text-align: center; font-size: 3.5rem; margin-bottom: 1rem; }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.1rem; }
 
-/* Main Gallery Container */
-.gallery-container {
-    max-width: 100%;
-    padding: 2rem;
-    font-family: 'Arial', sans-serif;
-    height: 100vh;
-}
-
-.gallery-title {
-    text-align: center;
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    color: #333;
-}
-
-.gallery-description {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 3rem;
-    line-height: 1.6;
-    color: #555;
-}
-
-/* Grid Layout for BI Cards */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.1rem;
-}
-
-/* BI Card Styling */
+/* BI Cards */
 .bi-card {
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    color: #333;
-    height: 124px;
-    display: flex;
-    position: relative;
+  background: rgba(255,255,255,0.7); border-radius: 10px; 
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease;
+  height: 124px; display: flex; position: relative;
 }
+.bi-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+.bi-card-inner { padding: 1.5rem; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 
-.bi-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
+/* BI Page Layout */
+.bi-page { min-height: 140vh; width: 100%; background: #a3a3a3; }
+.bi-title-area { position: absolute; top: 0; right: 40vw; width: 40vw; height: 10vh; padding-right: 6vw; text-align: right; }
 
-.bi-card-inner {
-    padding: 1.5rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    z-index: 1;
-}
-
-.bi-card h2 {
-    margin: 0 0 0.5rem;
-    font-size: 1.8rem;
-}
-
-.bi-card p {
-    margin: 0;
-    font-size: 1rem;
-    opacity: 0.7;
-}
-
-/* Individual BI Page Styling - INVERTED from AI version */
-.bi-page {
-    position: relative;
-    min-height: 140vh; /* ~140vh total as specified */
-    width: 100%;
-    overflow-x: hidden;
-    background-color: #a3a3a3;
-}
-
-/* Title area - mirrored to the right side */
-.bi-title-area {
-    position: absolute;
-    top: 0;
-    right: 40vw; /* Inverted from left to right */
-    width: 40vw;
-    height: 10vh;
-    padding: 0 6vw 0 0; /* Inverted padding */
-    text-align: right; /* Right aligned */
-}
-
-.bi-title-img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-/* Upper section - Text and Character Image - INVERTED positions */
-.bi-upper-section {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* First viewport */
-    display: flex;
-    padding-top: 7vh; /* Space for title */
-}
-
-/* Right side - Text Content (inverted from AI gallery) */
+/* Content Sections */
+.bi-upper-section { position: relative; width: 100%; height: 100vh; padding-top: 7vh; }
 .bi-text-container {
-    position: absolute;
-    right: 8vw; /* 8vw from right instead of left */
-    top: 20vh;
-    width: 33vw;
-    height: fit-content; /* Already using fit-content */
-    max-height: 60vh; /* Maximum height constraint */
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--text-box-bg, rgba(64, 64, 64, 0.85)); /* Customizable background with transparency */
-    color: var(--text-color, #ACABBB); /* Customizable text color */
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 0 15px rgba(14, 14, 14, 0.1);
+  position: absolute; right: 8vw; top: 20vh; width: 33vw; max-height: 60vh;
+  background: var(--text-box-bg, rgba(64,64,64,0.85)); color: var(--text-color, #ACABBB);
+  padding: 1rem; border-radius: 5px; box-shadow: 0 0 15px rgba(14,14,14,0.1);
 }
-
-.bi-text-content {
-    width: 100%;
-    height: 100%;
-    overflow-y: visible; /* Changed from auto to visible to support parallax scrolling */
-    padding-left: 1rem; /* Inverted from right to left */
-    position: relative;
-    will-change: transform; /* Optimization for animations */
-}
-
-.bi-text-content::-webkit-scrollbar {
-    width: 5px;
-    background: transparent;
-}
-
-.bi-text-content::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-}
-
-.scroll-indicator {
-    position: absolute;
-    bottom: 10px;
-    left: 10px; /* Inverted from right to left */
-    width: 20px;
-    height: 20px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.7;
-    display: none; /* Initially hidden, will be shown via JavaScript if content overflows */
-}
-
-/* Left side - Character Image Display (inverted from AI gallery) */
-.bi-image-container {
-    position: absolute;
-    left: 4vw; /* Inverted from right to left */
-    top: 10vh;
-    width: 40vw;
-    height: 80vh;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.bi-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    transition: transform 0.5s ease;
-}
-
-/* Lower section - Long Image */
-.bi-lower-section {
-    position: relative;
-    margin-top: 10vh;
-    width: 100%;
-    height: 50vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.bi-long-image {
-    width: 80vw;
-    height: 100%;
-    object-fit: cover;
-}
+.bi-image-container { position: absolute; left: 4vw; top: 10vh; width: 40vw; height: 80vh; }
+.bi-lower-section { position: relative; margin-top: 10vh; width: 100%; height: 50vh; display: flex; justify-content: center; }
 
 /* Navigation */
-.bi-nav {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 100;
-}
-
+.bi-nav { position: fixed; top: 20px; left: 20px; z-index: 100; }
 .back-button {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 20px;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+  display: flex; align-items: center; padding: 0.5rem 1rem;
+  background: rgba(255,255,255,0.7); border-radius: 20px; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;
 }
+.back-button:hover { background: rgba(255,255,255,0.9); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-.back-button:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.back-icon {
-    margin-right: 5px;
-    font-size: 1.2rem;
-}
-
-/* Parallax effects */
-.parallax-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
-.parallax-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-}
-
-/* Character interest item boxes - floating around character image */
-.character-interests-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Allow interactions with elements beneath */
-}
-
+/* Floating Items */
 .interest-item {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
-    will-change: transform;
-    animation: float 6s infinite ease-in-out;
-    z-index: 5;
+  position: absolute; width: 150px; height: 150px;
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+  animation: float 6s infinite ease-in-out; z-index: 5;
 }
-
-.interest-item.item1 {
-    left: -80px;
-    top: 20%;
-    animation-delay: 0s;
-}
-
-.interest-item.item2 {
-    right: -50px;
-    top: 40%;
-    animation-delay: -2s;
-}
-
-.interest-item.item3 {
-    left: 30px;
-    bottom: 15%;
-    animation-delay: -4s;
-}
-
-/* Floating animation for interest items */
 @keyframes float {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    25% {
-        transform: translateY(-10px) rotate(2deg);
-    }
-    50% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    75% {
-        transform: translateY(10px) rotate(-2deg);
-    }
-    100% {
-        transform: translateY(0px) rotate(0deg);
-    }
+  0%,100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-10px) rotate(2deg); }
+  75% { transform: translateY(10px) rotate(-2deg); }
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 992px) {
-    /* Adjust the layout for tablets and smaller devices */
-    .bi-page {
-        min-height: 160vh; /* Increase height for stacked layout */
-    }
-    
-    .bi-upper-section {
-        flex-direction: column;
-        height: auto;
-    }
-    
-    .bi-title-area {
-        width: 80vw;
-        right: 40vw; /* Inverted from left to right */
-        padding: 0;
-    }
-    
-    .bi-text-container {
-        position: relative;
-        width: fit-content;
-        right: 10vw; /* Inverted from left to right */
-        margin-top: 5vh;
-        padding: 1.5rem;
-        height: 60vh;
-    }
-    
-    .bi-image-container {
-        position: relative;
-        width: 80vw;
-        right: 10vw; /* Inverted from left to right */
-        margin-top: 5vh;
-        height: 60vh;
-    }
-    
-    .bi-lower-section {
-        margin-top: 5vh;
-    }
+  .bi-page { min-height: 160vh; }
+  .bi-title-area { width: 80vw; right: 40vw; padding: 0; }
+  .bi-text-container, .bi-image-container { position: relative; width: 80vw; right: 10vw; }
 }
-
 @media (max-width: 576px) {
-    /* Mobile adjustments */
-    .bi-page {
-        min-height: 180vh;
-    }
-    
-    .bi-title-area {
-        width: 90vw;
-        right: 5vw; /* Inverted from left to right */
-    }
-    
-    .bi-text-container {
-        width: 90vw;
-        right: 5vw; /* Inverted from left to right */
-        height: 50vh;
-    }
-    
-    .bi-image-container {
-        width: 90vw;
-        right: 5vw; /* Inverted from left to right */
-        height: 50vh;
-    }
-    
-    .bi-lower-section {
-        height: 25vh;
-    }
-    
-    .bi-long-image {
-        width: 90vw;
-    }
+  .bi-page { min-height: 180vh; }
+  .bi-title-area, .bi-text-container, .bi-image-container { width: 90vw; right: 5vw; }
+  .bi-lower-section { height: 25vh; }
 }
 
-/* Theme colors for BI characters */
+/* Theme Colors */
 .theme-eene {
-    --primary-color: #4CAF50;
-    --secondary-color: #388E3C;
-    --accent-color: #8BC34A;
-    --text-color: #E1FFE1; /* Light green text */
-    --bg-color: #F1F8E9;
-    --text-box-bg: rgba(16, 64, 16, 0.85); /* Dark green with transparency */
-    --heading-color: #8BC34A; /* Light green for headings */
-    --interest-item1: url('/pages/BI-gallery/images/interests/eene_teacup.png');
-    --interest-item2: url('/pages/BI-gallery/images/interests/eene_book.png');
-    --interest-item3: url('/pages/BI-gallery/images/interests/eene_robot.png');
+  --primary-color: #4CAF50; --secondary-color: #388E3C;
+  --text-color: #E1FFE1; --text-box-bg: rgba(16,64,16,0.85);
 }
-
 .theme-emraa {
-    --primary-color: #9C27B0;
-    --secondary-color: #7B1FA2;
-    --accent-color: #E1BEE7;
-    --text-color: #F3E5F5; /* Light purple text */
-    --bg-color: #F3E5F5;
-    --text-box-bg: rgba(64, 16, 64, 0.85); /* Dark purple with transparency */
-    --heading-color: #E1BEE7; /* Light purple for headings */
-    --interest-item1: url('/pages/BI-gallery/images/interests/emraa_item1.png');
-    --interest-item2: url('/pages/BI-gallery/images/interests/emraa_item2.png');
-    --interest-item3: url('/pages/BI-gallery/images/interests/emraa_item3.png');
+  --primary-color: #9C27B0; --secondary-color: #7B1FA2;
+  --text-color: #F3E5F5; --text-box-bg: rgba(64,16,64,0.85);
 }
-
 .theme-trinkaloop {
-    --primary-color: #FF5722;
-    --secondary-color: #E64A19;
-    --accent-color: #FFCCBC;
-    --text-color: #FFEBE5; /* Light orange text */
-    --bg-color: #FBE9E7;
-    --text-box-bg: rgba(64, 32, 16, 0.85); /* Dark orange with transparency */
-    --heading-color: #FFCCBC; /* Light orange for headings */
-    --interest-item1: url('/pages/BI-gallery/images/interests/trinkaloop_item1.png');
-    --interest-item2: url('/pages/BI-gallery/images/interests/trinkaloop_item2.png');
-    --interest-item3: url('/pages/BI-gallery/images/interests/trinkaloop_item3.png');
+  --primary-color: #FF5722; --secondary-color: #E64A19;
+  --text-color: #FFEBE5; --text-box-bg: rgba(64,32,16,0.85);
 }
 
-.theme-yly {
-    --primary-color: #FFC107;
-    --secondary-color: #FFA000;
-    --accent-color: #FFECB3;
-    --text-color: #FF6F00;
-    --bg-color: #FFF8E1;
-}
-
-.theme-lyl {
-    --primary-color: #FF9800;
-    --secondary-color: #F57C00;
-    --accent-color: #FFE0B2;
-    --text-color: #E65100;
-    --bg-color: #FFF3E0;
-}
-
-.theme-gwenrr {
-    --primary-color: #2196F3;
-    --secondary-color: #1976D2;
-    --accent-color: #BBDEFB;
-    --text-color: #0D47A1;
-    --bg-color: #E3F2FD;
-}
-
-.theme-3mraa {
-    --primary-color: #673AB7;
-    --secondary-color: #512DA8;
-    --accent-color: #D1C4E9;
-    --text-color: #311B92;
-    --bg-color: #EDE7F6;
-}
-
-.bi-text-content h1, 
-.bi-text-content h2, 
-.bi-text-content h3, 
-.bi-text-content h4, 
-.bi-text-content h5, 
-.bi-text-content h6 {
-    color: var(--heading-color, #7e9bf0);
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-/* Custom CSS banners */
+/* Utility Classes */
 .bi-banner {
-    width: 100%;
-    height: 80px;
-    background: linear-gradient(to right, 
-        transparent 0%, 
-        var(--primary-color, #4CAF50) 20%, 
-        var(--secondary-color, #388E3C) 80%, 
-        transparent 100%);
-    margin: 2rem 0;
-    position: relative;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  width: 100%; height: 80px; margin: 2rem 0;
+  background: linear-gradient(to right, transparent 0%, var(--primary-color) 20%, var(--secondary-color) 80%, transparent 100%);
 }
-
-/* Decorative boxes for content */
 .bi-content-box {
-    border: 2px solid var(--primary-color, #4CAF50);
-    border-radius: 8px;
-    padding: 1rem;
-    margin: 1rem 0;
-    background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--primary-color); border-radius: 8px;
+  padding: 1rem; margin: 1rem 0; background: rgba(255,255,255,0.1);
 }
