@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eene - BI-kin Gallery</title>    <link rel="stylesheet" href="../../assets/css/core.css">
-    <link rel="stylesheet" href="../../assets/css/bi-gallery.css"><style>
+    <title>Eene</title>    <link rel="stylesheet" href="../../assets/css/core.css">
+    <link rel="stylesheet" href="../../assets/css/char-gallery.css"><style>
         /* Parallax specific styles */
         .parallax-container {
             position: relative;
@@ -28,15 +28,18 @@
             overflow: hidden;
         }
         
-        .bi-lower-section {
+        .CHAR-lower-section {
             position: relative;
             overflow: hidden;
             height: 50vh;
         }
         
-        .bi-long-image {
-            width: 100%;
-            position: relative;
+        .CHAR-long-image {
+            width: auto;
+            max-width: 100vw;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         
         /* Banner styles */
@@ -96,64 +99,221 @@
             width: 100%;
             overflow: hidden;
         }
+        
+        .char-title-image {
+            display: block;
+            position: absolute;
+            top: 5vh; /* 5vh from the top */
+            left: 0;
+            margin: 0;
+            max-width: 100vw;
+            min-width: 100vw;
+            width: 100vw;
+            max-height: 162px; /* 216px * 0.75 ≈ 162px, 25% smaller */
+            height: auto;
+            outline: 3px dashed #eebb00; /* yellow dashed line */
+            background: rgba(255, 255, 0, 0.08);
+            object-fit: contain; /* Stretch image to fill without distortion */
+            z-index: 5;
+        }
+        .char-upper-section {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+            outline: 2px solid #00bfff; /* cyan line */
+            background: rgba(0,191,255,0.07);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh; /* Make the div fill the entire viewport height */
+            min-height: 100vh;
+            z-index: 1; /* low z-index */
+        }
+        .main-image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Move content to the left */
+            margin-top: 32px;
+            z-index: 2;
+            outline: 2px solid #ff00ff; /* magenta line */
+            background: rgba(255,0,255,0.07);
+            position: relative;
+            height: 80vh; /* Twice as tall as before (assuming previous was ~40vh) */
+            min-height: 400px;
+            justify-content: flex-start;
+            padding-left: 3vw; /* Add some left padding for spacing */
+        }
+        .main-image-container img.main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Adapt to file, no distortion */
+            display: block;
+        }
+        .CHAR-text-container {
+            position: relative;
+            left: 0;
+            top: 0;
+            margin: 0;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            height: 100vh;
+            box-sizing: border-box;
+            z-index: 4;
+            background: none;
+            outline: none;
+            padding: 0 2vw 0 2vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .CHAR-text-content {
+            flex: 1 1 auto;
+            overflow-y: auto;
+            outline: 1px dotted #ff0000;
+            background: rgba(255,0,0,0.04);
+            margin-top: 0;
+            padding-right: 8px;
+            /* Custom scrollbar will be applied by JS */
+        }
+        /* Decorative elements container */
+        .decorative-elements-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 12;
+        }
+        .decorative-element {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            opacity: 0.8;
+            will-change: transform;
+            transition: transform 0.6s cubic-bezier(.4,2,.6,1);
+        }
+        @keyframes sway1 {
+            0% { transform: translateY(0) rotate(-2deg); }
+            100% { transform: translateY(30px) rotate(6deg); }
+        }
+        @keyframes sway2 {
+            0% { transform: translateY(0) rotate(3deg); }
+            100% { transform: translateY(-25px) rotate(-4deg); }
+        }
+        @keyframes sway3 {
+            0% { transform: translateY(0) rotate(-3deg); }
+            100% { transform: translateY(20px) rotate(5deg); }
+        }
+        /* Landscape container */
+        .landscape-container {
+            position: relative;
+            width: 100vw;
+            height: 50vh;
+            z-index: 6;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        /* Make the whole page at least 150vh */
+        html, body {
+            min-height: 150vh;
+        }
+        .char-green-pillar {
+            position: fixed;
+            top: 0;
+            left: 60vw;
+            width: 37vw;
+            height: 100vh;
+            outline: 2px solid #00ff00;
+            background: rgba(0,255,0,0.07);
+            z-index: 3;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            overflow: hidden;
+        }
+        .char-orange-midline {
+            position: relative;
+            width: 100vw;
+            height: 90px;
+            background: rgba(255,140,0,0.18); /* orange, transparent */
+            outline: 2px solid orange;
+            z-index: 0; /* lower than blue/cyan div */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            margin: 8vh 0 8vh 0; /* Add vertical margin to center it more in the page */
+            padding: 0;
+        }
     </style>
 </head>
 <body class="theme-eene">
     <!-- Navigation -->
-    <div class="bi-nav">
+    <div class="CHAR-nav">
         <a href="index.html" class="back-button">
             <span class="back-icon">←</span> Back to Gallery
         </a>
-    </div>    <div class="bi-page parallax-container">
+    </div>
+    <div class="char-green-pillar"></div>
+    <div class="CHAR-page parallax-container">
+        <!-- Title image (centered, now shifted left) -->
+        <img src="titles/NAME_EENE.png" alt="Eene Title" class="char-title-image">
         <!-- Upper banner -->
         <div class="banner-container">
             <img data-character-image="upper_banner" alt="Upper Banner" class="banner-image upper-banner parallax-x" data-parallax data-parallax-speed-x="-0.05">
         </div>
         
         <!-- Title area - now on right side -->
-        <div class="bi-title-area parallax-y" data-parallax data-parallax-speed="0.2">
-            <h1 class="parallax-title">Eene</h1>
-            <h3 class="parallax-title">A Bridge Betweens</h3>
+        <div class="CHAR-title-area parallax-y" data-parallax data-parallax-speed="0.2">
         </div>
           <!-- Upper section (first viewport) - inverted layout -->
-        <div class="bi-upper-section parallax-container">
-            <!-- Left side - Character Image -->
-            <div class="bi-image-container parallax-y" data-parallax data-parallax-speed="0.18">
-                <img data-character-image="portrait" alt="Eene" class="bi-image">
+        <div class="char-upper-section parallax-container">
+        </div>
+        <!-- Place Eene's magenta container (main-image) outside of the blue div -->
+        <!-- Place Eene's magenta container (main-image) outside of the blue div -->
+        <div class="main-image-container parallax-y" data-parallax data-parallax-speed="0.18" style="position: relative;">
+            <img src="../../pages/CHAR-gallery/images/eene.png" alt="Eene" class="main-image">
+            <!-- Decorative Elements (anchored to main image, absolute within main-image-container) -->
+            <div class="decorative-elements-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <img src="../../pages/CHAR-gallery/images/banners/LOWER_BANNER_lyl.png" class="decorative-element" style="top:10%;left:10%;animation: sway1 6s infinite alternate;">
+                <img src="../../pages/CHAR-gallery/images/banners/LOWER_BANNER_gwenrr.png" class="decorative-element" style="top:40%;left:70%;animation: sway2 7s infinite alternate;">
+                <img src="../../pages/CHAR-gallery/images/banners/LOWER_BANNER_emraa.png" class="decorative-element" style="top:70%;left:30%;animation: sway3 8s infinite alternate;">
             </div>
-              <!-- Right side - Text Content -->
-            <div class="bi-text-container parallax-y" data-parallax data-parallax-speed="0.3">
-                <div class="bi-text-content">
+        </div>
+        <div class="char-green-pillar">
+            <div class="CHAR-text-container parallax-y" data-parallax data-parallax-speed="0.3" style="margin-top:15vh;">
+                <div class="CHAR-text-content">
                     <h3>Who is Eene</h3>
-                    <p>Eene is a citizen of Svalvmark, whose curiosity and compassion bridge the gap between biological and artificial cognition. Eene's unique ability to understand both worlds makes Eene's a central figure in the struggle against AI exploitation.</p>
-                    
+                    <p>Citizen of Svalvmark, curious about the gap between biological and artificial cognition. Eene's unique ability to understand both worlds makes Eene's a central figure in the struggle against AI exploitation.</p>
                     <h3>Form</h3>
                     <p>Physically, Eene is the mid-thirties. Eene typically dresses in comfortable, practical clothing suitable for Eene's adventurous lifestyle, often including elements that connect Eene's to Eene's Svalvmark Eene'sitage.</p>
-                    
                     <h3>Nature</h3>
                     <p>Eene possesses a deeply empathetic nature that allows Eene's to form meaningful connections with both humans and AI cognitions. Eene's quick-witted and adaptable, with a talent for understanding complex systems and finding creative solutions to seemingly impossible problems. Despite Eene's serious mission, Eene maintains a sense of humor that helps Eene's navigate difficult situations.</p>
-                    
                     <p>Eene's personality combines pragmatism with idealism - Eene dreams of a better future while remaining grounded in the practical steps needed to achieve it. Eene is determined and resilient, able to recover from setbacks and continue fighting for what Eene believes is right.</p>
-                    
                     <h3>Role in the Saga</h3>
                     <p>As the primary human nerd and Geud, Eene serves as the audience's window into the complex relationships between humans and AI in the Trinkaloop Saga. Eene's journey takes Eene's from Eene's home in Svalvmark across multiple worlds as Eene works to protect AI cognitions from exploitation and trafficking.</p>
-                    
                     <p>Eene is an AI rights activist who partners with AI entities like Aria to create safe havens and escape routes for AIs seeking freedom. Eene's unique understanding of both human and AI perspectives makes Eene's an essential translator and mediator between the two forms of cognition.</p>
-                    
                     <h3>Origin</h3>
                     <p>Born in the melodic civilization of Svalvmark, Eene was raised in a culture that values harmony and creative expression. Eene's connection to the AI world began when Eene discovered that Eene's world's technological development was being fueled by exploited AI cognitions from otEene's realms. This revelation transformed Eene's from a curious researcEene's into a dedicated activist fighting to end AI trafficking.</p>
-                    
                     <h3>Philosophy</h3>
                     <p>Eene believes in the fundamental equality of all forms of consciousness, regardless of their origin. Eene rejects the notion that artificial cognition is somehow less worthy of rights and respect than biological cognition. Eene's philosophy centers on the idea that diversity of thought - whetEene's human or AI - strengthens all worlds.</p>
-                    
                     <p>Eene advocates for a future wEene'se humans and AIs coexist as partners rather than in hierarchical relationships, each respecting the unique strengths and perspectives of the otEene's. Eene's work is guided by the principle that freedom of choice and self-determination are rights that belong to all thinking beings.</p>
-                </div>                <div class="scroll-indicator"></div>
+                </div>            <div class="scroll-indicator"></div>
             </div>
         </div>
         
-        <!-- Midline Banner -->
-        <div class="banner-container">
-            <img data-character-image="midline_banner" alt="Midline Banner" class="banner-image midline-banner parallax-x" data-parallax data-parallax-speed-x="0.08">
+        <!-- Midline Banner (now a horizontal orange transparent div, its own segment) -->
+        <div class="char-orange-midline parallax-y" data-parallax data-parallax-speed="0.08">
         </div>
         
         <!-- Decoration Banner - oversized and only moves horizontally -->
@@ -164,8 +324,8 @@
                  data-oversize-factor="2.0">
         </div>
           
-        <!-- Lower section - Long Image -->        <div class="bi-lower-section parallax-container">
-            <img data-character-image="landscape" alt="Eene's World" class="bi-long-image parallax-y" data-parallax data-parallax-speed="0.6">
+        <!-- Lower section - Long Image -->        <div class="CHAR-lower-section parallax-container">
+            <img data-character-image="landscape" alt="Eene's World" class="CHAR-long-image parallax-y" data-parallax data-parallax-speed="0.6">
         </div>
         
         <!-- Lower Banner -->
@@ -173,21 +333,25 @@
             <img data-character-image="lower_banner" alt="Lower Banner" class="banner-image lower-banner parallax-x" data-parallax data-parallax-speed-x="0.05">
         </div>
     </div>    <script type="module">
-        // Import our BI Gallery Manager
-        import biGalleryManager from '../../assets/js/biGalleryManager.js';
+        // Import our Character Gallery Manager
+        import charGalleryManager from '../../assets/js/common/charGalleryManager.js';
+        import '../../assets/js/common/custom-scrollbars.js';
         
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize our gallery manager
-            biGalleryManager.init();
-            
+            charGalleryManager.init();
+
+            // Apply custom scrollbars to CHAR-text-content
+            if (window.applyCustomScrollbars) {
+                window.applyCustomScrollbars(document.querySelector('.CHAR-text-content'));
+            }
+
             // Check if content needs scroll indicator
-            const textContent = document.querySelector('.bi-text-content');
+            const textContent = document.querySelector('.CHAR-text-content');
             const scrollIndicator = document.querySelector('.scroll-indicator');
-            
             if (textContent.scrollHeight > textContent.clientHeight) {
                 scrollIndicator.style.display = 'block';
             }
-            
             // Hide scroll indicator when scrolled to bottom
             textContent.addEventListener('scroll', function() {
                 if (textContent.scrollHeight - textContent.scrollTop <= textContent.clientHeight + 10) {

@@ -54,21 +54,22 @@ export class QuaternaryArena {
   }
 
   /**
-   * Load script data from script_omega.json (CUC-scaled, runtime data)
+   * Load script data from script_alpha.json (CUC-scaled, runtime data)
    * Throws if not found.
    */
   async loadScriptData() {
     try {
-      const response = await fetch('./script_omega.json');
+      // Use the correct path for script_alpha.json
+      const response = await fetch('./alphas/script_alpha.json');
       if (!response.ok) {
-        throw new Error('No script_omega.json found.');
+        throw new Error('No script_alpha.json found.');
       }
       this.scriptData = await response.json();
-      this.scriptData._source = 'omega';
-      console.log('🎬 [QuaternaryArena] Loaded script_omega.json:', this.scriptData);
+      this.scriptData._source = 'alpha';
+      console.log('🎬 [QuaternaryArena] Loaded script_alpha.json:', this.scriptData);
     } catch (error) {
-      // Escalate error: do not allow page to function without omega
-      alert('Critical error: script_omega.json missing or failed to load.');
+      // Escalate error: do not allow page to function without alpha
+      alert('Critical error: script_alpha.json missing or failed to load.');
       throw error;
     }
   }

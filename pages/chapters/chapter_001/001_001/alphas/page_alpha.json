@@ -4,29 +4,29 @@
     "chapterId": "001",
     "title": "The Beginning",
     "description": "Eene's first steps into the story",
-    "pageHeight": "100%",
     "hudLayout": "WIDE",
-    "useAlphaBlueprint": true
+    "useAlphaBlueprint": true,
+    "debug": true
   },
   "dioramas": [
     {
       "id": "001_001_002",
-      "configPath": "./A1/001_001_002/config_alpha.json",
-      "scopePath": "./A1/001_001_002/scope_alpha.json",
+      "configPath": "A1/001_001_002/alphas/config_alpha.json",
+      "scopePath": "A1/001_001_002/alphas/scope_alpha.json",
       "anchorY": 800,
       "anchorX": 0
     },
     {
       "id": "001_001_004",
-      "configPath": "./A1/001_001_004/config_alpha.json",
-      "scopePath": "./A1/001_001_004/scope_alpha.json",
+      "configPath": "A1/001_001_004/alphas/config_alpha.json",
+      "scopePath": "A1/001_001_004/alphas/scope_alpha.json",
       "anchorY": 1600,
       "anchorX": 0
     },
     {
       "id": "001_001_006",
-      "configPath": "./A1/001_001_006/config_alpha.json",
-      "scopePath": "./A1/001_001_006/scope_alpha.json",
+      "configPath": "A1/001_001_006/alphas/config_alpha.json",
+      "scopePath": "A1/001_001_006/alphas/scope_alpha.json",
       "anchorY": 2400,
       "anchorX": 0
     }
@@ -34,8 +34,8 @@
   "textboxes": [
     {
       "id": "001_001_003",
-      "configPath": "./A2/001_001_003/scope_alpha.json",
-      "contentPath": "./A2/001_001_003/content.md",
+      "configPath": "A2/001_001_003/scope_alpha.json",
+      "contentPath": "A2/001_001_003/content.md",
       "anchorTo": "001_001_002",
       "moment": 2
     }

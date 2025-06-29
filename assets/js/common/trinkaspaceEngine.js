@@ -199,178 +199,126 @@ export default class TrinkaspaceEngine {
   }
 
   async loadPage(pageId) {
-    console.log(`🎭 Loading page: ${pageId}`);
-    // Load omega file (should reference alpha)
-    const omegaResponse = await fetch(`./page_omega.json`);
-    const omegaData = await omegaResponse.json();
-    const cuc = omegaData.CUC || this.cuc;
-    const alphaPath = omegaData.alpha || 'alphas/page_alpha.json';
-    // Load alpha file
-    const alphaResponse = await fetch(alphaPath);
-    const alphaData = await alphaResponse.json();
-    // Store meta for vpN
-    this.pageAlphaMeta = alphaData.meta || {};
-    // Debug: Log loaded alphaData
-    console.debug('[DEBUG] Loaded alphaData:', alphaData);
-    // Use alphaData for dioramas
-    const dioramas = alphaData.dioramas || [];
-    if (dioramas.length === 0) {
-      console.error('[DEBUG] No dioramas found in alphaData:', alphaData);
-    }
-    this.pageAlphaDioramas = dioramas; // Store for buildDiorama
-    // Calculate page height according to Royal Alpha: A1 height × N (default N=10)
-    const N = dioramas[0]?.N || 10;
-    const pageHeight = `${this.a1Height * N}px`;
-    this.container.style.height = pageHeight;
-    document.documentElement.style.setProperty('--page-height', pageHeight);
-    let firstScope = null;
-    for (const diorama of dioramas) {
-      console.log(`🎪 Processing diorama: ${diorama.id}`);
-      // Debug: Log diorama config and scope paths
-      console.debug('[DEBUG] Diorama configPath:', diorama.configPath, 'scopePath:', diorama.scopePath);
-      // Correct canonical path for block/box alpha files
-      const configPath = diorama.configPath || `A1/${diorama.id}/alphas/config_alpha.json`;
-      const scopePath = diorama.scopePath || `A1/${diorama.id}/alphas/scope_alpha.json`;
-      try {
-        const [config, scope] = await Promise.all([
-          fetch(configPath).then(r => r.json()),
-          fetch(scopePath).then(r => r.json())
-        ]);
-        // Debug: Log loaded config and scope
-        console.debug(`[DEBUG] Loaded config for ${diorama.id}:`, config);
-        console.debug(`[DEBUG] Loaded scope for ${diorama.id}:`, scope);
-        if (!firstScope) {
-          firstScope = scope;
-          this.scopeConfig = scope;
-          this.parallax = new ParallaxEngine(this.scopeConfig, cuc);
+    console.log(`🎭 Loading page from ALPHA blueprint: ${pageId}`);
+    // Fetch the alpha files relative to the current page directory
+    const alphaPath = `alphas/page_alpha.json`;
+    const scriptPath = `alphas/script_alpha.json`;
+    try {
+      const [alphaResponse, scriptResponse] = await Promise.all([
+        fetch(alphaPath),
+        fetch(scriptPath)
+      ]);
+      const alphaData = await alphaResponse.json();
+      const scriptData = await scriptResponse.json();
+      // Optionally, initialize A4 Director with the true alpha script
+      if (this.quaternaryArena) {
+        // Instead of loadScript, call loadScriptData with the correct path
+        this.quaternaryArena.scriptData = scriptData;
+        if (typeof this.quaternaryArena.parseMoments === 'function') {
+          this.quaternaryArena.parseMoments();
         }
-        // Build diorama with CUC
-        const dioramaEl = this.buildDiorama(config, scope, diorama.id, cuc);
-        this.container.appendChild(dioramaEl);
-        this.dioramaAnchors.set(diorama.id, diorama.anchorY || 0);
-      } catch (err) {
-        console.error(`[DEBUG] Failed to load diorama ${diorama.id}:`, err);
+        console.log('🎬 A4 Director has received the alpha script.');
       }
-    }
-    
-    // Initialize A3 HUD system
-    if (!this.hudManager) {
-      this.hudManager = initHUDManager({
-        hudLayout: this.hudLayout,
-        cuc: this.cuc
-      });
-    }
-    
-    // Initialize A3 menu system if we have one
-    if (alphaData.arena3?.menu) {
-      this.initArena3Menu(alphaData.arena3.menu);
-    }
-    
-    // A4 Director takes over moment coordination
-    if (this.quaternaryArena) {
-      // Connect A4 to the built dioramas
-      this.quaternaryArena.setDioramas(this.dioramaAnchors);
-      console.log('� A4 Director connected to dioramas');
+      // Store meta for vpN
+      this.pageAlphaMeta = alphaData.meta || {};
+      // Debug: Log loaded alphaData
+      console.debug('[DEBUG] Loaded alphaData:', alphaData);
+      // Use alphaData for dioramas
+      const dioramas = alphaData.dioramas || [];
+      if (dioramas.length === 0) {
+        console.error('[DEBUG] No dioramas found in alphaData:', alphaData);
+      }
+      this.pageAlphaDioramas = dioramas; // Store for buildDiorama
+      // Calculate page height according to Royal Alpha: A1 height × N (default N=10)
+      const N = dioramas[0]?.N || 10;
+      const pageHeight = `${this.a1Height * N}px`;
+      this.container.style.height = pageHeight;
+      document.documentElement.style.setProperty('--page-height', pageHeight);
+      let firstScope = null;
+      // Build dioramas and append to container
+      this.container.innerHTML = '';
+      for (const diorama of dioramas) {
+        console.log(`🎪 Processing diorama: ${diorama.id}`);
+        // Debug: Log diorama config and scope paths
+        console.debug('[DEBUG] Diorama configPath:', diorama.configPath, 'scopePath:', diorama.scopePath);
+        // Use correct canonical path for block/box alpha files
+        // If configPath/scopePath are not provided, use the convention: A1/{diorama.id}/alphas/config_alpha.json
+        const configPath = diorama.configPath || `A1/${diorama.id}/alphas/config_alpha.json`;
+        const scopePath = diorama.scopePath || `A1/${diorama.id}/alphas/scope_alpha.json`;
+        try {
+          const [config, scope] = await Promise.all([
+            fetch(configPath).then(r => r.json()),
+            fetch(scopePath).then(r => r.json())
+          ]);
+          // Debug: Log loaded config and scope
+          console.debug(`[DEBUG] Loaded config for ${diorama.id}:`, config);
+          const dioramaElement = this.buildDiorama(config, scope, diorama.id, this.cuc);
+          this.container.appendChild(dioramaElement);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      // Initialize A3 HUD system
+      if (!this.hudManager) {
+        this.hudManager = initHUDManager({
+          hudLayout: this.hudLayout,
+          cuc: this.cuc
+        });
+      }
+      // Initialize A3 menu system if we have one
+      if (alphaData.arena3?.menu) {
+        this.initArena3Menu(alphaData.arena3.menu);
+      }
+      // A4 Director takes over moment coordination
+      if (this.quaternaryArena) {
+        // Connect A4 to the built dioramas
+        this.quaternaryArena.setDioramas(this.dioramaAnchors);
+        console.log('� A4 Director connected to dioramas');
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 
   buildDiorama(config, scope, dioramaId, cuc = 1.0) {
-    const assetBase = `./A1/${dioramaId}`;
     const container = document.createElement('section');
-    container.className = 'diorama local-scroll';
+    container.className = 'diorama'; // Remove local-scroll
     container.id = dioramaId;
-    // Get anchorX and anchorY from the diorama entry in page_alpha.json
-    const pageAlphaDiorama = (this.pageAlphaDioramas || []).find(d => d.id === dioramaId);
-    let anchorX = 0, anchorY = 0;
-    if (pageAlphaDiorama) {
-      anchorX = (pageAlphaDiorama.anchorX || 0) * cuc;
-      anchorY = (pageAlphaDiorama.anchorY || 0) * cuc;
+    
+    // Set explicit dimensions
+    container.style.width = `${config.width * cuc}px`;
+    container.style.height = `${config.height * cuc}px`;
+    container.style.left = `${config.x * cuc}px`;
+    container.style.top = `${config.y * cuc}px`;
+    
+    // Create visible debug outline
+    if (this.debugMode) {
+      container.style.outline = '2px dashed cyan';
     }
-    container.style.position = 'absolute';
-    container.style.left = `${anchorX}px`;
-    container.style.top = `${anchorY}px`;
-    container.style.overflow = 'hidden';
-    // Clamp diorama width to never exceed A1 container width
-    const a1Width = this.a1Width;
-    const scaledWidth = Math.min(config.useAlphaBlueprint ? 320 * cuc : this.a1Width, a1Width);
-    const scaledHeight = config.useAlphaBlueprint ? 320 * cuc : this.a1Height;
-    container.style.width = `${scaledWidth}px`;
-    container.style.height = `${scaledHeight}px`;
-    container.style.maxWidth = '100%';
-    console.log(`📐 Diorama ${dioramaId} sized: ${scaledWidth}x${scaledHeight}px (CUC: ${cuc})`);
-    // Set CSS custom properties
-    container.style.setProperty('--a1-width', `${scaledWidth}px`);
-    container.style.setProperty('--cuc', cuc);
-    // Create natscene container
+
+    // Natscene container
     const natscene = document.createElement('div');
     natscene.className = 'natscene';
     natscene.style.width = '100%';
-    natscene.style.height = 'auto'; // Let natscene expand dynamically as needed
-    natscene.style.position = 'relative';
-    // Store layerData for this diorama
-    container._layerDatas = [];
+    natscene.style.height = '100%';
+    
+    // Add layers
     config.layers.forEach(layer => {
       const layerEl = document.createElement('div');
       layerEl.className = 'dime-layer';
-      layerEl.dataset.parallaxSpeed = layer.parallaxSpeed;
-      layerEl.style.zIndex = layer.zIndex;
-      layerEl.dataset.layerName = layer.path ? layer.path.split('.')[0] : '';
-      layerEl.dataset.yOffset = layer.yOffset || 0;
-      // Remove fitToScope logic, always use CUC-scaled dimensions
-      if (layer.width) {
-        const scaledLayerWidth = config.useAlphaBlueprint ? layer.width * cuc : layer.width;
-        layerEl.style.width = `${scaledLayerWidth}px`;
-      }
-      if (layer.minHeight) {
-        const scaledLayerHeight = config.useAlphaBlueprint ? layer.minHeight * cuc : layer.minHeight;
-        layerEl.style.minHeight = `${scaledLayerHeight}px`;
-      }
-      const img = new Image();
-      // Try different device class sizes with fallback
-      const fallbackOrder = ['L', 'M', 'S', 'XS'];
-      const currentIdx = fallbackOrder.indexOf(this.deviceClass);
-      const assetPath = `${assetBase}/${this.deviceClass}/${layer.path}`;
-      console.log(`🖼️ Loading asset [${this.deviceClass}]: ${assetPath}`);
-      img.onload = () => {
-        console.info(`✅ Asset loaded: ${this.deviceClass} class for ${layer.path}`);
-        layerEl.style.backgroundImage = `url(${img.src})`;
-        layerEl.style.backgroundSize = 'contain';
-        layerEl.style.backgroundPosition = 'center';
-        layerEl.style.backgroundRepeat = 'no-repeat';
-        if (layer.blendMode) {
-          layerEl.style.mixBlendMode = layer.blendMode;
-        }
-      };
-      img.onerror = () => {
-        console.warn(`⚠️ Asset not found: ${assetPath}`);
-        layerEl.style.background = 'rgba(255,100,100,0.2)';
-        layerEl.style.border = '1px dashed red';
-        layerEl.textContent = `⚠️ ${layer.path}`;
-      };
-      img.src = assetPath;
-      // Position layer with CUC
-      this.alignment.position(layerEl, layer, cuc);
+      layerEl.style.backgroundImage = `url(${this.getAssetPath(layer.path)})`;
+      layerEl.style.backgroundSize = 'contain';
       natscene.appendChild(layerEl);
-      // Store the layer config for parallax
-      container._layerDatas.push(layer);
     });
+
     container.appendChild(natscene);
-    
-    // Ensure arena1-container is relative and hides overflow
-    this.container.style.position = 'relative';
-    this.container.style.overflowX = 'hidden';
-    
-    // Attach local scroll event for parallax
-    container.addEventListener('scroll', () => {
-      this.updateParallax();
-    });
-    
     return container;
   }
 
   updateParallax() {
     // Use the correct selector for diorama sections
     const visibleDioramas = document.querySelectorAll('.diorama.local-scroll:not(.diorama-hidden)');
+    const debugEnabled = this.pageAlphaMeta && this.pageAlphaMeta.debug;
     visibleDioramas.forEach(diorama => {
       const layers = diorama.querySelectorAll('.dime-layer');
       const layerDatas = diorama._layerDatas || [];
@@ -378,11 +326,15 @@ export default class TrinkaspaceEngine {
       const localScroll = diorama.scrollTop;
       if (this.parallax) {
         this.parallax.update(layers, layerDatas, localScroll);
+        if (debugEnabled) {
+          console.debug(`[PARALLAX DEBUG] Parallax updated for diorama ${diorama.id} with scrollTop:`, localScroll);
+        }
+      } else if (debugEnabled) {
+        console.warn(`[PARALLAX DEBUG] Parallax engine is NOT initialized for diorama ${diorama.id}`);
       }
       const scopeSystem = this.scopeSystems.get(diorama.id);
       if (scopeSystem) {
         scopeSystem.update(layers);
-        
         // --- SafetyZone warning ---
         const safetyZone = scopeSystem.safetyZone || 60;
         layers.forEach(layer => {
@@ -403,136 +355,5 @@ export default class TrinkaspaceEngine {
         });
       }
     });
-  }
-  
-  /**
-   * Load HUD elements defined in the page data
-   * @param {object} pageData - The page data containing HUD definitions
-   */
-  async loadHUDElements(pageData) {
-    if (!this.hudManager || !pageData.elements?.huds) return;
-    
-    console.log(`🎮 Loading ${pageData.elements.huds.length} HUD elements`);
-    
-    for (const hud of pageData.elements.huds) {
-      if (!hud.visible) continue;
-      
-      try {
-        console.log(`🎯 Loading HUD: ${hud.id} from ${hud.configPath}`);
-        
-        const response = await fetch(hud.configPath);
-        if (!response.ok) {
-          throw new Error(`Failed to load HUD config: ${response.status}`);
-        }
-        const hudConfig = await response.json();
-        
-        // Set layout from HUD config or from page meta
-        hudConfig.layout = hud.layout || this.hudLayout;
-        
-        // Load the HUD
-        this.hudManager.loadHUD(hudConfig);
-        
-        console.log(`✅ HUD loaded: ${hud.id}`);
-      } catch (error) {
-        console.error(`❌ Failed to load HUD ${hud.id}:`, error);
-      }
-    }  }
-  
-  /**
-   * Logs asset availability for a given diorama block
-   * This helper method allows for inspecting which asset sizes are available
-   * @param {string} blockId - The ID of the diorama block to inspect
-   */
-  inspectAssetAvailability(blockId) {
-    if (!blockId) {
-      console.error('Cannot inspect assets: No blockId provided');
-      return;
-    }
-    
-    console.group(`📊 Asset Availability for ${blockId}`);
-    console.log(`Current device class: ${this.deviceClass}`);
-    
-    const deviceClasses = ['L', 'M', 'S', 'XS'];
-    
-    // Fetch the directory listing if available
-    const testImg = new Image();
-    
-    deviceClasses.forEach(size => {
-      // Use a test image to see if the directory exists
-      const testPath = `${blockId}/${size}/test-availability.png`;
-      testImg.src = testPath;
-      // Just log that we're checking
-      console.log(`Checking ${size} assets at ${blockId}/${size}/...`);
-    });
-    
-    console.log('💡 To verify specific assets, check network requests in DevTools');
-    console.log('💡 Missing asset directories will show 404 errors in the console');
-    console.groupEnd();
-  }
-  
-  /**
-   * Toggle asset debugging mode for the current page
-   * This adds or removes 'debug=assets' to the URL query string
-   * @param {boolean} [enable] - Force enable/disable, or toggle if undefined
-   */
-  toggleAssetDebugMode(enable) {
-    const url = new URL(window.location.href);
-    const hasDebug = url.searchParams.has('debug');
-    const debugValue = url.searchParams.get('debug');
-    
-    // If enable is not specified, toggle the current state
-    const shouldEnable = enable === undefined 
-      ? !(hasDebug && debugValue === 'assets') 
-      : enable;
-    
-    if (shouldEnable) {
-      url.searchParams.set('debug', 'assets');
-      console.log('🔍 Asset debugging enabled - reloading page');
-    } else {
-      // If debug=assets, remove it, otherwise leave as is
-      if (hasDebug && debugValue === 'assets') {
-        url.searchParams.delete('debug');
-        console.log('🔍 Asset debugging disabled - reloading page');
-      } else {
-        // No change needed
-        return;
-      }
-    }
-    
-    // Reload with new URL
-    window.location.href = url.toString();
-  }
-  
-  /**
-   * Toggle Royal Alpha debugging mode for the current page
-   * This adds or removes 'debug=royal' to the URL query string
-   * @param {boolean} [enable] - Force enable/disable, or toggle if undefined
-   */
-  toggleRoyalAlphaDebugMode(enable) {
-    const url = new URL(window.location.href);
-    const hasDebug = url.searchParams.has('debug');
-    const debugValue = url.searchParams.get('debug');
-    
-    // If enable is not specified, toggle the current state
-    const shouldEnable = enable === undefined 
-      ? !(hasDebug && debugValue === 'royal') 
-      : enable;
-    
-    if (shouldEnable) {
-      url.searchParams.set('debug', 'royal');
-      console.log('👑 Royal Alpha debugging enabled - reloading page');
-    } else {
-      // If debug=royal, remove it, otherwise leave as is
-      if (hasDebug && debugValue === 'royal') {
-        url.searchParams.delete('debug');
-        console.log('👑 Royal Alpha debugging disabled - reloading page');
-      } else {
-        // No change needed
-        return;
-      }
-    }
-    
-    // Reload with new URL
-    window.location.href = url.toString();
   }
 }

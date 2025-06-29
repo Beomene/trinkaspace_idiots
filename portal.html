@@ -202,9 +202,9 @@
       chapterList.className = 'chapter-list';
       
       const chapters = [
-        { number: 'I', path: 'pages/chapter_001/001_001/index.html' },
-        { number: 'II', path: 'pages/CHAPTER_2/002_001/index.html' },
-        { number: 'III', path: 'pages/CHAPTER_3/003_001/index.html' }
+        { number: 'I', path: 'pages/chapters/chapter_001/001_001/index.html' },
+        { number: 'II', path: 'pages/chapters/chapter_002/002_001/index.html' },
+        { number: 'III', path: 'pages/chapters/chapter_003/003_001/index.html' }
       ];
       
       chapters.forEach(chapter => {
@@ -381,7 +381,7 @@
       <img src="assets/images/trinkatitles/portal-title-3.png" alt="The Trinkaloop Saga Background Layer" class="trinkatitle-layer trinkatitle-3">
       <img src="assets/images/trinkatitles/portal-title-2.png" alt="The Trinkaloop Saga Middle Layer" class="trinkatitle-layer trinkatitle-2">
       <img src="assets/images/trinkatitles/portal-title-1.png" alt="The Trinkaloop Saga Foreground Layer" class="trinkatitle-layer trinkatitle-1">    
-    </div>    <!-- Buttons in a standard vertical layout -->    <div style="text-align: center; background: transparent; border: none; box-shadow: none; padding: 0; margin: 0;">      <button onclick="location.href='pages/chapter_001/001_001/index.html'" class="main-button" style="margin-bottom: 0;">Begin</button>      
+    </div>    <!-- Buttons in a standard vertical layout -->    <div style="text-align: center; background: transparent; border: none; box-shadow: none; padding: 0; margin: 0;">      <button onclick="location.href='pages/chapters/chapter_001/001_001/index.html'" class="main-button" style="margin-bottom: 0;">Begin</button>      
       <button onclick="showChapterSelect()" class="continue-button" style="margin-top: 3vh; display: block; margin-left: calc(auto - 4vw); margin-right: auto; position: relative; left: -4vw;">Continue</button>
     </div><div class="portal-footer">
       <!-- Legal links and copyright at the bottom -->      <div class="legal-links">
@@ -439,38 +439,39 @@
     });
   </script>
     <!-- Import portal parallax script -->  <script type="module">
-    import portalParallax from './assets/js/common/portalParallax.js';
-    import { initPortalTitleEffects } from './assets/js/common/portalEffects.js';
-    import { initPageParticles } from './assets/js/common/pageParticles.js';
-      
+    import portalParallax from '/assets/js/common/portalParallax.js';
+    import { initPortalTitleEffects } from '/assets/js/common/portalEffects.js';
+    import { initPageParticles } from '/assets/js/common/pageParticles.js';
+    
     // Initialize parallax, cursor effects and particles
     document.addEventListener('DOMContentLoaded', () => {
       // Apply cursor chase effects to the portal title layers
       initPortalTitleEffects({
-        selector: '.trinkatitle-layer', // Apply to all title layers
-        intensity: 0.03,                // How strongly elements follow cursor (subtle)
-        delay: 0.08,                    // Higher values make movement more laggy/dreamy
-        behavior: 'hover',              // 'hover' makes elements shift slightly with cursor
-        maxDistance: 40,                // Maximum pixel distance elements can move
-        hoverDistance: 300              // How far cursor can be to trigger effect (px)
+        selector: '.trinkatitle-layer',
+        intensity: 0.03,
+        delay: 0.08,
+        behavior: 'hover',
+        maxDistance: 40,
+        hoverDistance: 300
       });
       
       // Initialize Aria's particle effects
       initPageParticles({
-        autoEnable: true,               // Enable particles by default
-        preset: 'aria',                 // Use Aria's preset (cyan/blue particles)
-        container: document.body,       // Apply to entire page
-        particleConfig: {               // Custom configuration
-          particleCount: 12,            // Number of particles
-          particleSize: 7,              // Size in pixels
+        autoEnable: true,
+        preset: 'aria',
+        container: document.body,
+        particleConfig: {
+          particleCount: 12,
+          particleSize: 7,
           colors: ['rgba(42, 255, 247, 0.8)', 'rgba(156, 217, 249, 0.7)'],
-          followSpeed: 0.05,            // How quickly particles follow cursor
-          lifespan: 3000,              // Particle lifetime in milliseconds
-          glow: true,                   // Enable glow effect
-          trailEffect: false           // No trailing effect
+          followSpeed: 0.05,
+          lifespan: 3000,
+          glow: true,
+          trailEffect: false
         }
       });
-        // Add helpful message to the page about the effect
+      
+      // Add helpful message to the page about the effect
       const message = document.createElement('div');
       message.className = 'cursor-effects-toggle';
       message.textContent = 'Cursor effects toggled! (Alt+E to toggle)';
@@ -496,6 +497,6 @@
       
       console.log('✨ Portal effects initialized (Alt+E: cursor chase, Alt+P: particles)');
     });
-  </script>
+    </script>
 </body>
 </html>

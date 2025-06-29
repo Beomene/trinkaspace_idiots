@@ -4,7 +4,7 @@
   "layers": [
     {
       "path": "sky.png",
-      "zIndex": -100,
+      "zIndex": 1,
       "parallaxSpeed": 0.9,
       "width": 400,
       "minHeight": 500,
@@ -13,7 +13,7 @@
     },
     {
       "path": "wall.png", 
-      "zIndex": -90,
+      "zIndex": 10,
       "parallaxSpeed": 0.9,
       "width": 400,
       "minHeight": 500,
@@ -22,7 +22,7 @@
     },
     {
       "path": "furniture.png",
-      "zIndex": -80,
+      "zIndex": 20,
       "parallaxSpeed": 0.89,
       "width": 400,
       "minHeight": 500,
@@ -31,7 +31,7 @@
     },
     {
       "path": "table.png",
-      "zIndex": -70,
+      "zIndex": 20,
       "parallaxSpeed": 0.89,
       "width": 400,
       "minHeight": 500,
@@ -40,16 +40,16 @@
     },
     {
       "path": "atmo1.png",
-      "zIndex": -50,
+      "zIndex": 30,
       "parallaxSpeed": 0.95,
-      "width": 400,
+      "width": 100,
       "minHeight": 500,
       "yOffset": -60,
       "fitToScope": true
     },
     {
       "path": "atmo2.png",
-      "zIndex": -49,
+      "zIndex": 100,
       "parallaxSpeed": 0.95,
       "width": 400,
       "minHeight": 500,
@@ -58,7 +58,7 @@
     },
     {
       "path": "foreground.png",
-      "zIndex": 10,
+      "zIndex": 101,
       "parallaxSpeed": 0.5,
       "width": 400,
       "minHeight": 500,
@@ -67,7 +67,7 @@
     },
     {
       "path": "light_basic.png",
-      "zIndex": 1,
+      "zIndex": 50,
       "parallaxSpeed": 0.899,
       "width": 400,
       "minHeight": 500,
@@ -76,7 +76,7 @@
     },
     {
       "path": "fog.png",
-      "zIndex": 5,
+      "zIndex": 60,
       "parallaxSpeed": 0.95,
       "width": 400,
       "minHeight": 500,
@@ -86,7 +86,7 @@
     },
     {
       "path": "fog_up.png",
-      "zIndex": 6,
+      "zIndex": 61,
       "parallaxSpeed": 0.895,
       "width": 400,
       "minHeight": 500,
@@ -96,7 +96,7 @@
     },
     {
       "path": "light_side.png",
-      "zIndex": 2,
+      "zIndex": 51,
       "parallaxSpeed": 0.898,
       "width": 400,
       "minHeight": 500,
@@ -105,7 +105,7 @@
     },
     {
       "path": "light_extra.png",
-      "zIndex": 4,
+      "zIndex": 52,
       "parallaxSpeed": 0.899,
       "width": 400,
       "minHeight": 500,

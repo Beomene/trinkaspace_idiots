@@ -24,22 +24,33 @@ export function initPageParticles(options = {}) {
   
   // Initialize particle system
   defaultParticleSystem.init(config.container);
-  
+
+  // Force canvas to always cover viewport
+  if (defaultParticleSystem.canvas) {
+    defaultParticleSystem.canvas.style.position = 'fixed';
+    defaultParticleSystem.canvas.style.top = '0';
+    defaultParticleSystem.canvas.style.left = '0';
+    defaultParticleSystem.canvas.style.width = '100vw';
+    defaultParticleSystem.canvas.style.height = '100vh';
+    defaultParticleSystem.canvas.width = window.innerWidth;
+    defaultParticleSystem.canvas.height = window.innerHeight;
+    defaultParticleSystem.canvas.style.zIndex = '1000';
+    defaultParticleSystem.canvas.style.pointerEvents = 'none';
+  }
+
   // Apply preset if specified
   if (config.preset) {
     applyPreset(config.preset);
   }
-  
   // Apply custom configuration if provided
   if (Object.keys(config.particleConfig).length > 0) {
     defaultParticleSystem.configure(config.particleConfig);
   }
-  
-  // Auto-enable if configured
-  if (config.autoEnable) {
-    defaultParticleSystem.start();
-  }
-  
+
+  // Force particles to always be active (cannot be toggled off)
+  defaultParticleSystem.config.active = true;
+  defaultParticleSystem.start();
+
   console.log(`🌟 Page particles initialized with preset: ${config.preset}`);
 }
 

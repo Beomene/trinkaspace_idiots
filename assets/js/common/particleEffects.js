@@ -63,6 +63,7 @@ class ParticleSystem {
     
     // Add canvas to container
     this.container.appendChild(this.canvas);
+    console.log('[ParticleSystem] Canvas appended to', this.container);
     
     // Add event listeners
     document.addEventListener('mousemove', this.handleMouseMove);
@@ -136,6 +137,7 @@ class ParticleSystem {
     };
     
     this.particles.push(particle);
+    console.log('[ParticleSystem] Particle spawned at', x, y);
     
     // Keep particle count in check
     if (this.particles.length > this.config.particleCount * 2) {
@@ -224,6 +226,9 @@ class ParticleSystem {
     
     // Continue animation
     requestAnimationFrame(this.animate);
+    if (this.particles.length > 0) {
+      console.log('[ParticleSystem] Animation frame, particles:', this.particles.length);
+    }
   }
   
   /**

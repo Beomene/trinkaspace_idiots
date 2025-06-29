@@ -3,7 +3,7 @@
  * Applies cursor-chasing effects to portal title elements
  */
 
-import defaultCursorChase, { CursorChase } from '../A1_js/cursorChase.js';
+import defaultCursorChase, { CursorChase } from './cursorChase.js';
 
 /**
  * Initialize cursor chase effects for portal title elements
